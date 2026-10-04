@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>04 — Connect MT4 &amp; MT5</title>
+<link rel="stylesheet" href="base.css"><link rel="stylesheet" href="light.css"><link rel="stylesheet" href="screens.css">
+<style>
+  .ok { left: 176px; top: 486px; width: 254px; padding: 15px 15px 13px; transform: rotate(4deg); }
+  .ok .r1 { display: flex; align-items: center; gap: 11px; }
+  .ok .ck { width: 38px; height: 38px; border-radius: 50%; background: rgba(38,191,97,.16); display: flex; align-items: center; justify-content: center; color: var(--green); flex: none; }
+  .ok .ck svg { width: 22px; height: 22px; }
+  .ok b { display: block; font: 700 15px/1.15 Aeonik; color: #fff; }
+  .ok .tg2 { margin-top: 6px; display: flex; gap: 5px; }
+  .ok .tg2 span { height: 19px; padding: 0 8px; border-radius: 10px; font: 400 10.5px/19px Aeonik; color: #fff; background: rgba(73,75,82,.5); }
+  .ok .tg2 span.g { background: rgba(38,191,97,.5); }
+  .ok hr { border: 0; height: 1px; background: rgba(255,255,255,.08); margin: 12px 0 10px; }
+  .ok .enc { display: flex; align-items: center; gap: 8px; font: 400 11.5px/1.3 Aeonik; color: var(--secondary); }
+  .ok .enc svg { width: 16px; height: 16px; color: #8DB6FF; flex: none; }
+</style>
+</head>
+<body>
+<div class="canvas light">
+  <div class="lgrid" style="-webkit-mask-image:radial-gradient(75% 45% at 50% 85%, #000 0%, rgba(0,0,0,.3) 60%, transparent 100%)"></div>
+  <div data-deco="cloud" class="z-back" style="left:-62px;top:640px;width:124px;height:62px"></div>
+  <div data-deco="cloud" class="z-back" style="left:372px;top:780px;width:136px;height:68px"></div>
+  <div data-deco="path" class="z-back" data-d="M0 560 C 40 600, 10 660, 60 690" style="inset:0"></div>
+
+  <div class="device ti lg" data-k="device" style="left:42px;top:-58px;transform:rotate(-5deg)">
+    <div class="app" data-screen="connectMT"></div>
+  </div>
+
+  <div class="pop ok">
+    <div class="r1"><span class="ck"><i data-ic="checkC"></i></span>
+      <div><b>MT5 account connected</b><div class="tg2"><span>#51234870</span><span class="g">Real</span><span>USD</span></div></div></div>
+    <hr>
+    <div class="enc"><i data-ic="lock"></i>Credentials encrypted before they leave your phone</div>
+  </div>
+  <div data-deco="candles" class="z-front" style="left:8px;top:560px;width:96px;height:102px"></div>
+
+  <div class="head" style="top:736px">
+    <div class="hl">Connect<br><em>MT4 &amp; MT5</em></div>
+    <div class="sl">Search your broker’s server and link your account securely.</div>
+  </div>
+  <div data-deco="sparkle" style="left:30px;top:760px;width:22px;height:22px"></div>
+  <div data-deco="sparkle" data-tone="blue" style="left:392px;top:744px;width:16px;height:16px"></div>
+</div>
+<script src="screens.js"></script><script src="deco.js"></script><script src="kit.js"></script>
+</body></html>

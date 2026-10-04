@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>08 — Stay ahead of the news</title>
+<link rel="stylesheet" href="base.css"><link rel="stylesheet" href="light.css"><link rel="stylesheet" href="screens.css">
+<style>
+  .evc { left: 12px; top: 452px; width: 380px; padding: 0 18px 20px; border-radius: 26px; transform: rotate(-3deg); }
+  .evc .hb { width: 50px; height: 5px; border-radius: 3px; background: #4A4A4E; margin: 10px auto 0; }
+  .evc .t { margin-top: 14px; font: 700 21px/1.2 Aeonik; color: #fff; }
+  .evc .imp2 { margin-top: 9px; display: flex; align-items: center; gap: 9px; padding-bottom: 12px; border-bottom: .5px solid #2A2A2E; font: 400 15px/1 Aeonik; color: var(--text); }
+  .evc .imp2 .tg { height: 20px; padding: 0 9px; border-radius: 10px; background: rgba(224,0,0,.6); font: 700 9px/20px Aeonik; color: #fff; letter-spacing: .05em; }
+  .evc .trow { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font: 400 14px/1 Aeonik; color: var(--sub); }
+  .evc .trow b { font: 700 15px/1 Aeonik; color: #fff; }
+  .evc .vals { margin-top: 12px; display: flex; border: 1px solid #2A2A2E; border-radius: 10px; padding: 11px 0; }
+  .evc .vals div { flex: 1; text-align: center; font: 400 15px/1.4 Aeonik; color: var(--text); }
+  .evc .vals div + div { border-left: 1px solid #2A2A2E; }
+  .evc .c-bad { color: var(--bad) !important; } .evc .c-good { color: var(--good) !important; }
+</style>
+</head>
+<body>
+<div class="canvas light">
+  <div class="lgrid" style="-webkit-mask-image:radial-gradient(75% 45% at 50% 85%, #000 0%, rgba(0,0,0,.3) 60%, transparent 100%)"></div>
+  <div data-deco="cloud" class="z-back" style="left:-64px;top:560px;width:128px;height:64px"></div>
+  <div data-deco="cloud" class="z-back" style="left:330px;top:640px;width:150px;height:75px"></div>
+
+  <div class="device ti lg" data-k="device" style="left:46px;top:-60px;transform:rotate(5deg)">
+    <div class="app" data-screen="news"></div>
+  </div>
+
+  <div class="pop evc">
+    <div class="hb"></div>
+    <div class="t">Non-Farm Employment Change</div>
+    <div class="imp2"><span>Impact</span><span class="tg">HIGH</span></div>
+    <div class="trow"><b>Time</b><span>10/02/2026 08:30:00 AM</span></div>
+    <div class="vals"><div class="c-bad">Previous<br>22K</div><div>Forecast<br>51K</div><div class="c-good">Actual<br>142K</div></div>
+  </div>
+
+  <div class="head" style="top:736px">
+    <div class="hl">Stay Ahead<br>of the <em>News</em></div>
+    <div class="sl">High-impact events with previous, forecast and actual values.</div>
+  </div>
+  <div data-deco="plane" style="left:16px;top:690px;width:30px;height:30px;transform:rotate(-30deg)"></div>
+  <div data-deco="path" data-d="M-10 760 C 10 740, 0 720, 22 712" style="inset:0"></div>
+  <div data-deco="sparkle" style="left:394px;top:742px;width:22px;height:22px"></div>
+</div>
+<script src="screens.js"></script><script src="deco.js"></script><script src="kit.js"></script>
+</body></html>

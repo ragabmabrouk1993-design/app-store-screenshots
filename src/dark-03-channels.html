@@ -1,0 +1,44 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Dark · 03 — Pick your channels</title>
+<link rel="stylesheet" href="base.css"><link rel="stylesheet" href="light.css"><link rel="stylesheet" href="screens.css"><link rel="stylesheet" href="dark.css">
+<style>
+  .picker { left: 150px; top: 610px; width: 278px; padding: 14px 14px 14px; transform: rotate(4deg); }
+  .picker .ph { display: flex; align-items: center; gap: 8px; font: 700 15px/1 Aeonik; color: #fff; }
+  .picker .ph span { margin-left: auto; font: 400 11.5px/1 Aeonik; color: var(--sub); }
+  .prow { display: flex; align-items: center; gap: 10px; height: 48px; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .prow:last-of-type { border-bottom: 0; }
+  .prow b { display: block; font: 700 14px/1.15 Aeonik; color: #fff; }
+  .prow small { display: block; margin-top: 3px; font: 400 12px/1 Aeonik; color: var(--sub); }
+  .prow .cb { margin-left: auto; width: 19px; height: 19px; }
+  .prow.sel { margin: 0 -14px; padding: 0 14px; background: rgba(255,255,255,.05); }
+  .picker .go { margin-top: 10px; height: 40px; border-radius: 20px; background: var(--primary); display: flex; align-items: center; justify-content: center;
+    font: 700 16px/1 Aeonik; color: #fff; }
+</style>
+</head>
+<body>
+<div class="canvas light dark">
+  <div class="lgrid"></div>
+  <div data-deco="chart" data-n="26" data-seed="23" data-op=".75" data-line data-vol style="left:-8px;top:40px;width:440px;height:840px"></div>
+
+  <div class="head" style="top:56px">
+    <div class="hl">Pick Your<br><em>Channels</em></div>
+    <div class="sl">Copy only the channels you trust and switch any of them on or off.</div>
+  </div>
+  <div data-deco="sparkle" style="left:44px;top:86px;width:24px;height:24px"></div>
+
+  <div class="device ti lg" data-k="device" style="left:40px;top:300px">
+    <div class="app" data-screen="channels"></div>
+  </div>
+
+  <div class="pop picker">
+    <div class="ph"><i data-ic="tg" style="width:21px;height:21px"></i>Add from Telegram<span>3 found</span></div>
+    <div style="margin-top:8px">
+      <div class="prow"><span data-k="av" data-kind="sterling" data-size="32"></span><div><b>Sterling Pips Club</b><small>• 6,904 members</small></div><i class="cb" data-ic="uncheckbox"></i></div>
+      <div class="prow sel"><span data-k="av" data-kind="bullion" data-size="32"></span><div><b>Bullion Daily</b><small>• 21,318 members</small></div><i class="cb" data-ic="checkbox"></i></div>
+      <div class="prow"><span data-k="av" data-kind="orbit" data-size="32"></span><div><b>Orbit FX Signals</b><small>• 2,145 members</small></div><i class="cb" data-ic="uncheckbox"></i></div>
+    </div>
+    <div class="go">Select</div>
+  </div>
+</div>
+<script src="screens.js"></script><script src="deco.js"></script><script src="kit.js"></script>
+</body></html>

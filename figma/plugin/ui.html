@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  body { margin: 0; padding: 16px; font: 12px/1.5 Inter, system-ui, sans-serif; color: #1d1d1f; }
+  h1 { margin: 0 0 4px; font-size: 13px; }
+  p { margin: 0 0 12px; color: #6b6b70; }
+  label { display: block; padding: 10px; border-radius: 8px; background: #1A69F1; color: #fff; text-align: center; font-weight: 600; cursor: pointer; }
+  label.alt { margin-top: 6px; padding: 4px; background: none; color: #1A69F1; font-weight: 500; }
+  input { display: none; }
+  #log { margin-top: 10px; min-height: 36px; white-space: pre-wrap; }
+</style></head>
+<body>
+  <h1>Tragram · App Store screenshots</h1>
+  <p>Choose the <b>figma/import</b> folder in store-assets/app-store-screenshots.<br>اختر مجلد <b>figma/import</b>.</p>
+  <label>Choose folder…<input id="dir" type="file" webkitdirectory></label>
+  <label class="alt">or select all the files inside it<input id="files" type="file" multiple accept=".json,.png"></label>
+  <div id="log"></div>
+<script>
+  const log = t => (document.getElementById('log').textContent = t);
+  let ack = null;
+  onmessage = e => {
+    const m = e.data.pluginMessage;
+    if (!m) return;
+    if (m.type === 'ack' && ack) { const r = ack; ack = null; r(); }
+    if (m.type === 'progress') log(m.text);
+  };
+  async function load(list) {
+    const files = {};
+    for (const f of list) files[f.name] = f;
+    if (!files['manifest.json']) return log('manifest.json is not in that folder.');
+    const manifest = JSON.parse(await files['manifest.json'].text());
+    const names = [...new Set(manifest.sets.flatMap(s => s.screens.flatMap(sc => sc.layers.map(l =>
+      l.type === 'image' ? l.file : l.image && l.image.file))))].filter(Boolean);
+    const missing = names.filter(n => !files[n]);
+    if (missing.length) return log(`${missing.length} images are missing, e.g. ${missing[0]}`);
+    for (const [k, name] of names.entries()) {
+      log(`Loading images ${k + 1}/${names.length}…`);
+      const bytes = new Uint8Array(await files[name].arrayBuffer());
+      await new Promise(r => { ack = r; parent.postMessage({ pluginMessage: { type: 'image', name, bytes } }, '*'); });
+    }
+    parent.postMessage({ pluginMessage: { type: 'build', manifest } }, '*');
+  }
+  for (const id of ['dir', 'files']) document.getElementById(id).addEventListener('change', e => load(e.target.files));
+</script>
+</body></html>

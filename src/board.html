@@ -1,0 +1,43 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: Aeonik; font-weight: 700; src: url(../../../src/assets/fonts/fonnts.com-Aeonik-Bold.ttf); }
+@font-face { font-family: Aeonik; font-weight: 400; src: url(../../../src/assets/fonts/fonnts.com-Aeonik-Regular.ttf); }
+html,body{margin:0;width:2400px;height:1000px;background:#EEF1F5;font-family:Aeonik}
+.top{position:absolute;left:90px;top:60px;display:flex;align-items:center;gap:36px}
+.icon{width:180px;height:180px;border-radius:42px;background:url(app-icon.png) center/cover;box-shadow:0 24px 50px -18px rgba(10,30,70,.45)}
+.t b{display:block;font:700 120px/1 Aeonik;letter-spacing:-.04em;background:linear-gradient(90deg,#0B1424 0%,#0B1424 45%,#8A94A6 100%);-webkit-background-clip:text;color:transparent}
+.t span{display:block;margin-top:14px;font:400 30px/1 Aeonik;color:#55617A}
+.card{position:absolute;left:60px;right:60px;top:300px;bottom:60px;border-radius:44px;background:#fff;box-shadow:0 30px 60px -30px rgba(10,30,70,.25)}
+.row{position:absolute;left:100px;right:100px;top:342px;display:flex;gap:22px;justify-content:center}
+.row img{width:258px;height:558.2px;border-radius:28px;box-shadow:0 18px 30px -16px rgba(10,30,70,.4)}
+.tags{position:absolute;right:100px;top:120px;display:flex;gap:48px;text-align:center;color:#0B1424}
+.tags div small{display:block;font:400 18px/1 Aeonik;letter-spacing:.06em;color:#55617A;text-transform:uppercase}
+.tags div b{display:block;margin-top:12px;font:700 34px/1 Aeonik}
+/* dark board */
+body.dark{background:#060B16}
+.dark .t b{background:linear-gradient(90deg,#FFFFFF 0%,#FFFFFF 45%,#6E7C99 100%);-webkit-background-clip:text}
+.dark .t span,.dark .tags div small{color:#8C98B0}
+.dark .tags{color:#fff}
+.dark .icon{box-shadow:0 0 0 1.5px rgba(110,160,255,.28),0 24px 50px -18px rgba(0,0,0,.7)}
+.dark .card{background:#0C1428;box-shadow:inset 0 0 0 1px rgba(110,160,255,.14),0 30px 60px -30px rgba(0,0,0,.6)}
+.dark .row img{box-shadow:0 0 0 1px rgba(110,160,255,.16),0 18px 30px -16px rgba(0,0,0,.6)}
+</style></head><body>
+<div class="top"><div class="icon"></div><div class="t"><b>Tragram</b><span id="sub">App Store screenshots · iPhone 6.5" · 1284 × 2778</span></div></div>
+<div class="tags"><div><small>Platforms</small><b>MT4 · MT5</b></div><div><small>Signals from</small><b>Telegram</b></div><div><small>Language</small><b id="lang">EN</b></div></div>
+<div class="card"></div>
+<div class="row">
+  <img data-n="01-hero"><img data-n="02-telegram"><img data-n="03-channels"><img data-n="04-connect-mt">
+  <img data-n="05-rules"><img data-n="06-profits"><img data-n="07-performance"><img data-n="08-news">
+</div>
+<script>
+  // board.html#light, #dark, #alt or #alt-ar (alt sets use the dark board; Arabic runs right to left, as in the Arabic App Store)
+  const set = ['dark', 'alt', 'alt-ar'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'light';
+  document.body.classList.add(set === 'light' ? 'light' : 'dark');
+  document.getElementById('sub').textContent += ' · ' + { light: 'Light', dark: 'Dark', alt: 'Dark alternative', 'alt-ar': 'Dark alternative · Arabic' }[set];
+  if (set === 'alt-ar') {
+    document.querySelector('.row').style.flexDirection = 'row-reverse';
+    document.getElementById('lang').textContent = 'AR';
+  }
+  document.querySelectorAll('.row img').forEach(img => img.src = `../out/${set}/${img.dataset.n}.png`);
+</script>
+</body></html>

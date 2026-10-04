@@ -1,0 +1,141 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>01 — Never miss a signal</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  /* Home screen */
+  .home-hdr { position: relative; margin-top: 62px; display: flex; justify-content: space-between; align-items: flex-start; padding: 0 19px; }
+  .acct { display: flex; align-items: center; gap: 2px; padding: 5px 0; }
+  .acct svg { width: 24px; height: 24px; color: var(--sub); }
+  .bell { width: 38px; height: 38px; border-radius: 50%; background: rgba(64,65,70,.5); display: flex; align-items: center; justify-content: center; position: relative; color: #fff; }
+  .bell svg { width: 19px; height: 19px; }
+  .bell i { position: absolute; right: 0; top: 0; width: 9.5px; height: 9.5px; border-radius: 50%; background: #D22A00; }
+  .overview { margin-top: 19px; display: flex; flex-direction: column; align-items: center; }
+  .stats { display: flex; justify-content: space-between; padding: 0 19px; margin-top: 19px; width: 100%; }
+  .stat { width: 195px; height: 118px; border-radius: 19px; background: var(--card); padding: 14px 19px 19px; display: flex; flex-direction: column; align-items: flex-start; }
+  .stat .ib { width: 42px; height: 35px; border-radius: 12px; background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; color: var(--sub); }
+  .stat .ib svg { width: 16px; height: 16px; }
+  .stat .st { display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+  .stat .dot { background: var(--green); }
+  .plan { width: 402.5px; margin: 19px auto 0; border-radius: 19px; background: var(--card); padding: 19px; display: flex; justify-content: space-between; }
+  .plan .pi { width: 49px; height: 49px; border-radius: 50%; background: #153729; display: flex; align-items: center; justify-content: center; color: #fff; flex: none; }
+  .plan .pi svg { width: 26px; height: 26px; }
+  .plan .ptag { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 8px; font: 400 14px/1 Aeonik; }
+  .sec-h { display: flex; align-items: center; justify-content: space-between; margin: 14px 19px 9px; }
+  .sec-h .av { width: 24px; height: 24px; }
+</style></head>
+<body>
+<div class="canvas">
+  <div class="glow top"></div><div class="glow mid"></div><div class="grid"></div>
+  <svg class="pano" data-k="pano" data-i="0"></svg>
+
+  <div class="copy">
+    <div class="lockup"><span class="mark" data-k="mark"></span><span class="word"><img src="logo.svg" alt=""></span></div>
+    <h1>Never miss a<br><em>signal</em> again</h1>
+    <p class="sub">Telegram trading signals executed on your MT4/MT5 account automatically, even while you’re away.</p>
+  </div>
+
+  <div class="device" data-k="device">
+    <div class="app">
+      <div data-k="sb"></div>
+      <div class="home-hdr">
+        <div class="col" style="align-items:flex-start">
+          <div class="TB20">Hi, Alex👋</div>
+          <div class="row" style="gap:14px">
+            <div class="acct R14 c-sub">#51234870<i data-ic="chevDown"></i></div>
+            <div class="row" style="gap:7px"><span class="tag green">Real</span><span class="tag dark">MT5</span><span class="tag dark">USD</span></div>
+          </div>
+        </div>
+        <div class="bell"><i data-ic="bell"></i><i></i></div>
+      </div>
+
+      <div class="overview">
+        <div class="R14">Balance</div>
+        <div class="TB32">$24,860.42</div>
+        <div class="row">
+          <span class="pnl R14"><i data-ic="trendUp" style="width:20px;height:20px"></i>+$1,284.50</span><span class="R14 c-green">&nbsp;(5.45%)</span>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div style="flex:1"><div class="ib"><i data-ic="server"></i></div></div>
+            <div class="TB14">MT5/MT4</div>
+            <div class="st"><span class="dot"></span><span class="R12 c-sub">Connected</span></div>
+          </div>
+          <div class="stat">
+            <div style="flex:1"><div class="ib" style="color:#696F74"><i data-ic="plane"></i></div></div>
+            <div class="TB14">Telegram</div>
+            <div class="st"><span class="dot"></span><span class="R12 c-sub">Connected</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plan">
+        <div class="row" style="gap:9px;align-items:center">
+          <div class="pi"><i data-ic="crown"></i></div>
+          <div class="col" style="align-items:flex-start">
+            <div class="R12 c-sub" style="line-height:15px">Current Plan</div>
+            <div class="row" style="gap:5px;margin-top:6px">
+              <span style="font:700 19px/normal Aeonik;color:#fff">Pro</span>
+              <span class="ptag" style="background:#26292E;color:var(--sub)">Monthly</span>
+              <span class="ptag" style="background:#153829;color:var(--green)">Active</span>
+            </div>
+            <div class="R12 c-sub" style="margin-top:6px;line-height:15px">Renews on Nov 2, 2026 (30 days left)</div>
+          </div>
+        </div>
+        <i data-ic="chevRight" style="width:26px;height:26px;align-self:center;color:#fff"></i>
+      </div>
+
+      <div class="tabs">
+        <div class="rowt">
+          <div class="t on">Open <span class="cnt">2</span></div>
+          <div class="t">Limit</div>
+          <div class="t">Closed <span class="cnt" style="color:var(--sub)">312</span></div>
+        </div>
+        <div class="ind" style="left:19px;width:96px"></div>
+      </div>
+
+      <div class="sec-h">
+        <div class="row" style="gap:9px"><span class="av" data-k="av" data-kind="aurum" data-size="24"></span><span class="R14">Aurum Gold Signals</span></div>
+        <span class="pnl R12"><i data-ic="trendUp" style="width:17px;height:17px"></i>+$184.20</span>
+      </div>
+      <div class="order">
+        <div class="l">
+          <span class="pair" data-k="pair" data-b="xau" data-q="usd" data-size="26"></span>
+          <div class="col" style="align-items:flex-start">
+            <div class="sym"><span class="TB14 c-white">XAUUSD</span></div>
+            <div class="det R12"><span class="c-primary">Buy 0.12 lot&nbsp;</span><span class="c-sub">at 4,412.50</span></div>
+            <div class="tps"><span class="tp hit">TP1 4,418.00<i data-ic="checkC"></i></span><span class="tp">TP2 4,430.00</span><span class="tp">TP3 4,445.00</span></div>
+          </div>
+        </div>
+        <div class="r"><span class="R12">$4,427.85</span><span class="pnl R12"><i data-ic="trendUp" style="width:17px;height:17px"></i>+$184.20</span></div>
+      </div>
+
+      <div class="sec-h" style="margin-top:16px">
+        <div class="row" style="gap:9px"><span class="av" data-k="av" data-kind="northline" data-size="24"></span><span class="R14">Northline FX</span></div>
+        <span class="pnl R12"><i data-ic="trendUp" style="width:17px;height:17px"></i>+$61.20</span>
+      </div>
+      <div class="order">
+        <div class="l">
+          <span class="pair" data-k="pair" data-b="eur" data-q="usd" data-size="26"></span>
+          <div class="col" style="align-items:flex-start">
+            <div class="sym"><span class="TB14 c-white">EURUSD</span></div>
+            <div class="det R12"><span class="c-red">Sell 0.40 lot&nbsp;</span><span class="c-sub">at 1.17420</span></div>
+            <div class="tps"><span class="tp hit">TP1 1.17300<i data-ic="checkC"></i></span><span class="tp">TP2 1.17150</span><span class="tp">TP3 1.17000</span></div>
+          </div>
+        </div>
+        <div class="r"><span class="R12">$1.17267</span><span class="pnl R12"><i data-ic="trendUp" style="width:17px;height:17px"></i>+$61.20</span></div>
+      </div>
+
+      <div class="tabbar" data-k="tabbar" data-on="home"></div>
+    </div>
+  </div>
+
+  <div class="notif" style="left:40px;top:251px;width:360px">
+    <div class="ai"></div>
+    <div class="nt">
+      <div class="h"><b>Order executed</b><span>now</span></div>
+      <div class="bd">XAUUSD · Buy 0.12 lot @ 4,412.50<br>Copied from Aurum Gold Signals</div>
+    </div>
+  </div>
+</div>
+<script src="kit.js"></script>
+</body></html>

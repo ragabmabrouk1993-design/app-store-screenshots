@@ -1,0 +1,30 @@
+/* Alt option: the dark set's type, phone and cards (canvas classes "light dark alt") on a different
+   dark background: deep black with blue/cyan glows and one glowing price line that runs through all
+   eight screenshots. Phones stand straight, with one app card popping out over each phone. Load after dark.css. */
+
+.canvas.dark.alt { background:
+    radial-gradient(62% 28% at 50% 0%, rgba(38,104,255,.36) 0%, rgba(38,104,255,0) 100%),
+    radial-gradient(46% 30% at 4% 60%, rgba(26,105,241,.30) 0%, rgba(26,105,241,0) 100%),
+    radial-gradient(44% 28% at 98% 76%, rgba(45,200,255,.16) 0%, rgba(45,200,255,0) 100%),
+    linear-gradient(180deg, #070B18 0%, #03050B 55%, #060A15 100%); }
+.canvas.alt .bgdots { position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(140,180,255,.2) 1px, transparent 1.3px); background-size: 18px 18px; background-position: 4px 6px;
+  -webkit-mask-image: radial-gradient(85% 34% at 50% 12%, #000 0%, rgba(0,0,0,.3) 60%, transparent 100%); }
+.canvas.alt [data-deco="wave"] { inset: 0; z-index: 1; }
+
+/* enlarged input card popping out over the Connect screens (02 Telegram, 04 MT) */
+.zin { padding: 12px; border-radius: 26px; }
+.zin .zrow { display: flex; gap: 10px; }
+.zin .zrow + .zrow { margin-top: 10px; }
+.zin .zcc { width: 106px; height: 62px; flex: none; border-radius: 19px; border: 1px solid var(--border); background: var(--bg);
+  display: flex; align-items: center; justify-content: center; gap: 8px; }
+.zin .zcc .fl { font: 400 24px/1 "Apple Color Emoji"; }
+.zin .zcc b { font: 700 21px/1 Aeonik; color: #fff; }
+.zin .zfld { flex: 1; height: 62px; border-radius: 19px; border: 1px solid var(--border); background: rgba(4,8,15,.6);
+  display: flex; align-items: center; gap: 11px; padding: 0 17px; font: 400 21px/1 Aeonik; color: #fff; letter-spacing: .2px; }
+.zin .zfld.on { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(26,105,241,.2); }
+.zin .zfld svg.ic { width: 26px; height: 26px; color: var(--sub); flex: none; }
+.zin .zfld .end { margin-left: auto; color: var(--green); }
+.zin .zcaret { width: 2px; height: 26px; background: var(--primary); border-radius: 1px; margin-left: -7px; }
+.zin .zenc { margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; font: 400 13px/1 Aeonik; color: var(--secondary); }
+.zin .zenc svg { width: 15px; height: 15px; color: #8DB6FF; }

@@ -1,0 +1,37 @@
+/* Dark option — same layouts as the light set, night palette. Load after light.css. */
+
+.canvas.dark { background:
+    radial-gradient(85% 34% at 50% 0%, rgba(26,105,241,.42) 0%, rgba(26,105,241,.10) 55%, rgba(26,105,241,0) 100%),
+    radial-gradient(70% 30% at 50% 100%, rgba(26,105,241,.26) 0%, rgba(26,105,241,0) 100%),
+    linear-gradient(180deg, #081430 0%, #050B18 46%, #060E21 100%); }
+.canvas.dark.bottom-glow { background:
+    radial-gradient(85% 34% at 50% 100%, rgba(26,105,241,.42) 0%, rgba(26,105,241,.10) 55%, rgba(26,105,241,0) 100%),
+    radial-gradient(70% 30% at 50% 0%, rgba(26,105,241,.22) 0%, rgba(26,105,241,0) 100%),
+    linear-gradient(180deg, #060E21 0%, #050B18 54%, #081430 100%); }
+.canvas.dark .lgrid { background-image: linear-gradient(rgba(130,170,255,.075) 1px, transparent 1px), linear-gradient(90deg, rgba(130,170,255,.075) 1px, transparent 1px); }
+
+.canvas.dark .hl { color: #FFFFFF; -webkit-text-stroke-color: #FFFFFF; }
+.canvas.dark .hl em { color: #3D84FF; -webkit-text-stroke-color: #3D84FF; text-shadow: 0 0 28px rgba(26,105,241,.45); }
+.canvas.dark .sl { color: #A7B3C9; }
+.canvas.dark .laurel { color: #FFFFFF; }
+.canvas.dark .laurel .tx b { -webkit-text-stroke-color: #FFFFFF; }
+
+/* phone: blue-steel titanium with a light rim and a blue glow so it separates from the navy */
+.canvas.dark .device.ti { background: linear-gradient(140deg, #D3DCEE 0%, #6A7896 12%, #2B3449 30%, #171C2A 50%, #343F59 72%, #B8C4DE 100%);
+  box-shadow: 0 0 0 .6px rgba(170,200,255,.6), 0 0 0 2px rgba(61,132,255,.18), 0 50px 80px -24px rgba(0,0,0,.85), 0 20px 40px -16px rgba(0,0,0,.6), 0 0 90px rgba(26,105,241,.34); }
+.canvas.dark .device.ti .hw { background: linear-gradient(90deg, #232B3D, #8C9AB8 55%, #2E384E); }
+
+/* pop-outs stand off the dark background with a lighter fill and a blue edge */
+.canvas.dark .pop { background: linear-gradient(180deg, #1C2436 0%, #121A29 100%); border-color: rgba(110,160,255,.28);
+  box-shadow: 0 30px 60px -18px rgba(0,0,0,.85), 0 12px 24px -10px rgba(0,0,0,.5), 0 0 50px rgba(26,105,241,.28), inset 0 1px 0 rgba(255,255,255,.07); }
+.canvas.dark .notif { background: linear-gradient(180deg, rgba(40,46,60,.97), rgba(28,33,45,.97)); border: .5px solid rgba(140,175,255,.22);
+  box-shadow: 0 30px 60px -12px rgba(0,0,0,.8), 0 10px 22px rgba(0,0,0,.45), 0 0 60px rgba(26,105,241,.3); }
+
+/* soft glow behind decorations so they read on navy */
+.canvas.dark [data-deco="arrow"] { filter: drop-shadow(0 0 22px rgba(34,197,94,.3)); }
+.canvas.dark [data-deco="plane3d"] { filter: drop-shadow(0 0 24px rgba(110,160,255,.35)); }
+
+/* trading backdrop: candlestick charts sit under everything; text gets a soft dark halo */
+.canvas.dark [data-deco="chart"] { z-index: 1; }
+.canvas.dark .head::before { content: ''; position: absolute; z-index: -1; left: -10px; right: -10px; top: -24px; bottom: -24px;
+  background: radial-gradient(closest-side, rgba(4,9,20,.82) 0%, rgba(4,9,20,.55) 55%, rgba(4,9,20,0) 100%); }

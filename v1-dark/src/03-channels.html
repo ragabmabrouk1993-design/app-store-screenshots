@@ -1,0 +1,76 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>03 — Channels you trust</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .list { position: absolute; left: 0; right: 0; top: 119px; }
+  .ch { margin: 0 19px; height: 85px; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid var(--border); }
+  .ch:last-child { border-bottom: 0; }
+  .ch .tt { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; }
+  .ch .name { font: 700 16px/20px Aeonik; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+  .ch .meta { display: flex; align-items: center; gap: 7px; margin-top: 6px; }
+  .pill { display: inline-flex; align-items: center; gap: 2px; height: 24px; padding: 0 9px; border-radius: 14px; background: rgba(41,41,41,.8);
+    font: 400 12px/1 Aeonik; color: var(--success); }
+  .pill svg { width: 14px; height: 14px; }
+  .pill.neg { color: var(--red); }
+
+  /* pop-out: channel picker */
+  .picker { left: 166px; top: 628px; width: 256px; padding: 13px 13px 13px; }
+  .picker .ph { display: flex; align-items: center; gap: 8px; font: 700 14px/1 Aeonik; color: #fff; }
+  .picker .ph span { margin-left: auto; font: 400 11.5px/1 Aeonik; color: var(--sub); }
+  .prow { display: flex; align-items: center; gap: 10px; height: 44px; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .prow:last-of-type { border-bottom: 0; }
+  .prow b { display: block; font: 700 13.5px/1.15 Aeonik; color: #fff; }
+  .prow small { display: block; margin-top: 3px; font: 400 11.5px/1 Aeonik; color: var(--sub); }
+  .prow .cb { margin-left: auto; width: 18px; height: 18px; }
+  .prow.sel { margin: 0 -13px; padding: 0 13px; background: rgba(255,255,255,.05); }
+  .picker .go { margin-top: 10px; height: 36px; border-radius: 20px; background: var(--primary); display: flex; align-items: center; justify-content: center;
+    font: 700 15px/1 Aeonik; color: #fff; box-shadow: 0 8px 20px rgba(26,105,241,.35); }
+</style></head>
+<body>
+<div class="canvas">
+  <div class="glow top"></div><div class="glow mid"></div><div class="grid"></div>
+  <svg class="pano" data-k="pano" data-i="2"></svg>
+
+  <div class="copy">
+    <div class="eyebrow"><i></i>Telegram channels</div>
+    <h1>Automate the channels<br><em>you trust</em></h1>
+    <p class="sub">Pick channels from your Telegram account and switch each one on or off anytime.</p>
+  </div>
+
+  <div class="device" data-k="device">
+    <div class="app">
+      <div data-k="sb"></div>
+      <div class="hdr"><span class="title" style="font-size:21px">Connected Channels</span><span class="act"><i data-ic="plus" style="width:16px;height:16px"></i></span></div>
+      <div class="list">
+        <div class="ch"><span data-k="av" data-kind="aurum" data-size="47"></span>
+          <div class="tt"><span class="name">Aurum Gold Signals</span><div class="meta"><span class="R12 c-sub">• 12,480 members</span><span class="pill"><i data-ic="trendUp"></i>+$3,482.60</span></div></div>
+          <span class="switch on"></span></div>
+        <div class="ch"><span data-k="av" data-kind="northline" data-size="47"></span>
+          <div class="tt"><span class="name">Northline FX</span><div class="meta"><span class="R12 c-sub">• 8,315 members</span><span class="pill"><i data-ic="trendUp"></i>+$1,912.40</span></div></div>
+          <span class="switch on"></span></div>
+        <div class="ch"><span data-k="av" data-kind="pipwave" data-size="47"></span>
+          <div class="tt"><span class="name">Pipwave Trading</span><div class="meta"><span class="R12 c-sub">• 3,902 members</span><span class="pill"><i data-ic="trendUp"></i>+$684.25</span></div></div>
+          <span class="switch on"></span></div>
+        <div class="ch"><span data-k="av" data-kind="atlas" data-size="47"></span>
+          <div class="tt"><span class="name">Atlas Swing Room</span><div class="meta"><span class="R12 c-sub">• 1,276 members</span><span class="pill"><i data-ic="trendUp"></i>+$248.10</span></div></div>
+          <span class="switch"></span></div>
+        <div class="ch"><span data-k="av" data-kind="meridian" data-size="47"></span>
+          <div class="tt"><span class="name">Meridian Forex VIP</span><div class="meta"><span class="R12 c-sub">• 5,640 members</span><span class="pill neg"><i data-ic="trendDown"></i>-$92.30</span></div></div>
+          <span class="switch"></span></div>
+      </div>
+      <div class="tabbar" data-k="tabbar" data-on="channels"></div>
+    </div>
+  </div>
+
+  <div class="callout blue picker">
+    <div class="ph"><i data-ic="tg" style="width:20px;height:20px"></i>Add from Telegram<span>3 found</span></div>
+    <div style="margin-top:8px">
+      <div class="prow"><span data-k="av" data-kind="sterling" data-size="30"></span><div><b>Sterling Pips Club</b><small>• 6,904 members</small></div><i class="cb" data-ic="uncheckbox"></i></div>
+      <div class="prow sel"><span data-k="av" data-kind="bullion" data-size="30"></span><div><b>Bullion Daily</b><small>• 21,318 members</small></div><i class="cb" data-ic="checkbox"></i></div>
+      <div class="prow"><span data-k="av" data-kind="orbit" data-size="30"></span><div><b>Orbit FX Signals</b><small>• 2,145 members</small></div><i class="cb" data-ic="uncheckbox"></i></div>
+    </div>
+    <div class="go">Select</div>
+  </div>
+</div>
+<script src="kit.js"></script>
+</body></html>

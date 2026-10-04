@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ar"><head><meta charset="utf-8"><title>Alt AR · 05 — تداول وفق قواعدك</title>
+<link rel="stylesheet" href="base.css"><link rel="stylesheet" href="light.css"><link rel="stylesheet" href="screens.css"><link rel="stylesheet" href="dark.css"><link rel="stylesheet" href="alt.css"><link rel="stylesheet" href="ar.css">
+<style>
+  .calc { left: 128px; top: 758px; width: 300px; padding: 10px 11px 11px; transform: rotate(7deg); }
+  .calc .cz-h { display: flex; align-items: center; gap: 7px; }
+  .calc .cz-i { width: 20px; height: 20px; border-radius: 6px; background: rgba(26,105,241,.22); display: flex; align-items: center; justify-content: center; color: #8DB6FF; flex: none; }
+  .calc .cz-i svg { width: 12px; height: 12px; }
+  .calc .cz-h b { font: 700 12.5px/1 Aeonik; color: #fff; }
+  .calc .cz-p { margin-left: auto; display: flex; align-items: center; gap: 5px; height: 20px; padding: 0 8px 0 4px; border-radius: 10px; background: rgba(255,255,255,.07); font: 600 10px/1 var(--sf); color: #fff; letter-spacing: .2px; }
+  .calc .cz-eq { margin-top: 8px; display: flex; align-items: center; gap: 4px; }
+  .calc .cz-t { height: 46px; border-radius: 11px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+    display: flex; flex-direction: column; justify-content: center; padding: 0 8px; }
+  .calc .cz-t small { font: 700 8px/1 Aeonik; letter-spacing: .1em; text-transform: uppercase; color: #8DB6FF; }
+  .calc .cz-t b { margin-top: 3px; font: 700 15px/1 Aeonik; color: #fff; letter-spacing: -.01em; }
+  .calc .cz-t span { margin-top: 3px; font: 400 9px/1 Aeonik; color: var(--secondary); white-space: nowrap; }
+  .calc .cz-t.r1 { width: 66px; } .calc .cz-t.r2 { width: 92px; }
+  .calc .cz-t.res { flex: 1; background: linear-gradient(160deg, #3D84FF 0%, #1A69F1 55%, #1450C8 100%); border-color: rgba(160,200,255,.45);
+    box-shadow: 0 6px 16px -6px rgba(26,105,241,.7); }
+  .calc .cz-t.res small { color: rgba(255,255,255,.8); } .calc .cz-t.res span { color: rgba(255,255,255,.85); }
+  .calc .cz-t.res b { font-size: 18px; } .calc .cz-t.res b i { font: 700 10px/1 Aeonik; font-style: normal; margin-left: 2px; }
+  .calc .cz-op { font: 400 14px/1 var(--sf); font-style: normal; color: #8DB6FF; width: 10px; text-align: center; flex: none; }
+</style>
+</head>
+<body>
+<div class="canvas light dark alt" dir="rtl">
+  <div class="bgdots"></div>
+  <div data-deco="rings" data-cx="200" data-cy="700" data-n="8" data-r0="120" data-step="64" style="inset:0;z-index:1"></div>
+  <div data-deco="wave" data-tone="neon" data-i="4"></div>
+
+  <div class="head" style="top:56px">
+    <div class="hl">تداول وفق<br><em>قواعدك</em></div>
+    <div class="sl">الرموز المسموحة وحدود التداول وحجم العقد حسب مخاطرتك.</div>
+  </div>
+  <div data-deco="sparkle" class="z-front" style="left:380px;top:84px;width:24px;height:24px"></div>
+  <div data-deco="sparkle" data-tone="white" class="z-front" style="left:40px;top:262px;width:16px;height:16px"></div>
+  <div class="device ti lg" data-k="device" style="left:22px;top:319px;transform:rotate(7deg)">
+    <div class="app"><div data-k="sb"></div><div data-settings></div></div>
+  </div>
+  <div class="pop calc">
+    <div class="cz-h"><span class="cz-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="2.5" width="16" height="19" rx="3"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16.5h.01M12 16.5h.01M16 16.5h.01"/></svg></span>
+      <b>حاسبة حجم العقد</b><span class="cz-p"><span class="pair" data-k="pair" data-b="eur" data-q="usd" data-size="15"></span>EURUSD</span></div>
+    <div class="cz-eq">
+      <div class="cz-t r1"><small>المخاطرة</small><b>$12.00</b><span>سعر ثابت</span></div><i class="cz-op">÷</i>
+      <div class="cz-t r2"><small>الخسارة لكل عقد</small><b>$140.00</b><span>14 نقطة × <bdi>$10</bdi></span></div><i class="cz-op">=</i>
+      <div class="cz-t res"><small>حجم العقد</small><b>0.08<i>لوت</i></b><span>تقريب لأسفل</span></div>
+    </div>
+  </div>
+</div>
+<script src="screens.js"></script><script src="settings.js"></script><script src="deco.js"></script><script src="kit.js"></script>
+</body></html>

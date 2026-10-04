@@ -1,0 +1,114 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>02 — From signal to trade</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .flow { position: absolute; left: 26px; right: 26px; top: 252px; z-index: 5; }
+  .step { position: relative; border-radius: 24px; padding: 16px 16px 16px;
+    background: linear-gradient(180deg, rgba(22,29,42,.96) 0%, rgba(13,18,27,.96) 100%);
+    border: 1px solid rgba(255,255,255,.08);
+    box-shadow: 0 28px 50px -16px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.05); }
+  .step .hd { display: flex; align-items: center; gap: 11px; }
+  .step .ti { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex: none; }
+  .step .ti svg { width: 19px; height: 19px; }
+  .step .tt b { display: block; font: 700 16px/1.15 Aeonik; color: #fff; }
+  .step .tt span { display: block; margin-top: 3px; font: 400 12px/1.2 Aeonik; color: var(--sub); }
+  .step .no { margin-left: auto; height: 22px; padding: 0 9px; border-radius: 11px; display: flex; align-items: center;
+    font: 700 9.5px/1 Aeonik; letter-spacing: .14em; color: #8DB6FF; background: rgba(26,105,241,.14); border: 1px solid rgba(90,151,255,.25); }
+  .link { height: 30px; display: flex; justify-content: center; position: relative; }
+  .link::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px;
+    background: linear-gradient(180deg, rgba(90,151,255,.15), rgba(90,151,255,.9), rgba(90,151,255,.15)); }
+  .link i { position: relative; align-self: center; width: 24px; height: 24px; border-radius: 50%; background: #0B1424;
+    border: 1px solid rgba(90,151,255,.6); box-shadow: 0 0 16px rgba(26,105,241,.55); display: flex; align-items: center; justify-content: center; color: #8DB6FF; }
+  .link i svg { width: 14px; height: 14px; }
+
+  /* step 1: telegram post */
+  .tgpost { margin-top: 13px; border-radius: 16px 16px 16px 6px; background: #182533; padding: 11px 13px 9px; }
+  .tgpost .who { display: flex; align-items: center; gap: 8px; font: 600 13px/1 var(--sf); color: #F5B05C; }
+  .tgpost .tx { margin-top: 9px; font: 400 14px/1.42 var(--sf); color: #F2F4F7; }
+  .tgpost .tx b { font-weight: 700; }
+  .tgpost .tx .g { color: #4BE08A; font-weight: 700; }
+  .tgpost .meta { margin-top: 2px; display: flex; justify-content: flex-end; gap: 10px; font: 400 11.5px/1 var(--sf); color: #6D8299; }
+
+  /* step 2: rules */
+  .rules { margin-top: 12px; display: flex; flex-direction: column; gap: 2px; }
+  .rule { display: flex; align-items: center; gap: 10px; height: 30px; padding: 0 2px; }
+  .rule + .rule { border-top: 1px solid rgba(255,255,255,.06); }
+  .rule .ck { width: 18px; height: 18px; color: var(--green); }
+  .rule .lb { font: 400 14px/1 Aeonik; color: var(--text); }
+  .rule .vl { margin-left: auto; font: 700 13.5px/1 Aeonik; color: #fff; }
+  .rule .vl em { font-style: normal; color: var(--sub); font-weight: 400; }
+
+  /* step 3: order */
+  /* in-app order card at native size, zoomed to fit the step card */
+  .ord { margin-top: 13px; width: 402.5px; zoom: .8845; border-radius: 14px; background: rgba(255,255,255,.05); padding: 16px; display: flex; justify-content: space-between; }
+  .ord .l { display: flex; gap: 9px; }
+  .ord .r { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; font: 400 14px/1.2 Aeonik; }
+  .live { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; height: 22px; padding: 0 9px; border-radius: 11px;
+    font: 700 9.5px/1 Aeonik; letter-spacing: .14em; color: var(--green); background: rgba(38,191,97,.12); border: 1px solid rgba(38,191,97,.3); }
+  .live b { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
+</style></head>
+<body>
+<div class="canvas">
+  <div class="glow top"></div><div class="glow mid" style="top:330px"></div><div class="grid"></div>
+  <svg class="pano edges" data-k="pano" data-i="1"></svg>
+
+  <div class="copy">
+    <div class="eyebrow"><i></i>How it works</div>
+    <h1>From signal to trade,<br><em>on autopilot</em></h1>
+    <p class="sub">Tragram reads each signal, checks it against your rules and places the order for you.</p>
+  </div>
+
+  <div class="flow">
+    <div class="step">
+      <div class="hd">
+        <span class="ti" style="background:rgba(42,171,238,.14)"><i data-ic="tg" style="width:22px;height:22px"></i></span>
+        <div class="tt"><b>Signal posted</b><span>In a Telegram channel you follow</span></div>
+        <span class="no">STEP 1</span>
+      </div>
+      <div class="tgpost">
+        <div class="who"><span class="av" data-k="av" data-kind="aurum" data-size="22"></span>Aurum Gold Signals</div>
+        <div class="tx"><span class="g">XAUUSD BUY</span> @ 4412.50 &nbsp;·&nbsp; SL 4392.50<br>TP1 4418 &nbsp;·&nbsp; TP2 4430 &nbsp;·&nbsp; TP3 4445</div>
+        <div class="meta"><span>12.4K views</span><span>09:41</span></div>
+      </div>
+    </div>
+
+    <div class="link"><i><i data-ic="chevDown"></i></i></div>
+
+    <div class="step">
+      <div class="hd">
+        <span class="ti" style="background:rgba(26,105,241,.16)"><span data-k="mark" style="display:block;width:21px;height:15px"></span></span>
+        <div class="tt"><b>Your rules applied</b><span>Settings you choose for this channel</span></div>
+        <span class="no">STEP 2</span>
+      </div>
+      <div class="rules">
+        <div class="rule"><i class="ck" data-ic="checkC"></i><span class="lb">Allowed symbol</span><span class="vl">XAUUSD</span></div>
+        <div class="rule"><i class="ck" data-ic="checkC"></i><span class="lb">Risk 1% of equity</span><span class="vl"><em>lot&nbsp;</em>0.12</span></div>
+        <div class="rule"><i class="ck" data-ic="checkC"></i><span class="lb">Max active trades</span><span class="vl">2 <em>/ 5</em></span></div>
+        <div class="rule"><i class="ck" data-ic="checkC"></i><span class="lb">Break-even</span><span class="vl"><em>after&nbsp;</em>TP1</span></div>
+      </div>
+    </div>
+
+    <div class="link"><i><i data-ic="chevDown"></i></i></div>
+
+    <div class="step">
+      <div class="hd">
+        <span class="ti" style="background:rgba(38,191,97,.14);color:var(--green)"><i data-ic="server"></i></span>
+        <div class="tt"><b>Order placed on MT5</b><span>Managed until it closes</span></div>
+        <span class="live"><b></b>LIVE</span>
+      </div>
+      <div class="ord">
+        <div class="l">
+          <span class="pair" data-k="pair" data-b="xau" data-q="usd" data-size="26"></span>
+          <div class="col" style="align-items:flex-start">
+            <span style="font:700 16px/1.2 Aeonik;color:#fff">XAUUSD</span>
+            <div style="margin-top:4px;font:400 14px/1.2 Aeonik"><span class="c-primary">Buy 0.12 lot&nbsp;</span><span class="c-sub">at 4,412.50</span></div>
+            <div class="tps"><span class="tp hit">TP1 4,418.00<i data-ic="checkC"></i></span><span class="tp">TP2 4,430.00</span><span class="tp">TP3 4,445.00</span></div>
+          </div>
+        </div>
+        <div class="r"><span>$4,427.85</span><span class="pnl"><i data-ic="trendUp" style="width:17px;height:17px"></i>+$184.20</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="kit.js"></script>
+</body></html>

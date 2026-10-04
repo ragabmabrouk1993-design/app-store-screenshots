@@ -1,0 +1,54 @@
+/* Arabic pages: <html lang="ar"> with dir="rtl" on the canvas (on <html> it would shift the page
+   right, because Chrome's minimum window is wider than 440pt), loaded last. */
+
+/* One type family for the whole design, from the headline down to the in-app screen, as on iOS:
+   SF Arabic for Arabic letters paired with SF Pro for Latin letters and digits (system-ui).
+   Every element keeps its own weight, from Regular (400) up to Heavy (800). */
+body, body * { font-family: system-ui, sans-serif !important; }
+
+/* Arabic letters join, so no letter-spacing (it breaks the joins) and no text stroke (it shows at the joins) */
+.hl { font-weight: 800; line-height: 1.18; letter-spacing: 0; -webkit-text-stroke-width: 0; }
+.sl { font-weight: 400; letter-spacing: 0; line-height: 1.5; font-size: 17px; max-width: 300px; }
+.laurel { direction: ltr; }
+.laurel .tx b { font-weight: 800; letter-spacing: -.01em; -webkit-text-stroke-width: 0; }
+.laurel .tx span { direction: rtl; font-size: 14px; font-weight: 600; letter-spacing: 0; margin-top: 3px; }
+.notif .h b, .notif .bd { letter-spacing: 0; }
+
+/* in-app mirroring that right-to-left flexbox doesn't do by itself (the app gets this from forceRTL) */
+.app[dir="rtl"] .pair .q { left: auto; right: 0; }
+.app[dir="rtl"] .pair .b { right: auto; left: 0; }
+.app[dir="rtl"] .plan > .ic:last-child { transform: scaleX(-1); }
+.app[dir="rtl"] .hdr .back { left: auto; right: 19px; transform: scaleX(-1); }
+.app[dir="rtl"] .hdr .act { right: auto; left: 19px; }
+/* the app's trailing/leading spaces end up on the outer side once a row is mirrored */
+.app[dir="rtl"] .overview .row { gap: 4px; }
+/* keep the English trade line ("Buy 0.12 lot at 4,412.50") in reading order */
+.app[dir="rtl"] .order .det { direction: ltr; }
+/* SF Pro is a little wider than Aeonik: semibold TP pills with tighter padding keep all three on one line */
+.app[dir="rtl"] .tps { gap: 4px; }
+.app[dir="rtl"] .tp { font-weight: 600; padding: 0 7px; gap: 4px; letter-spacing: -.1px; }
+
+/* Settings: nested options indent from the right; a symbol chip's remove badge sits on its top-left corner */
+.app[dir="rtl"] .kids { margin-left: 0; margin-right: 31px; }
+.app[dir="rtl"] .schip .rm { right: auto; left: -7px; }
+/* switches mirror in right-to-left iOS: when on, the knob sits on the left */
+.app[dir="rtl"] .switch::after { left: 24px; }
+.app[dir="rtl"] .switch.on::after { left: 2px; }
+/* sheets: back arrow on the right, pointing right; the caret sits at the left end of the typed number */
+.app[dir="rtl"].modal .back { left: auto; right: 19px; transform: scaleX(-1); }
+.app[dir="rtl"].modal .fld .caret { margin-left: 0; margin-right: -6px; }
+/* the iOS number pad keeps 1-2-3 left to right */
+.app[dir="rtl"] .kb { direction: ltr; }
+/* news values sit at the row's end, which is the left */
+.app[dir="rtl"] .scr-news .ev .vl { text-align: left; }
+
+/* pop-out cards on the canvas */
+[dir="rtl"] .zin .zcaret { margin-left: 0; margin-right: -7px; }
+[dir="rtl"] .calc .cz-t small, [dir="rtl"] .wl .k { letter-spacing: 0; text-transform: none; font-size: 9.5px; }
+[dir="rtl"] .wl .k { font-size: 11px; }
+[dir="rtl"] .calc .cz-t.res b i { margin-left: 0; margin-right: 3px; }
+[dir="rtl"] .wl .lg i { margin-right: 0; margin-left: 6px; }
+[dir="rtl"] .evc .vals div + div { border-left: 0; border-right: 1px solid #2A2A2E; }
+[dir="rtl"] .evc .imp2 .tg { letter-spacing: 0; font-size: 10.5px; }
+/* "الملف الشخصي" needs a wider tab than "Profile"; four 104pt tabs still fit the 440pt screen */
+.app[dir="rtl"] .tabbar .tab { width: 104px; white-space: nowrap; }

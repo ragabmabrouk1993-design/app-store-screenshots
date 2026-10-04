@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>05 — Size every trade by your risk</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .calc { left: 40px; top: 477px; width: 386px; padding: 18px 18px 20px; display: flex; gap: 18px; align-items: stretch; }
+  .calc .lhs { flex: 1; }
+  .calc .k { display: block; margin-bottom: 12px; }
+  .calc .ln { display: flex; justify-content: space-between; align-items: baseline; font: 400 13px/1 Aeonik; color: var(--secondary); }
+  .calc .ln + .ln { margin-top: 10px; }
+  .calc .ln b { font: 700 13.5px/1 Aeonik; color: #fff; }
+  .calc .rhs { width: 104px; border-radius: 14px; background: rgba(26,105,241,.14); border: 1px solid rgba(90,151,255,.3);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .calc .rhs small { font: 400 11px/1 Aeonik; color: #8DB6FF; }
+  .calc .rhs b { margin: 6px 0 5px; font: 700 30px/1 Aeonik; color: #fff; letter-spacing: -.02em; }
+  .calc .rhs span { font: 400 10.5px/1.25 Aeonik; color: var(--secondary); }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="glow top"></div><div class="glow mid"></div><div class="grid"></div>
+  <svg class="pano" data-k="pano" data-i="4"></svg>
+
+  <div class="copy">
+    <div class="eyebrow"><i></i>Position sizing</div>
+    <h1>Size every trade<br>by <em>your risk</em></h1>
+    <p class="sub">Fixed lot, fixed amount or % of equity. Lot size is calculated from your stop loss.</p>
+  </div>
+
+  <div class="device" data-k="device">
+    <div class="app"><div data-k="sb"></div><div data-settings data-scroll-to="risk"></div></div>
+  </div>
+
+  <div class="callout blue calc">
+    <div class="lhs">
+      <span class="k">Lot size, calculated</span>
+      <div class="ln"><span>Equity</span><b>$24,860.42</b></div>
+      <div class="ln"><span>Risk per trade · 1%</span><b>$248.60</b></div>
+      <div class="ln"><span>Entry → Stop loss</span><b>4412.50 → 4392.50</b></div>
+    </div>
+    <div class="rhs"><small>XAUUSD</small><b>0.12</b><span>lot · rounded<br>down</span></div>
+  </div>
+</div>
+<script src="settings.js"></script>
+<script src="kit.js"></script>
+</body></html>

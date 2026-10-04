@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ar"><head><meta charset="utf-8"><title>Alt AR · 03 — اختر قنواتك</title>
+<link rel="stylesheet" href="base.css"><link rel="stylesheet" href="light.css"><link rel="stylesheet" href="screens.css"><link rel="stylesheet" href="dark.css"><link rel="stylesheet" href="alt.css"><link rel="stylesheet" href="ar.css">
+<style>
+  .picker { left: 8px; top: 626px; width: 278px; padding: 14px 14px 14px; transform: rotate(4deg); }
+  .picker .ph { display: flex; align-items: center; gap: 8px; font: 700 15px/1 Aeonik; color: #fff; }
+  .picker .ph span { margin-left: auto; font: 400 11.5px/1 Aeonik; color: var(--sub); }
+  .prow { display: flex; align-items: center; gap: 10px; height: 48px; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .prow:last-of-type { border-bottom: 0; }
+  .prow b { display: block; font: 700 14px/1.15 Aeonik; color: #fff; }
+  .prow small { display: block; margin-top: 3px; font: 400 12px/1 Aeonik; color: var(--sub); }
+  .prow .cb { margin-left: auto; width: 19px; height: 19px; }
+  .prow.sel { margin: 0 -14px; padding: 0 14px; background: rgba(255,255,255,.05); }
+  .picker .go { margin-top: 10px; height: 40px; border-radius: 20px; background: var(--primary); display: flex; align-items: center; justify-content: center;
+    font: 700 16px/1 Aeonik; color: #fff; }
+</style>
+</head>
+<body>
+<div class="canvas light dark alt" dir="rtl">
+  <div class="bgdots"></div>
+  <div data-deco="rings" data-cx="250" data-cy="690" data-n="8" data-r0="120" data-step="64" style="inset:0;z-index:1"></div>
+  <div data-deco="wave" data-tone="neon" data-i="2"></div>
+
+  <div class="head" style="top:56px">
+    <div class="hl">اختر<br><em>قنواتك</em></div>
+    <div class="sl">انسخ فقط من القنوات التي تثق بها، وفعّل أو أوقف أيًّا منها في أي وقت.</div>
+  </div>
+  <div data-deco="sparkle" class="z-front" style="left:30px;top:86px;width:22px;height:22px"></div>
+  <div data-deco="sparkle" data-tone="white" class="z-front" style="left:396px;top:214px;width:18px;height:18px"></div>
+  <div class="device ti lg" data-k="device" style="left:75px;top:311px;transform:rotate(-8deg)">
+    <div class="app" data-screen="channels"></div>
+  </div>
+  <div class="pop picker">
+    <div class="ph"><i data-ic="tg" style="width:21px;height:21px"></i>إضافة من تيليجرام<span>3 قنوات</span></div>
+    <div style="margin-top:8px">
+      <div class="prow"><span data-k="av" data-kind="sterling" data-size="32"></span><div><b>Sterling Pips Club</b><small>• 6,904 أعضاء</small></div><i class="cb" data-ic="uncheckbox"></i></div>
+      <div class="prow sel"><span data-k="av" data-kind="bullion" data-size="32"></span><div><b>Bullion Daily</b><small>• 21,318 أعضاء</small></div><i class="cb" data-ic="checkbox"></i></div>
+      <div class="prow"><span data-k="av" data-kind="orbit" data-size="32"></span><div><b>Orbit FX Signals</b><small>• 2,145 أعضاء</small></div><i class="cb" data-ic="uncheckbox"></i></div>
+    </div>
+    <div class="go">اختيار</div>
+  </div>
+</div>
+<script src="screens.js"></script><script src="deco.js"></script><script src="kit.js"></script>
+</body></html>

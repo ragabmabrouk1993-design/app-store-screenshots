@@ -1,0 +1,76 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>09 — Stay ahead of market news</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .nlist { position: absolute; left: 19px; right: 19px; top: 122px; }
+  .nlist .sec { margin-top: 19px; font: 700 19px/1.2 Aeonik; color: var(--text); }
+  .ev { padding: 12px 0; border-bottom: 1px solid var(--dark-border); }
+  .ev .tm { display: flex; align-items: center; gap: 5px; height: 22px; font: 400 16px/1 Aeonik; color: var(--sub); }
+  .ev .tm .nx { height: 17px; padding: 0 7px; border-radius: 9px; background: rgba(38,191,97,.5); font: 700 9px/17px Aeonik; color: #fff; }
+  .ev .dt { display: flex; align-items: center; gap: 14px; height: 26px; margin-top: 2px; }
+  .ev .imp { width: 12px; height: 12px; border-radius: 4px; flex: none; }
+  .ev .cur { font: 700 14px/1 var(--sf); color: var(--text); width: 34px; }
+  .ev .nm { flex: 1; font: 400 16px/1 Aeonik; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ev .vl { min-width: 66px; text-align: right; font: 400 16px/1 Aeonik; color: var(--text); }
+  .hi { background: var(--red); } .md { background: var(--orange); } .lo { background: var(--yellow); }
+  .ev .vl.c-good { color: var(--good); } .ev .vl.c-bad { color: var(--bad); }
+  /* pop-out: event details (EventDetailsModal) */
+  .evc { left: 34px; top: 630px; width: 372px; padding: 0 18px 26px; border-radius: 26px; background: linear-gradient(180deg, #151820, #0F1015);
+    border-color: rgba(255,255,255,.1); }
+  .evc .hb { width: 50px; height: 5px; border-radius: 3px; background: #4A4A4E; margin: 10px auto 0; }
+  .evc .t { margin-top: 14px; font: 700 21px/1.2 Aeonik; color: #fff; }
+  .evc .imp2 { margin-top: 9px; display: flex; align-items: center; gap: 9px; padding-bottom: 12px; border-bottom: .5px solid #2A2A2E; font: 400 15px/1 Aeonik; color: var(--text); }
+  .evc .imp2 .tg { height: 20px; padding: 0 9px; border-radius: 10px; background: rgba(224,0,0,.6); font: 700 9px/20px Aeonik; color: #fff; letter-spacing: .05em; }
+  .evc .trow { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font: 400 14px/1 Aeonik; color: var(--sub); }
+  .evc .trow b { font: 700 15px/1 Aeonik; color: #fff; }
+  .evc .vals { margin-top: 12px; display: flex; border: 1px solid #2A2A2E; border-radius: 10px; padding: 11px 0; }
+  .evc .vals div { flex: 1; text-align: center; font: 400 15px/1.4 Aeonik; color: var(--text); }
+  .evc .vals div + div { border-left: 1px solid #2A2A2E; }
+  .evc .vals .c-bad { color: var(--bad); } .evc .vals .c-good { color: var(--good); }
+</style></head>
+<body>
+<div class="canvas">
+  <div class="glow top"></div><div class="glow mid"></div><div class="grid"></div>
+  <svg class="pano" data-k="pano" data-i="8"></svg>
+
+  <div class="copy">
+    <div class="eyebrow"><i></i>Economic calendar</div>
+    <h1>Stay ahead of<br><em>market-moving news</em></h1>
+    <p class="sub">Track every event’s impact with previous, forecast and actual values.</p>
+  </div>
+
+  <div class="device" data-k="device">
+    <div class="app">
+      <div data-k="sb"></div>
+      <div class="hdr"><span class="title" style="font-size:21px">News</span></div>
+      <div class="nlist">
+        <div class="sec">Today:</div>
+        <div class="ev"><div class="tm">2:00AM</div><div class="dt"><span class="imp lo"></span><span class="cur">GBP</span><span class="nm">Nationwide HPI m/m</span><span class="vl c-good">0.4%</span></div></div>
+        <div class="ev"><div class="tm">4:30AM</div><div class="dt"><span class="imp lo"></span><span class="cur">GBP</span><span class="nm">Construction PMI</span><span class="vl c-bad">46.2</span></div></div>
+        <div class="ev"><div class="tm">5:00AM</div><div class="dt"><span class="imp md"></span><span class="cur">EUR</span><span class="nm">Core CPI Flash Estimate y/y</span><span class="vl">2.3%</span></div></div>
+        <div class="ev"><div class="tm">8:30AM</div><div class="dt"><span class="imp hi"></span><span class="cur">USD</span><span class="nm">Average Hourly Earnings m/m</span><span class="vl c-good">0.4%</span></div></div>
+        <div class="ev"><div class="tm">8:30AM</div><div class="dt"><span class="imp hi"></span><span class="cur">USD</span><span class="nm">Non-Farm Employment Change</span><span class="vl c-good">142K</span></div></div>
+        <div class="ev"><div class="tm">8:30AM</div><div class="dt"><span class="imp hi"></span><span class="cur">USD</span><span class="nm">Unemployment Rate</span><span class="vl c-good">4.1%</span></div></div>
+        <div class="ev"><div class="tm">10:00AM<span class="nx">Next Event</span></div><div class="dt"><span class="imp hi"></span><span class="cur">USD</span><span class="nm">ISM Services PMI</span><span class="vl">-</span></div></div>
+        <div class="ev"><div class="tm">12:00PM</div><div class="dt"><span class="imp md"></span><span class="cur">USD</span><span class="nm">FOMC Member Speaks</span><span class="vl">-</span></div></div>
+        <div class="ev"><div class="tm">1:00PM</div><div class="dt"><span class="imp lo"></span><span class="cur">USD</span><span class="nm">Baker Hughes Rig Count</span><span class="vl">-</span></div></div>
+      </div>
+      <div class="hdr" style="z-index:30;pointer-events:none"></div>
+      <div class="tabbar" data-k="tabbar" data-on="news"></div>
+    </div>
+  </div>
+
+  <div class="callout evc">
+    <div class="hb"></div>
+    <div class="t">Non-Farm Employment Change</div>
+    <div class="imp2"><span>Impact</span><span class="tg">HIGH</span></div>
+    <div class="trow"><b>Time</b><span>10/02/2026 08:30:00 AM</span></div>
+    <div class="vals">
+      <div class="c-bad">Previous<br>22K</div>
+      <div>Forecast<br>51K</div>
+      <div class="c-good">Actual<br>142K</div>
+    </div>
+  </div>
+</div>
+<script src="kit.js"></script>
+</body></html>

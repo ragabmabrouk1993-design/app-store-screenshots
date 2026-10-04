@@ -1,0 +1,132 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>07 — See which channels perform</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .hero { position: absolute; left: 0; right: 0; top: 77px; display: flex; flex-direction: column; align-items: center; }
+  .hero .meta { margin-top: 7px; }
+  .grid4 { position: absolute; left: 19px; right: 19px; top: 270px; display: grid; grid-template-columns: 194px 194px; justify-content: space-between; row-gap: 12.5px; }
+  .sc4 { height: 64px; border-radius: 14px; background: var(--card); padding: 0 16px; display: flex; align-items: center; gap: 9px; }
+  .sc4 .ib { width: 33px; height: 33px; border-radius: 12px; background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; color: var(--sub); flex: none; }
+  .sc4 .ib svg { width: 16px; height: 16px; }
+  .sc4 .v { font: 700 19px/1.1 Aeonik; color: var(--text); }
+  .sc4 .v.c-success { color: var(--success); }
+  .sc4 .l { font: 400 16px/1.15 Aeonik; color: var(--text); }
+  .chart { position: absolute; left: 19px; right: 19px; top: 423px; height: 346px; border-radius: 16px; background: var(--card); padding: 19px 5px 0 12px; }
+  .chart .badge2 { display: inline-flex; height: 21px; align-items: center; padding: 0 12px; border-radius: 9px; background: rgba(38,191,97,.2); font: 700 12px/1 Aeonik; color: var(--green); }
+  .chart .val { margin-top: 6px; font: 700 28px/1.1 Aeonik; color: var(--success); }
+  .ranges { position: absolute; left: 12.5px; right: 16.5px; top: 85px; height: 44.7px; border-radius: 12px; background: rgba(255,255,255,.05); display: flex; align-items: center; padding: 0 5px; }
+  .ranges span { flex: 1; text-align: center; font: 600 16px/1 var(--sf); color: var(--sub); }
+  .ranges span.on { flex: none; width: 95px; height: 35px; line-height: 35px; border-radius: 10px; background: var(--primary); color: #fff; }
+  .plot { position: absolute; left: 0; right: 0; top: 140px; height: 206px; }
+  .ylab { position: absolute; right: 22px; font: 400 15px/1 var(--sf); color: var(--sub); transform: translateY(-50%); }
+  .xlab { position: absolute; bottom: 12px; font: 400 15px/1 var(--sf); color: var(--sub); transform: translateX(-50%); }
+  .xlab.m { color: #B5B5BC; font-weight: 600; }
+  .ptabs { position: absolute; left: 0; right: 0; top: 776px; }
+  .olist { position: absolute; left: 0; right: 0; top: 821px; }
+  /* pop-out: win/loss */
+  .wl { left: 14px; top: 640px; width: 178px; padding: 14px 15px 14px; }
+  .wl .lg div { white-space: nowrap; }
+  .wl .row2 { display: flex; align-items: center; gap: 12px; margin-top: 11px; }
+  .wl .donut { width: 62px; height: 62px; position: relative; flex: none; }
+  .wl .donut b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 700 16px/1 Aeonik; color: #fff; }
+  .wl .lg { font: 400 11.5px/1.5 Aeonik; color: var(--secondary); }
+  .wl .lg i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; }
+  .wl .lg b { color: #fff; font-weight: 700; }
+</style></head>
+<body>
+<div class="canvas">
+  <div class="glow top"></div><div class="glow mid"></div><div class="grid"></div>
+  <svg class="pano" data-k="pano" data-i="6"></svg>
+
+  <div class="copy">
+    <div class="eyebrow"><i></i>Channel analytics</div>
+    <h1>See which channels<br><em>really perform</em></h1>
+    <p class="sub">Profit, wins, losses and every executed trade, tracked for each channel.</p>
+  </div>
+
+  <div class="device" data-k="device">
+    <div class="app">
+      <div data-k="sb"></div>
+      <div class="hdr" style="justify-content:space-between"><i class="back" data-ic="back" style="position:static;width:38px;height:38px"></i><span class="act" style="position:static"><i data-ic="gear" style="width:19px;height:19px"></i></span></div>
+      <div class="hero">
+        <span data-k="av" data-kind="aurum" data-size="104"></span>
+        <div class="TB20" style="margin-top:12px">Aurum Gold Signals</div>
+        <div class="R14 c-sub meta">@aurumgoldsignals • 12,480 members</div>
+      </div>
+      <div class="grid4">
+        <div class="sc4"><span class="ib"><i data-ic="server"></i></span><div><div class="v c-success">+$3,482.60</div><div class="l">Total Profit</div></div></div>
+        <div class="sc4"><span class="ib"><i data-ic="server"></i></span><div><div class="v">146</div><div class="l">Executed Trades</div></div></div>
+        <div class="sc4"><span class="ib" style="color:#009940"><i data-ic="trendUp"></i></span><div><div class="v">98</div><div class="l">Winning Trades</div></div></div>
+        <div class="sc4"><span class="ib" style="color:#D22A00"><i data-ic="trendDown"></i></span><div><div class="v">48</div><div class="l">Losing Trades</div></div></div>
+      </div>
+      <div class="chart">
+        <span class="badge2">Total Profit</span>
+        <div class="val">+$2,946.80</div>
+        <div class="ranges"><span>Week</span><span>Month</span><span class="on">3 Months</span><span>Year</span><span>All</span></div>
+        <div class="plot"><svg id="plot" width="402" height="206" style="position:absolute;left:-12px;top:0"></svg></div>
+      </div>
+      <div class="ptabs tabs">
+        <div class="rowt">
+          <div class="t">Open <span class="cnt" style="color:var(--sub)">1</span></div>
+          <div class="t">Limit</div>
+          <div class="t on">Closed <span class="cnt">146</span></div>
+        </div>
+        <div class="ind" id="ind"></div>
+      </div>
+      <div class="olist">
+        <div class="order">
+          <div class="l">
+            <span class="pair" data-k="pair" data-b="xau" data-q="usd" data-size="26"></span>
+            <div class="col" style="align-items:flex-start">
+              <div class="sym"><span class="TB14 c-white">XAUUSD</span><span class="badge tp">TP 2</span></div>
+              <div class="det R12"><span class="c-primary">Buy 0.12 lot&nbsp;</span><span class="c-sub">at 4,371.20</span></div>
+            </div>
+          </div>
+          <div class="r"><span class="R12">$4,389.20</span><span class="pnl R12"><i data-ic="trendUp" style="width:17px;height:17px"></i>+$216.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout blue wl">
+    <span class="k">Win / loss</span>
+    <div class="row2">
+      <div class="donut"><svg width="62" height="62" viewBox="0 0 62 62">
+        <circle cx="31" cy="31" r="25" fill="none" stroke="#E00000" stroke-opacity=".85" stroke-width="8"/>
+        <circle cx="31" cy="31" r="25" fill="none" stroke="#26BF61" stroke-width="8" stroke-dasharray="105.3 157.1" transform="rotate(-90 31 31)" stroke-linecap="butt"/>
+      </svg><b>67%</b></div>
+      <div class="lg"><div><i style="background:#26BF61"></i><b>98</b> wins</div><div><i style="background:#E00000"></i><b>48</b> losses</div></div>
+    </div>
+  </div>
+</div>
+<script>
+  // Cumulative profit, Jul 2 – Oct 2 (92 days) — demo data ending at +$2,946.80
+  document.addEventListener('DOMContentLoaded', () => {
+    const pts = [[0,0],[5,120],[9,60],[14,340],[18,280],[23,610],[27,540],[31,820],[35,760],[40,1100],[44,1020],[48,1380],[52,1290],
+      [56,1610],[60,1540],[64,1850],[68,2010],[72,1880],[76,2240],[80,2410],[84,2330],[88,2690],[92,2946.8]];
+    const svg = document.getElementById('plot');
+    const L = 24, R = 330, T = 22, B = 166; // plot box inside the 402 x 206 svg
+    const X = d => L + (d / 92) * (R - L), Y = v => B - (v / 3200) * (B - T);
+    const P = pts.map(([d, v]) => [X(d), Y(v)]);
+    let d = `M${P[0][0]},${P[0][1]}`;
+    for (let i = 0; i < P.length - 1; i++) {
+      const p0 = P[i - 1] || P[i], p1 = P[i], p2 = P[i + 1], p3 = P[i + 2] || p2;
+      d += `C${p1[0] + (p2[0] - p0[0]) / 6},${p1[1] + (p2[1] - p0[1]) / 6} ${p2[0] - (p3[0] - p1[0]) / 6},${p2[1] - (p3[1] - p1[1]) / 6} ${p2[0]},${p2[1]}`;
+    }
+    const grid = [0, 1000, 2000, 3000].map(v => `<line x1="12" x2="${R + 10}" y1="${Y(v)}" y2="${Y(v)}" stroke="rgba(255,255,255,.09)" stroke-width="1"/>`).join('');
+    svg.innerHTML = `<defs><linearGradient id="af" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A69F1" stop-opacity=".38"/><stop offset="1" stop-color="#1A69F1" stop-opacity="0"/></linearGradient></defs>
+      ${grid}<path d="${d}L${R},${B + 18}L${L},${B + 18}Z" fill="url(#af)"/><path d="${d}" fill="none" stroke="#1A69F1" stroke-width="2.6" stroke-linejoin="round"/>
+      <circle cx="${P[P.length - 1][0]}" cy="${P[P.length - 1][1]}" r="4.5" fill="#1A69F1" stroke="#fff" stroke-width="2"/>`;
+    const plot = svg.parentElement;
+    [0, 1000, 2000, 3000].forEach(v => plot.insertAdjacentHTML('beforeend', `<span class="ylab" style="top:${Y(v)}px">${v}$</span>`));
+    [[13, '15', 0], [30, 'Aug', 1], [44, '15', 0], [61, 'Sep', 1], [75, '15', 0]].forEach(([dd, t, m]) =>
+      plot.insertAdjacentHTML('beforeend', `<span class="xlab ${m ? 'm' : ''}" style="left:${X(dd) - 12}px">${t}</span>`));
+    // tab indicator under "Closed"
+    document.fonts.ready.then(() => {
+      const on = document.querySelector('.ptabs .t.on'), ind = document.getElementById('ind');
+      ind.style.left = on.offsetLeft + 'px'; ind.style.width = on.offsetWidth + 'px';
+    });
+  });
+</script>
+<script src="kit.js"></script>
+</body></html>

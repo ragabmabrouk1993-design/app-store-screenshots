@@ -1,0 +1,59 @@
+/* Light "sky" marketing layer — sits on top of base.css (app layer + device). */
+
+.canvas.light { background:
+    radial-gradient(70% 38% at 50% 0%, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 100%),
+    linear-gradient(180deg, #E9F3FF 0%, #D3E7FC 46%, #B9D8F8 100%); }
+.canvas.light .lgrid { position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(26,105,241,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(26,105,241,.07) 1px, transparent 1px);
+  background-size: 24px 24px; background-position: -1px -1px;
+  -webkit-mask-image: radial-gradient(75% 45% at 50% 20%, #000 0%, rgba(0,0,0,.3) 60%, transparent 100%); }
+
+/* headline */
+.head { position: absolute; left: 18px; right: 18px; z-index: 8; text-align: center; }
+.hl { text-wrap: balance; font: 700 60px/.98 Aeonik; letter-spacing: -.035em; color: #0B1424; -webkit-text-stroke: .9px #0B1424; }
+.hl em { font-style: normal; color: #1A69F1; -webkit-text-stroke-color: #1A69F1; }
+.sl { text-wrap: balance; margin: 14px auto 0; max-width: 360px; font: 400 16.5px/1.38 Aeonik; color: #33445F; letter-spacing: -.005em; }
+
+/* laurel badge */
+.laurel { display: inline-flex; align-items: center; gap: 4px; color: #0B1424; }
+.laurel .br { width: 34px; height: 60px; flex: none; }
+.laurel .tx { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+.laurel .tx b { font: 700 27px/1 Aeonik; letter-spacing: -.035em; -webkit-text-stroke: .5px #0B1424; }
+.laurel .tx span { margin-top: 5px; font: 700 12.5px/1 Aeonik; letter-spacing: .01em; }
+.laurel .tx small { font: 700 12.5px/1 Aeonik; margin-bottom: 5px; }
+
+/* decorations */
+[data-deco] { position: absolute; pointer-events: none; }
+.z-back { z-index: 2; } .z-front { z-index: 11; }
+
+/* device: natural titanium for the light theme */
+.device.ti { background: linear-gradient(140deg, #F4F5F7 0%, #C3C7CD 14%, #8F949C 34%, #D5D8DD 56%, #9DA2AA 78%, #EEF0F3 100%);
+  box-shadow: 0 0 0 .5px rgba(30,40,60,.35), 0 50px 70px -30px rgba(14,42,90,.55), 0 22px 40px -16px rgba(14,42,90,.35); }
+.device.ti .hw { background: linear-gradient(90deg, #8A9098, #E6E8EB 55%, #9AA0A8); }
+
+/* pop-out of an in-app (dark) component */
+.pop { position: absolute; z-index: 12; border-radius: 20px; background: linear-gradient(180deg, #151B26, #0E131C);
+  border: 1px solid rgba(255,255,255,.1);
+  box-shadow: 0 30px 50px -18px rgba(10,30,70,.65), 0 12px 24px -10px rgba(10,30,70,.35), inset 0 1px 0 rgba(255,255,255,.06); }
+
+/* light notification */
+.notif.light { background: rgba(255,255,255,.96); -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
+  border: .5px solid rgba(255,255,255,.9); box-shadow: 0 30px 50px -18px rgba(10,30,70,.5), 0 10px 20px -8px rgba(10,30,70,.25); }
+.notif.light .h b { color: #0B1424; } .notif.light .bd { color: #1E2A3D; } .notif.light .h span { color: rgba(60,60,67,.6); }
+.notif.light .ai { box-shadow: 0 0 0 .5px rgba(0,0,0,.15); }
+
+/* larger phone (360pt wide) for the light layouts */
+.device.lg { --dev-w: 360px; --scr-w: 343px; --s: .779545; --scr-h: 745.25px; border-radius: 51.5px; }
+.device.lg .bezel { border-radius: 49px; }
+.device.lg .screen, .device.lg .glass { border-radius: 43px; }
+.device.lg .hw.action { top: 126px; height: 24px; } .device.lg .hw.volu { top: 174px; height: 46px; } .device.lg .hw.vold { top: 231px; height: 46px; }
+.device.lg .hw.power { top: 194px; height: 72px; } .device.lg .hw.cam { top: 427px; height: 41px; }
+
+/* OTP pop-out (TelegramVerifyOtp / CodeInput) */
+.otp { padding: 16px 16px 16px; }
+.otp .ot { display: flex; align-items: center; gap: 8px; font: 700 17px/1.2 Aeonik; color: #EEE; }
+.otp .os { margin-top: 5px; font: 400 12.5px/1.3 Aeonik; color: var(--sub); }
+.otp .boxes { margin-top: 13px; display: flex; gap: 8px; }
+.otp .boxes span { width: 40px; height: 48px; border-radius: 13px; border: 1px solid var(--border); background: var(--bg); display: flex; align-items: center; justify-content: center;
+  font: 700 21px/1 Aeonik; color: #fff; }
+.otp .boxes span.on { border-color: rgba(26,105,241,.7); box-shadow: 0 0 0 3px rgba(26,105,241,.18); }

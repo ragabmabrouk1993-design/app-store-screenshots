@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>07 — Track every channel</title>
+<link rel="stylesheet" href="base.css"><link rel="stylesheet" href="light.css"><link rel="stylesheet" href="screens.css">
+<style>
+  .wl { left: 6px; top: 318px; width: 184px; padding: 14px 15px; transform: rotate(-5deg); }
+  .wl .k { font: 700 9.5px/1 Aeonik; letter-spacing: .14em; text-transform: uppercase; color: #8DB6FF; }
+  .wl .row2 { display: flex; align-items: center; gap: 12px; margin-top: 11px; }
+  .wl .donut { width: 64px; height: 64px; position: relative; flex: none; }
+  .wl .donut b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 700 16px/1 Aeonik; color: #fff; }
+  .wl .lg { font: 400 12px/1.6 Aeonik; color: var(--secondary); white-space: nowrap; }
+  .wl .lg i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; }
+  .wl .lg b { color: #fff; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="canvas light">
+  <div class="lgrid"></div>
+  <div data-deco="cloud" class="z-back" style="left:-70px;top:860px;width:140px;height:70px"></div>
+  <div data-deco="cloud" class="z-back" style="left:376px;top:560px;width:128px;height:64px"></div>
+
+  <div class="head" style="top:56px">
+    <div class="hl">Track Every<br><em>Channel</em></div>
+    <div class="sl">Profit, wins and losses for every channel you copy.</div>
+  </div>
+  <div data-deco="sparkle" style="left:30px;top:150px;width:22px;height:22px"></div>
+
+  <div data-deco="arrow" class="z-back" style="left:262px;top:250px;width:176px;height:151px"></div>
+
+  <div class="device ti lg" data-k="device" style="left:52px;top:300px;transform:rotate(5deg)">
+    <div class="app" data-screen="profile"></div>
+  </div>
+
+  <div class="pop wl">
+    <span class="k">Win / loss</span>
+    <div class="row2">
+      <div class="donut"><svg width="64" height="64" viewBox="0 0 62 62">
+        <circle cx="31" cy="31" r="25" fill="none" stroke="#E00000" stroke-opacity=".85" stroke-width="8"/>
+        <circle cx="31" cy="31" r="25" fill="none" stroke="#26BF61" stroke-width="8" stroke-dasharray="105.3 157.1" transform="rotate(-90 31 31)"/>
+      </svg><b>67%</b></div>
+      <div class="lg"><div><i style="background:#26BF61"></i><b>98</b> wins</div><div><i style="background:#E00000"></i><b>48</b> losses</div></div>
+    </div>
+  </div>
+</div>
+<script src="screens.js"></script><script src="deco.js"></script><script src="kit.js"></script>
+</body></html>

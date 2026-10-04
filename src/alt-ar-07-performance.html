@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ar"><head><meta charset="utf-8"><title>Alt AR · 07 — تابع أداء كل قناة</title>
+<link rel="stylesheet" href="base.css"><link rel="stylesheet" href="light.css"><link rel="stylesheet" href="screens.css"><link rel="stylesheet" href="dark.css"><link rel="stylesheet" href="alt.css"><link rel="stylesheet" href="ar.css">
+<style>
+  .wl { left: 6px; top: 314px; width: 184px; padding: 14px 15px; transform: rotate(4deg); }
+  .wl .k { font: 700 9.5px/1 Aeonik; letter-spacing: .14em; text-transform: uppercase; color: #8DB6FF; }
+  .wl .row2 { display: flex; align-items: center; gap: 12px; margin-top: 11px; }
+  .wl .donut { width: 64px; height: 64px; position: relative; flex: none; }
+  .wl .donut b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 700 16px/1 Aeonik; color: #fff; }
+  .wl .lg { font: 400 12px/1.6 Aeonik; color: var(--secondary); white-space: nowrap; }
+  .wl .lg i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; }
+  .wl .lg b { color: #fff; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="canvas light dark alt" dir="rtl">
+  <div class="bgdots"></div>
+  <div data-deco="rings" data-cx="260" data-cy="700" data-n="8" data-r0="120" data-step="64" style="inset:0;z-index:1"></div>
+  <div data-deco="wave" data-tone="neon" data-i="6"></div>
+
+  <div class="head" style="top:56px">
+    <div class="hl">تابع أداء<br><em>كل قناة</em></div>
+    <div class="sl">الأرباح والصفقات الرابحة والخاسرة لكل قناة تنسخ منها.</div>
+  </div>
+  <div data-deco="sparkle" class="z-front" style="left:30px;top:150px;width:22px;height:22px"></div>
+  <div data-deco="sparkle" data-tone="white" class="z-front" style="left:396px;top:250px;width:16px;height:16px"></div>
+  <div class="device ti lg" data-k="device" style="left:87px;top:320px;transform:rotate(-9deg)">
+    <div class="app" data-screen="profile"></div>
+  </div>
+  <div class="pop wl">
+    <span class="k">نسبة النجاح</span>
+    <div class="row2">
+      <div class="donut"><svg width="64" height="64" viewBox="0 0 62 62">
+        <circle cx="31" cy="31" r="25" fill="none" stroke="#E00000" stroke-opacity=".85" stroke-width="8"/>
+        <circle cx="31" cy="31" r="25" fill="none" stroke="#26BF61" stroke-width="8" stroke-dasharray="105.3 157.1" transform="rotate(-90 31 31)"/>
+      </svg><b>67%</b></div>
+      <div class="lg"><div><i style="background:#26BF61"></i><b>98</b> رابحة</div><div><i style="background:#E00000"></i><b>48</b> خاسرة</div></div>
+    </div>
+  </div>
+</div>
+<script src="screens.js"></script><script src="deco.js"></script><script src="kit.js"></script>
+</body></html>
