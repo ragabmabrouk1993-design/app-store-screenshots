@@ -83,7 +83,7 @@
     },
   };
 
-  const mock = k => `<div class="ml canvas light dark alt"${isAr ? ' dir="rtl"' : ''}><div class="glow2"></div>${P[k].art()}</div><div class="fade"></div>`;
+  const mock = k => `<div class="ml canvas light dark alt"${isAr ? ' dir="rtl"' : ''}>${P[k].art()}</div><div class="fade"></div>`;
 
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.mock[data-onb]').forEach(el => { el.innerHTML = mock(el.dataset.onb); });

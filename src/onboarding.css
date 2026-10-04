@@ -15,13 +15,11 @@ html.onbpage, html.onbpage body { width: 375px; height: 812px; background: #0408
 .mock .ml.canvas { position: absolute; left: 0; top: 0; width: 440px; height: 662px; overflow: visible;
   transform: scale(.779545); transform-origin: 0 0; }
 .mock .ml.canvas.dark.alt { background: none; }
-.mock .glow2 { position: absolute; left: 20px; right: 20px; top: 70px; height: 520px; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(closest-side, rgba(26,105,241,.18), rgba(26,105,241,0)); filter: blur(10px); }
 
 /* phone: graphite frame like the current mockup, cropped by the bottom fade */
 .mock .phone { position: absolute; left: 26px; top: 58px; width: 388px; height: 760px; z-index: 3; padding: 5px; border-radius: 62px;
   background: linear-gradient(140deg, #8E9097 0%, #4F5258 18%, #2C2E33 45%, #44474D 75%, #7C7F86 100%);
-  box-shadow: 0 0 0 .6px rgba(190,205,235,.45), 0 0 0 2px rgba(61,132,255,.12), 0 40px 80px -20px rgba(0,0,0,.8), 0 0 90px rgba(26,105,241,.30); }
+  box-shadow: none; }
 .mock .phone .bz { width: 100%; height: 100%; padding: 8px; border-radius: 57px; background: #010101; box-shadow: inset 0 0 0 1px rgba(255,255,255,.07); }
 .mock .phone .scr { position: relative; width: 362px; height: 742px; border-radius: 49px; overflow: hidden; background: var(--bg); isolation: isolate; }
 .mock .phone .scr > .app { transform: scale(.822727); transform-origin: 0 0; }
