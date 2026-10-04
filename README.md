@@ -41,6 +41,8 @@ Each screenshot is an HTML page in `src/`. Light pages are `NN-*.html`, dark pag
   - Add `data-keyboard` to show the iOS number pad: the decimal pad on Telegram and the number pad on MT.
 - `settings.js`: the Channel Settings screen. `data-scroll-to` picks the section shown.
 - `base.css` and `kit.js`: the app's UI tokens (colors, Aeonik font, `scale()` sizes), device frame, icons, status bar and tab bar.
+  - The app screen background (`--app-glow` in `base.css`) is the navy glow behind the status bar and header, measured from device captures.
+  - `src/symbols/` holds the round symbol icons (USD, EUR, GBP, gold, silver), drawn after the app's own. A pair icon shows the quote currency top-left with the base symbol over it, bottom-right.
 
 Layouts alternate: odd screenshots have the headline on top and the phone below; even ones have the phone on top and the headline below. The channels and account are fictional demo data.
 

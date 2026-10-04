@@ -16,7 +16,7 @@ html.onbpage, html.onbpage body { width: 375px; height: 812px; background: #0408
   transform: scale(.779545); transform-origin: 0 0; }
 .mock .ml.canvas.dark.alt { background: none; }
 .mock .glow2 { position: absolute; left: 20px; right: 20px; top: 70px; height: 520px; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(closest-side, rgba(26,105,241,.32), rgba(26,105,241,0)); filter: blur(10px); }
+  background: radial-gradient(closest-side, rgba(26,105,241,.18), rgba(26,105,241,0)); filter: blur(10px); }
 
 /* phone: graphite frame like the current mockup, cropped by the bottom fade */
 .mock .phone { position: absolute; left: 26px; top: 58px; width: 388px; height: 760px; z-index: 3; padding: 5px; border-radius: 62px;
@@ -45,7 +45,7 @@ html.onbpage, html.onbpage body { width: 375px; height: 812px; background: #0408
 
 /* ── full screen ─────────────────────────────────────────────────────── */
 .onbs { position: relative; width: 375px; height: 812px; overflow: hidden; color: #fff; font-family: Aeonik, var(--sf);
-  background: radial-gradient(90% 40% at 50% 0%, rgba(26,72,160,.55) 0%, rgba(10,24,52,.25) 55%, rgba(4,8,15,0) 100%), #04080F; }
+  background: var(--app-glow), var(--bg); }
 .onbs .sbw { position: absolute; left: 0; top: 0; width: 440px; height: 62px; transform: scale(.852273); transform-origin: 0 0; z-index: 30; }
 .onbs .hd { position: absolute; left: 16px; right: 16px; top: 58px; height: 26px; display: flex; align-items: center; justify-content: space-between; z-index: 30; }
 .onbs .brand { display: flex; align-items: center; gap: 8px; direction: ltr; font: 700 19px/1 Aeonik; letter-spacing: -.01em; color: #fff; }

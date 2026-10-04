@@ -66,7 +66,7 @@
         <div class="pop zoom" style="left:8px;top:330px;width:424px">
           <div class="zh"><i data-ic="checkC"></i>${L('Break-even', 'التعادل')}<span>${L('now', 'الآن')}</span></div>
           ${order({ b: 'xau', sym: 'XAUUSD', side: 'Buy', lot: '0.12', at: '4,412.50', px: '$4,436.10', pl: '+$283.20',
-            badge: '<span class="badge be">BE</span>', tps: [['TP1 4,418', 1], ['TP2 4,430', 1], ['TP3 4,445']] })}
+            badge: '<span class="badge be">Break Even</span>', tps: [['TP1 4,418', 1], ['TP2 4,430', 1], ['TP3 4,445']] })}
         </div>
         ${sparkles(396, 282)}`,
     },

@@ -1,7 +1,7 @@
 /* Tragram screenshot kit: icon sprite + small templating helpers.
    Markup uses data-k="<helper>" placeholders that are expanded on load. */
 (function () {
-  const FLAGS = '../../../src/assets/svgs/symbol-flags/';
+  const FLAGS = 'symbols/';   // round symbol icons drawn after the app's symbol-flags
   const LOGO_PATHS = {
     mark: '<path d="M37.2305 48.5783L56.979 28H79.162L36.1739 73L35.3681 71.8192C30.4695 64.64 31.2577 54.8018 37.2305 48.5783Z" fill="#142B55"/><path d="M39.3715 0.00141907H139.162V24L6.16205 23.2529L7.57904 17.8656C10.3223 7.43605 23.7679 -0.118992 39.3715 0.00141907Z" fill="#1A69F1"/><path d="M39.9265 59.5534L70.1795 28H104.162L38.3078 97L37.0734 95.1894C29.5692 84.1814 30.7767 69.0962 39.9265 59.5534Z" fill="#1A69F1"/>',
   };
