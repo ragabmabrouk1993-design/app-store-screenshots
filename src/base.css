@@ -4,8 +4,11 @@
    => 1284 x 2778 px (App Store 6.5" display). In-app screens stay 440 x 956 pt.
    ========================================================================== */
 
-@font-face { font-family: Aeonik; font-weight: 400; src: url(../../../src/assets/fonts/fonnts.com-Aeonik-Regular.ttf); }
-@font-face { font-family: Aeonik; font-weight: 700; src: url(../../../src/assets/fonts/fonnts.com-Aeonik-Bold.ttf); }
+/* Aeonik from fonts/ (not in git, see fonts/install.sh), else from the app repo next to this one */
+@font-face { font-family: Aeonik; font-weight: 400; src: url(../fonts/Aeonik-Regular.otf), url(../fonts/Aeonik-Regular.ttf),
+  url(../../../src/assets/fonts/fonnts.com-Aeonik-Regular.ttf); }
+@font-face { font-family: Aeonik; font-weight: 700; src: url(../fonts/Aeonik-Bold.otf), url(../fonts/Aeonik-Bold.ttf),
+  url(../../../src/assets/fonts/fonnts.com-Aeonik-Bold.ttf); }
 
 :root {
   /* App tokens (src/config/colors.ts) */

@@ -1,0 +1,4 @@
+# Font files stay on your machine: Apple's and Aeonik's licenses don't allow sharing them.
+# Run fonts/install.sh to fetch the Apple fonts; put the Aeonik files in fonts/ by hand.
+fonts/*
+!fonts/install.sh
