@@ -66,6 +66,16 @@ These are designs for the app's five onboarding steps, in English and Arabic. Th
   - subtitle: 15 pt, `#A7B3C9`
 - `onboarding.js` builds both kinds of page from `data-onb` and holds all the text. `onboarding.css` holds the styles. The page files are `src/onb-mock-*.html` and `src/onb-*.html`.
 
+## Google Play feature graphic
+
+`out/feature/feature-en.png` and `feature-ar.png` are the 1024 × 500 feature graphic for the Google Play listing. They are opaque PNGs with no alpha, as Play requires.
+
+- The left side has the app icon, the name, the "Never Miss a Signal" headline, the subtitle, and MT4 / MT5 / Telegram chips. The right side has a tilted phone on the home screen with the "Order executed" notification popping out.
+- The Arabic version mirrors the layout.
+- The background is the alt set's: dark navy, signal rings and a faint candlestick chart.
+- Text and the phone stay clear of the edges, because Play can crop or overlay them.
+- `./render.sh feature` renders both. The pages are `src/feature-en.html` and `src/feature-ar.html`, and the styles are in `src/feature.css`.
+
 ## Re-render
 
 ```bash
