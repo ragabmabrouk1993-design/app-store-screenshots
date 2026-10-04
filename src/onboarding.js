@@ -40,8 +40,8 @@
     linkTelegram: {
       title: L('Link Your <em>Telegram</em>', 'اربط حساب <em>تيليجرام</em>'),
       text: L('Sign in with your Telegram number. Your channels show up right away.', 'سجّل الدخول برقم تيليجرام، وستظهر قنواتك فورًا.'),
-      art: () => `${phone('<div class="app" data-screen="connectTelegram" data-keyboard></div>')}
-        <div class="pop zin" style="left:22px;top:238px;width:396px">
+      art: () => `${phone('<div class="app" data-screen="connectTelegram" data-full data-keyboard></div>')}
+        <div class="pop zin" style="left:22px;top:240px;width:396px">
           <div class="zrow"><div class="zcc"><span class="fl">🇬🇧</span><b>+44</b></div><div class="zfld on"><i data-ic="phone"></i><span>7700 900123</span><span class="zcaret"></span></div></div>
           <div class="zenc"><i data-ic="lock"></i>${L('We only use your number to sign in to Telegram', 'نستخدم رقمك لتسجيل الدخول إلى تيليجرام فقط')}</div>
         </div>
@@ -62,7 +62,7 @@
     connect: {
       title: L('Connect <em>MT4 &amp; MT5</em>', 'اربط <em>MT4 &amp; MT5</em>'),
       text: L('Search your broker’s server and link your account securely.', 'ابحث عن سيرفر الوسيط واربط حسابك بأمان.'),
-      art: () => `${phone('<div class="app" data-screen="connectMT"></div>')}
+      art: () => `${phone('<div class="app" data-screen="connectMT" data-full></div>')}
         <div class="pop zin" style="left:22px;top:312px;width:396px">
           <div class="zrow"><div class="zfld"><i data-ic="server"></i><span>YourBroker-Live</span><i class="end" data-ic="checkC"></i></div></div>
           <div class="zrow"><div class="zfld on"><i data-ic="hash"></i><span>51234870</span><span class="zcaret"></span></div></div>

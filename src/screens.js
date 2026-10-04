@@ -176,6 +176,7 @@
       app.classList.add('scr-' + k);
       if (isAr) app.dir = 'rtl';
       if (k === 'connectTelegram' || k === 'connectMT') app.classList.add('modal');
+      if (app.dataset.full !== undefined) app.classList.add('full');
       app.insertAdjacentHTML('afterbegin', T[k]());
       if (app.dataset.keyboard !== undefined) {
         app.classList.add('kbd');

@@ -47,6 +47,12 @@
 .app.modal .fld .end { margin-left: auto; }
 .app.modal .fld .dots { letter-spacing: 3px; font-size: 18px; }
 .app.modal .cbtn { position: absolute; left: 19px; right: 19px; bottom: 34px; }
+/* full-screen variant (data-full): the same screen pushed as a page, no parent card or sheet corners */
+.app.modal.full { background: var(--app-glow), var(--bg); }
+.app.modal.full .parent { display: none; }
+.app.modal.full .sheet { top: 0; border-radius: 0; background: none; }
+.app.modal.full .back { top: 74px; }
+.app.modal.full .body { top: 130px; }
 .scr-connectMT .plat { margin-top: 22px; display: flex; align-items: center; gap: 9px; }
 .scr-connectMT .plat .pc { width: 81px; height: 34px; border-radius: 17px; border: 1px solid var(--dark-border); display: flex; align-items: center; justify-content: center; font: 400 16px/1 Aeonik; color: #fff; }
 .scr-connectMT .plat .pc.on { border: 2px solid var(--primary); }
