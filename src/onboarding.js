@@ -1,4 +1,4 @@
-/* Onboarding pages, four steps: signals, telegram, connect, rules.
+/* Onboarding pages, five steps: signals, linkTelegram, channels, connect, rules.
    <div class="mock" data-onb="signals"></div>  the mockup image only (343 x 516 pt)
    <div class="onbs" data-onb="signals"></div>  the full onboarding screen with that mockup in place
    Arabic pages (<html lang="ar">) get the Arabic copy and right-to-left screens; trade rows, symbols and
@@ -6,7 +6,7 @@
 (function () {
   const isAr = document.documentElement.lang === 'ar';
   const L = (en, ar) => (isAr ? ar : en);
-  const ORDER = ['signals', 'telegram', 'connect', 'rules'];
+  const ORDER = ['signals', 'linkTelegram', 'channels', 'connect', 'rules'];
 
   const pnl = v => `<span class="pnl R12"><i data-ic="trendUp" style="width:17px;height:17px"></i>${v}</span>`;
   const tps = list => `<div class="tps">${list.map(([t, hit]) => `<span class="tp ${hit ? 'hit' : ''}">${t}${hit ? '<i data-ic="checkC"></i>' : ''}</span>`).join('')}</div>`;
@@ -37,9 +37,20 @@
           </div></div>
         ${sparkles(398, 356)}`,
     },
-    telegram: {
+    linkTelegram: {
       title: L('Link Your <em>Telegram</em>', 'اربط حساب <em>تيليجرام</em>'),
-      text: L('Sign in with your Telegram number, then pick the channels to copy.', 'سجّل الدخول برقم تيليجرام، ثم اختر القنوات التي تريد نسخها.'),
+      text: L('Sign in with your Telegram number. Your channels show up right away.', 'سجّل الدخول برقم تيليجرام، وستظهر قنواتك فورًا.'),
+      art: () => `${phone('<div class="app" data-screen="connectTelegram" data-keyboard></div>')}
+        <div class="pop zin" style="left:22px;top:238px;width:396px">
+          <div class="zrow"><div class="zcc"><span class="fl">🇬🇧</span><b>+44</b></div><div class="zfld on"><i data-ic="phone"></i><span>7700 900123</span><span class="zcaret"></span></div></div>
+          <div class="zenc"><i data-ic="lock"></i>${L('We only use your number to sign in to Telegram', 'نستخدم رقمك لتسجيل الدخول إلى تيليجرام فقط')}</div>
+        </div>
+        <div data-deco="plane3d" class="z-front" style="left:-6px;top:338px;width:112px;height:82px;transform:rotate(-10deg)"></div>
+        ${sparkles(394, 192)}`,
+    },
+    channels: {
+      title: L('Pick Your <em>Channels</em>', 'اختر <em>قنواتك</em>'),
+      text: L('Copy only the channels you trust and switch any of them on or off.', 'انسخ فقط من القنوات التي تثق بها، وفعّل أو أوقف أيًّا منها في أي وقت.'),
       art: () => `${phone('<div class="app" data-screen="channels"></div>')}
         <div class="pop zoom" style="left:8px;top:224px;width:424px">
           <div class="ch"><span data-k="av" data-kind="northline" data-size="47"></span>

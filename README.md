@@ -50,14 +50,15 @@ Layouts alternate: odd screenshots have the headline on top and the phone below;
 
 ## Onboarding
 
-These are designs for the app's four onboarding steps, in English and Arabic. They keep the app's fixed onboarding layout: the logo and progress pills on top, then the mockup image, the title, the subtitle and the Next button. Only the mockup image and the text styling change.
+These are designs for the app's five onboarding steps, in English and Arabic. They keep the app's fixed onboarding layout: the logo and progress pills on top, then the mockup image, the title, the subtitle and the Next button. Only the mockup image and the text styling change.
 
 | # | Step | English title | Arabic title |
 |---|------|---------------|--------------|
 | 1 | `01-signals` | Never Miss a **Signal** | لا تفوّت أي **إشارة** |
-| 2 | `02-telegram` | Link Your **Telegram** | اربط حساب **تيليجرام** |
-| 3 | `03-connect` | Connect **MT4 & MT5** | اربط **MT4 & MT5** |
-| 4 | `04-rules` | Trade by **Your Rules** | تداول وفق **قواعدك** |
+| 2 | `02-link-telegram` | Link Your **Telegram** | اربط حساب **تيليجرام** |
+| 3 | `03-channels` | Pick Your **Channels** | اختر **قنواتك** |
+| 4 | `04-connect` | Connect **MT4 & MT5** | اربط **MT4 & MT5** |
+| 5 | `05-rules` | Trade by **Your Rules** | تداول وفق **قواعدك** |
 
 - **Mockup images** (`out/onb-mock/`, `out/onb-mock-ar/`) are the assets for the app. Each one is a 686 × 1032 PNG, the same size as the current mockup, plus a 1372 × 2064 `@2x` copy. It is transparent above and beside the phone and fades into `#04080F` at the bottom. A graphite phone shows the app screen, with one app card or notification popping out over it.
 - **Full screens** (`out/onb/`, `out/onb-ar/`, 1125 × 2436) show each mockup in the layout, with the suggested text styling:
