@@ -76,6 +76,20 @@ These are designs for the app's five onboarding steps, in English and Arabic. Th
 - Text and the phone stay clear of the edges, because Play can crop or overlay them.
 - `./render.sh feature` renders both. The pages are `src/feature-en.html` and `src/feature-ar.html`, and the styles are in `src/feature.css`.
 
+## Brand
+
+`brand/` holds the enhanced Tragram symbol. The shape is unchanged from the original; only the colour and shading are refined.
+
+- **Bar:** a cleaner cyan-to-blue gradient, a thin lit top edge and a slightly darker underside.
+- **Stem:** runs from deep blue under the bar to bright cyan at the tip.
+- **Join:** the bar casts a soft shadow onto the stem, and the fold where the ribbon turns now fades out instead of ending in a hard block.
+
+| File | What it is |
+|------|------------|
+| `tragram-symbol.svg` | The symbol, transparent background. One shared path, so the file is smaller. |
+| `tragram-symbol-1024.png` | The same, as a 1024 × 782 PNG with transparency. |
+| `tragram-app-icon.svg`, `tragram-app-icon-1024.png` | The symbol on the app's navy background with a soft glow, 1024 × 1024, no transparency. Use it as the store icon; iOS and Android round the corners themselves. |
+
 ## Re-render
 
 ```bash
