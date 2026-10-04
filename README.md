@@ -46,11 +46,26 @@ Layouts alternate: odd screenshots have the headline on top and the phone below;
 
 `v1-dark/` keeps the first dark draft for reference.
 
+## Onboarding
+
+Four onboarding pages for inside the app, in English and Arabic. They are full-screen app pages at the device's native 440 × 956 pt, with no phone frame. They are exported at 3x, which gives 1320 × 2868 px.
+
+| # | Page | English | Arabic |
+|---|------|---------|--------|
+| 1 | `01-signals` | Never Miss a Signal | لا تفوّت أي إشارة |
+| 2 | `02-telegram` | Link Your Telegram | اربط حساب تيليجرام |
+| 3 | `03-connect` | Connect MT4 & MT5 | اربط حسابك MT4 & MT5 |
+| 4 | `04-rules` | Trade by Your Rules | تداول وفق قواعدك |
+
+- Each page in `src/onb-NN-*.html` (English) and `src/onb-ar-NN-*.html` (Arabic) is a single `<div class="app onb" data-onb="signals">`. `onboarding.js` builds it: the copy, the illustration, the page dots, Skip, and the Next or Get Started button. `onboarding.css` holds the styles.
+- The pages use the alt set's background and cards, and the app's own components: order rows, channel rows, switches and input fields. The Arabic pages run right to left and use the app's Arabic strings where it has them.
+- `./render.sh onb` and `./render.sh onb-ar` write `out/onb/` and `out/onb-ar/`. A full set also writes `preview-onb.png`, which shows both languages side by side.
+
 ## Re-render
 
 ```bash
 ./render.sh            # all three sets + their preview boards
-./render.sh dark       # only the dark set (or: light, alt, alt-ar)
+./render.sh dark       # only the dark set (or: light, alt, alt-ar, onb, onb-ar)
 ./render.sh dark 04    # only dark 04-*
 RAW=1 ./render.sh 01   # bare in-app screen, for comparing with a device capture
 ```
