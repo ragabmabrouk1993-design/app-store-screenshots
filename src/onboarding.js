@@ -1,7 +1,8 @@
-/* Onboarding pages. <div class="app onb" data-onb="signals"></div> expands into one of the four
-   pages (signals, telegram, connect, rules). Arabic pages (<html lang="ar">) get the Arabic copy and
-   right-to-left layout; trade rows, symbols and channel names stay English, as in the app.
-   Load before deco.js and kit.js (they expand the decorations, icons, avatars and pairs). */
+/* Onboarding pages, four steps: signals, telegram, connect, rules.
+   <div class="mock" data-onb="signals"></div>  the mockup image only (343 x 516 pt)
+   <div class="onbs" data-onb="signals"></div>  the full onboarding screen with that mockup in place
+   Arabic pages (<html lang="ar">) get the Arabic copy and right-to-left screens; trade rows, symbols and
+   channel names stay English, as in the app. Load before screens.js, settings.js, deco.js and kit.js. */
 (function () {
   const isAr = document.documentElement.lang === 'ar';
   const L = (en, ar) => (isAr ? ar : en);
@@ -17,91 +18,74 @@
           ${o.tps ? tps(o.tps) : ''}
         </div></div>
       <div class="r"><span class="R12">${o.px}</span>${pnl(o.pl)}</div></div>`;
-  const ch = (kind, name, members, pl, on) => `<div class="ch"><span data-k="av" data-kind="${kind}" data-size="46"></span>
-      <div class="tt"><span class="name">${name}</span><div class="meta"><span class="R12 c-sub">• ${members} ${L('members', 'أعضاء')}</span>
-      <span class="pill"><i data-ic="trendUp"></i>${pl}</span></div></div>
-      <span class="switch ${on ? 'on' : ''}"></span></div>`;
-  const rule = (ic, t, end) => `<div class="rule"><span class="ib"><i data-ic="${ic}"></i></span><span class="t">${t}</span>${end}</div>`;
+  const sparkles = (x, y) => `<div data-deco="sparkle" data-tone="white" class="z-front" style="left:${x}px;top:${y}px;width:22px;height:22px"></div>
+      <div data-deco="sparkle" data-tone="white" class="z-front" style="left:${x + 22}px;top:${y + 32}px;width:11px;height:11px"></div>`;
+  // the in-app screen inside the phone
+  const phone = app => `<div class="phone"><i class="hw l a"></i><i class="hw l v1"></i><i class="hw l v2"></i><i class="hw r p"></i>
+      <div class="bz"><div class="scr">${app}</div></div></div>`;
 
   const P = {
     signals: {
-      title: L('Never Miss<br>a <em>Signal</em>', 'لا تفوّت<br>أي <em>إشارة</em>'),
-      text: L('Tragram copies Telegram signals to your MT4/MT5 account the moment they’re posted.',
-        'ينسخ Tragram إشارات تيليجرام إلى حسابك على MT4/MT5 لحظة نشرها.'),
-      stage: () => `<div class="s1">
-        <svg class="flow" viewBox="0 0 440 462" fill="none">
-          <path d="M220 150V196M220 292V334" stroke="#5B95FF" stroke-opacity=".7" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round"/>
-          <circle cx="220" cy="150" r="4" fill="#CFF3FF"/><circle cx="220" cy="150" r="10" fill="#5CD3FF" opacity=".2"/>
-          <circle cx="220" cy="334" r="4" fill="#CFF3FF"/><circle cx="220" cy="334" r="10" fill="#5CD3FF" opacity=".2"/></svg>
-        <div class="ob msg">
-          <div class="who"><span data-k="av" data-kind="aurum" data-size="32"></span><b>Aurum Gold Signals</b><i data-ic="tg"></i></div>
-          <div class="tx"><b>XAUUSD</b> <b class="buy">BUY</b> 4,412.50<br>SL 4,398.00<br>TP1 4,418 · TP2 4,430 · TP3 4,445</div>
-          <div class="tm">9:41</div>
-        </div>
-        <div class="orb mk"><span data-k="mark"></span></div>
-        <div class="ob exec">
-          <div class="ob-h"><b><i data-ic="checkC"></i>${L('Order executed', 'تم تنفيذ الصفقة')}</b><span>${L('now', 'الآن')}</span></div>
-          ${order({ b: 'xau', sym: 'XAUUSD', side: 'Buy', lot: '0.12', at: '4,412.50', px: '$4,427.85', pl: '+$184.20' })}
-        </div></div>`,
+      title: L('Never Miss a <em>Signal</em>', 'لا تفوّت أي <em>إشارة</em>'),
+      text: L('Telegram signals copied to your MT4/MT5 account automatically.', 'إشارات تيليجرام تُنسخ إلى حسابك على MT4/MT5 تلقائيًا.'),
+      art: () => `${phone('<div class="app" data-screen="home"></div>')}
+        <div class="notif" style="left:14px;top:404px;width:412px">
+          <div class="ai"></div>
+          <div class="nt">
+            <div class="h"><b>${L('Order executed', 'تم تنفيذ الأمر')}</b><span>${L('now', 'الآن')}</span></div>
+            <div class="bd">${L('XAUUSD · Buy 0.12 lot @ 4,412.50<br>Copied from Aurum Gold Signals', 'XAUUSD · شراء 0.12 لوت عند 4,412.50<br>من قناة Aurum Gold Signals')}</div>
+          </div></div>
+        ${sparkles(398, 356)}`,
     },
     telegram: {
-      title: L('Link Your<br><em>Telegram</em>', 'اربط حساب<br><em>تيليجرام</em>'),
-      text: L('Pick the channels you trust and switch copying on or off anytime.',
-        'اختر القنوات التي تثق بها، وفعّل النسخ أو أوقفه في أي وقت.'),
-      stage: () => `<div class="s2">
-        <div class="orb"><i data-ic="tg"></i></div>
-        <div class="ob chs">
-          <div class="ob-h"><b>${L('Connected Channels', 'القنوات')}</b><span>${L('2 Active', '2 نشط')}</span></div>
-          ${ch('aurum', 'Aurum Gold Signals', '12,480', '+$3,482.60', true)}
-          ${ch('northline', 'Northline FX', '8,315', '+$1,912.40', true)}
-          ${ch('pipwave', 'Pipwave Trading', '3,902', '+$684.25', false)}
-        </div></div>`,
+      title: L('Link Your <em>Telegram</em>', 'اربط حساب <em>تيليجرام</em>'),
+      text: L('Sign in with your Telegram number, then pick the channels to copy.', 'سجّل الدخول برقم تيليجرام، ثم اختر القنوات التي تريد نسخها.'),
+      art: () => `${phone('<div class="app" data-screen="channels"></div>')}
+        <div class="pop zoom" style="left:8px;top:224px;width:424px">
+          <div class="ch"><span data-k="av" data-kind="northline" data-size="47"></span>
+            <div class="tt"><span class="name">Northline FX</span><div class="meta"><span class="R12 c-sub">• 8,315 ${L('members', 'أعضاء')}</span>
+            <span class="pill"><i data-ic="trendUp"></i>+$1,912.40</span></div></div><span class="switch on"></span></div>
+        </div>
+        ${sparkles(396, 176)}`,
     },
     connect: {
-      title: L('Connect<br><em>MT4 &amp; MT5</em>', 'اربط حسابك<br><em>MT4 &amp; MT5</em>'),
-      text: L('Link your broker account in seconds. Your login is encrypted on your phone.',
-        'اربط حسابك لدى الوسيط في ثوانٍ. بيانات الدخول تُشفَّر على هاتفك.'),
-      stage: () => `<div class="s3">
-        <div class="orb"><i data-ic="shield"></i></div>
-        <div class="pop zin">
-          <div class="plat"><span>${L('Platform:', 'المنصة:')}</span><span class="pc">MT4</span><span class="pc on">MT5</span></div>
+      title: L('Connect <em>MT4 &amp; MT5</em>', 'اربط <em>MT4 &amp; MT5</em>'),
+      text: L('Search your broker’s server and link your account securely.', 'ابحث عن سيرفر الوسيط واربط حسابك بأمان.'),
+      art: () => `${phone('<div class="app" data-screen="connectMT"></div>')}
+        <div class="pop zin" style="left:22px;top:312px;width:396px">
           <div class="zrow"><div class="zfld"><i data-ic="server"></i><span>YourBroker-Live</span><i class="end" data-ic="checkC"></i></div></div>
           <div class="zrow"><div class="zfld on"><i data-ic="hash"></i><span>51234870</span><span class="zcaret"></span></div></div>
-          <div class="zenc"><i data-ic="lock"></i>${L('Encrypted before it leaves your phone', 'مشفّرة قبل أن تغادر هاتفك')}</div>
+          <div class="zenc"><i data-ic="lock"></i>${L('Encrypted before it leaves your phone', 'تُشفَّر بيانات الدخول قبل أن تغادر هاتفك')}</div>
         </div>
-        <div class="conn"><i></i>${L('Connected', 'متصل')} · MT5 · 51234870</div></div>`,
+        ${sparkles(394, 264)}`,
     },
     rules: {
-      title: L('Trade by<br><em>Your Rules</em>', 'تداول وفق<br><em>قواعدك</em>'),
-      text: L('Set your lot size, break-even and trailing stop. Your profits are protected on autopilot.',
-        'حدّد حجم العقد والتعادل ووقف الخسارة المتحرك، وتُحمى أرباحك تلقائيًا.'),
-      stage: () => `<div class="s4">
-        <div class="ob prot">
+      title: L('Trade by <em>Your Rules</em>', 'تداول وفق <em>قواعدك</em>'),
+      text: L('Lot size, break-even and trailing stop, all on autopilot.', 'حجم العقد والتعادل ووقف الخسارة المتحرك، كلها تلقائيًا.'),
+      art: () => `${phone(`<div class="app"${isAr ? ' dir="rtl"' : ''}><div data-k="sb"></div><div data-settings data-scroll-to="breakeven" data-top="134"></div></div>`)}
+        <div class="pop zoom" style="left:8px;top:330px;width:424px">
+          <div class="zh"><i data-ic="checkC"></i>${L('Break-even', 'التعادل')}<span>${L('now', 'الآن')}</span></div>
           ${order({ b: 'xau', sym: 'XAUUSD', side: 'Buy', lot: '0.12', at: '4,412.50', px: '$4,436.10', pl: '+$283.20',
             badge: '<span class="badge be">BE</span>', tps: [['TP1 4,418', 1], ['TP2 4,430', 1], ['TP3 4,445']] })}
         </div>
-        <div class="ob rules">
-          ${rule('sliders', L('Fixed lot size', 'حجم عقد ثابت'), '<span class="v">0.12</span>')}
-          ${rule('shield', L('Enable break-even', 'تفعيل التعادل'), '<span class="switch on"></span>')}
-          ${rule('trendUp', L('Enable trailing stop', 'تفعيل وقف الخسارة المتحرك'), '<span class="switch on"></span>')}
-          ${rule('clock', L('Max trades per day', 'الحد الأقصى للصفقات يوميًا'), '<span class="v">5</span>')}
-        </div></div>`,
+        ${sparkles(396, 282)}`,
     },
   };
 
+  const mock = k => `<div class="ml canvas light dark alt"${isAr ? ' dir="rtl"' : ''}><div class="glow2"></div>${P[k].art()}</div><div class="fade"></div>`;
+
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.app[data-onb]').forEach(app => {
-      const k = app.dataset.onb, p = P[k], i = ORDER.indexOf(k), last = i === ORDER.length - 1;
-      if (isAr) app.setAttribute('dir', 'rtl');
-      app.innerHTML = `<div class="bgdots"></div>
-        <div data-deco="rings" data-cx="220" data-cy="${k === 'signals' ? 356 : 170}" data-n="7" data-r0="70" data-step="52"></div>
-        <div data-k="sb"></div>
-        <div class="topbar"><div class="lockup"><span class="mark" data-k="mark"></span><span class="word"><img src="logo.svg"></span></div>
-          ${last ? '' : `<span class="skip">${L('Skip', 'تخطي')}</span>`}</div>
-        <div class="stage">${p.stage()}</div>
-        <div class="copy2"><h1>${p.title}</h1><p>${p.text}</p></div>
-        <div class="dots">${ORDER.map((_, j) => `<i class="${j === i ? 'on' : ''}"></i>`).join('')}</div>
-        <div class="btn-primary cta">${last ? L('Get Started', 'ابدأ الآن') : L('Next', 'التالي')}<i data-ic="chevRight"></i></div>`;
+    document.querySelectorAll('.mock[data-onb]').forEach(el => { el.innerHTML = mock(el.dataset.onb); });
+    document.querySelectorAll('.onbs[data-onb]').forEach(el => {
+      const k = el.dataset.onb, p = P[k], i = ORDER.indexOf(k);
+      if (isAr) el.setAttribute('dir', 'rtl');
+      el.innerHTML = `<div class="sbw"${isAr ? ' dir="rtl"' : ''}><div data-k="sb"></div></div>
+        <div class="hd"><div class="brand"><span class="mark" data-k="mark"></span>Teragram</div>
+          <div class="steps">${ORDER.map((_, j) => `<i class="${j <= i ? 'on' : ''}"></i>`).join('')}</div></div>
+        <div class="mockw"><div class="mock">${mock(k)}</div></div>
+        <div class="tx"><h1>${p.title}</h1><p>${p.text}</p></div>
+        <div class="next">${i === ORDER.length - 1 ? L('Get Started', 'ابدأ الآن') : L('Next', 'التالي')}</div>
+        <div class="ind"></div>`;
     });
   });
 })();

@@ -1,105 +1,70 @@
-/* Onboarding: four full-screen in-app pages at the device's native 440 x 956 pt (no phone frame),
-   exported at 3x = 1320 x 2868 px. The alt set's background and pop-out cards, the app's tokens and
-   components. Load after alt.css (and ar.css on Arabic pages). Markup comes from onboarding.js. */
+/* Onboarding, in the app's fixed onboarding layout: logo and progress pills on top, a mockup image,
+   then title, subtitle and Next. Two kinds of page, both built by onboarding.js:
+   - mockup image (html.mockpage): 343 x 516 pt, transparent above and beside the phone, fading into
+     the screen background (#04080F) at the bottom. Exported at 2x = 686 x 1032 px, the size the app uses.
+   - full screen (html.onbpage): 375 x 812 pt with the mockup in place, exported at 3x = 1125 x 2436 px.
+   Load after alt.css (and ar.css on Arabic pages). */
 
-body { width: 440px; height: 956px; }
-.app.onb { background:
-    radial-gradient(70% 34% at 50% 26%, rgba(38,104,255,.30) 0%, rgba(38,104,255,0) 100%),
-    radial-gradient(46% 24% at 0% 64%, rgba(26,105,241,.20) 0%, rgba(26,105,241,0) 100%),
-    radial-gradient(44% 22% at 100% 80%, rgba(45,200,255,.10) 0%, rgba(45,200,255,0) 100%),
-    linear-gradient(180deg, #070B18 0%, #03050B 58%, #04070F 100%); }
-.onb .bgdots { position: absolute; inset: 0; pointer-events: none;
-  background-image: radial-gradient(rgba(140,180,255,.2) 1px, transparent 1.3px); background-size: 18px 18px; background-position: 4px 6px;
-  -webkit-mask-image: radial-gradient(80% 32% at 50% 30%, #000 0%, rgba(0,0,0,.3) 60%, transparent 100%); }
-.onb [data-deco="rings"] { inset: 0; z-index: 0; -webkit-mask-image: linear-gradient(180deg, transparent 96px, #000 180px); }
+html.mockpage, html.mockpage body { width: 343px; height: 516px; background: transparent; overflow: hidden; }
+html.onbpage, html.onbpage body { width: 375px; height: 812px; background: #04080F; overflow: hidden; }
 
-/* top bar: logo lockup and Skip */
-.onb .topbar { position: absolute; left: 24px; right: 24px; top: 66px; height: 36px; display: flex; align-items: center; justify-content: space-between; z-index: 20; }
-.onb .lockup { direction: ltr; }
-.onb .skip { font: 600 16px/1 var(--sf); color: var(--secondary); padding: 8px 0; }
+/* ── mockup ──────────────────────────────────────────────────────────── */
+.mock { position: relative; width: 343px; height: 516px; overflow: hidden; }
+/* the artwork is laid out on the screenshot canvas's 440pt grid, so the pop-out cards, notification and
+   in-app screens keep their screenshot sizes; 343 / 440 scales it down to the mockup box */
+.mock .ml.canvas { position: absolute; left: 0; top: 0; width: 440px; height: 662px; overflow: visible;
+  transform: scale(.779545); transform-origin: 0 0; }
+.mock .ml.canvas.dark.alt { background: none; }
+.mock .glow2 { position: absolute; left: 20px; right: 20px; top: 70px; height: 520px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(26,105,241,.32), rgba(26,105,241,0)); filter: blur(10px); }
 
-/* illustration stage */
-.onb .stage { position: absolute; left: 0; right: 0; top: 112px; height: 462px; z-index: 5; }
-.onb .stage > div { position: absolute; inset: 0; }
-.onb .stage > div > * { position: absolute; }
-.onb .ob { border-radius: 22px; background: linear-gradient(180deg, #1C2436 0%, #121A29 100%); border: 1px solid rgba(110,160,255,.28);
-  box-shadow: 0 30px 60px -18px rgba(0,0,0,.85), 0 12px 24px -10px rgba(0,0,0,.5), 0 0 50px rgba(26,105,241,.28), inset 0 1px 0 rgba(255,255,255,.07); }
-.onb .ob-h { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 4px; }
-.onb .ob-h b { font: 700 17px/1.2 Aeonik; color: var(--text); }
-.onb .ob-h span { font: 400 13px/1 Aeonik; color: var(--sub); }
+/* phone: graphite frame like the current mockup, cropped by the bottom fade */
+.mock .phone { position: absolute; left: 26px; top: 58px; width: 388px; height: 760px; z-index: 3; padding: 5px; border-radius: 62px;
+  background: linear-gradient(140deg, #8E9097 0%, #4F5258 18%, #2C2E33 45%, #44474D 75%, #7C7F86 100%);
+  box-shadow: 0 0 0 .6px rgba(190,205,235,.45), 0 0 0 2px rgba(61,132,255,.12), 0 40px 80px -20px rgba(0,0,0,.8), 0 0 90px rgba(26,105,241,.30); }
+.mock .phone .bz { width: 100%; height: 100%; padding: 8px; border-radius: 57px; background: #010101; box-shadow: inset 0 0 0 1px rgba(255,255,255,.07); }
+.mock .phone .scr { position: relative; width: 362px; height: 742px; border-radius: 49px; overflow: hidden; background: var(--bg); isolation: isolate; }
+.mock .phone .scr > .app { transform: scale(.822727); transform-origin: 0 0; }
+.mock .phone .hw { position: absolute; width: 3px; border-radius: 2px; background: linear-gradient(90deg, #26282C, #8C8F96 55%, #2E3035); }
+.mock .phone .hw.l { left: -2.4px; } .mock .phone .hw.r { right: -2.4px; }
+.mock .phone .hw.a { top: 128px; height: 26px; } .mock .phone .hw.v1 { top: 178px; height: 50px; } .mock .phone .hw.v2 { top: 240px; height: 50px; }
+.mock .phone .hw.p { top: 200px; height: 80px; }
 
-/* glowing round badge (logo, Telegram, shield) */
-.onb .orb { width: 96px; height: 96px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  background: radial-gradient(circle at 50% 35%, #1D2C4A 0%, #0D1424 100%); border: 1px solid rgba(110,160,255,.4);
-  box-shadow: 0 0 0 8px rgba(26,105,241,.08), 0 0 60px rgba(26,105,241,.55), inset 0 1px 0 rgba(255,255,255,.12); }
-.onb .orb svg { width: 48px; height: 48px; }
-.onb .orb.mk svg { width: 52px; height: 37px; }
-.onb .orb .ic { color: #8DB6FF; }
+/* pop-out cards over the phone */
+.mock .pop, .mock .notif { z-index: 12; }
+.mock .zoom { padding: 4px 0; border-radius: 22px; }
+.mock .zoom .ch { margin: 0 18px; border: 0; }
+.mock .zoom .order { margin: 6px 10px; background: rgba(255,255,255,.04); }
+.mock .zoom .zh { display: flex; align-items: center; gap: 8px; padding: 12px 18px 2px; font: 700 15px/1.2 Aeonik; color: var(--text); }
+.mock .zoom .zh svg { width: 18px; height: 18px; color: var(--green); }
+.mock .zoom .zh span { margin-inline-start: auto; font: 400 13px/1 Aeonik; color: var(--sub); }
 
-/* 01: Telegram signal message -> logo -> executed order */
-.onb .msg { inset-inline-start: 26px; top: 14px; width: 318px; padding: 14px 16px 12px; transform: rotate(-3deg); }
-.onb .msg .who { display: flex; align-items: center; gap: 9px; }
-.onb .msg .who b { font: 700 15px/1.2 Aeonik; color: var(--text); }
-.onb .msg .who svg { width: 16px; height: 16px; margin-inline-start: auto; }
-.onb .msg .tx { margin-top: 10px; direction: ltr; text-align: left; font: 500 14.5px/1.5 var(--sf); color: #DCE3F0; }
-.onb .msg .tx b { font-weight: 700; color: #fff; }
-.onb .msg .tx .buy { color: var(--green); }
-.onb .msg .tm { margin-top: 2px; text-align: right; font: 400 11.5px/1 var(--sf); color: var(--sub); direction: ltr; }
-.onb .flow { left: 0; top: 0; width: 440px; height: 462px; pointer-events: none; }
-.onb .s1 .orb { left: 172px; top: 196px; }
-.onb .exec { inset-inline-end: 20px; top: 330px; width: 380px; padding: 6px 0 10px; transform: rotate(2.5deg); }
-.onb .exec .order { margin: 4px 10px 0; background: rgba(255,255,255,.04); }
-.onb .exec .ob-h { padding-top: 12px; }
-.onb .exec .ob-h b { display: flex; align-items: center; gap: 7px; font-size: 15px; }
-.onb .exec .ob-h b svg { width: 18px; height: 18px; color: var(--green); }
+/* fade into the screen background, over everything */
+.mock .fade { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; z-index: 50; pointer-events: none;
+  background: linear-gradient(180deg, rgba(4,8,15,0) 0%, rgba(4,8,15,.75) 45%, #04080F 80%); }
 
-/* 02: Telegram orb + channel list */
-.onb .s2 .orb { left: 172px; top: 8px; }
-.onb .s2 .orb svg { width: 50px; height: 50px; }
-.onb .chs { left: 22px; right: 22px; top: 140px; padding-bottom: 4px; }
-.onb .chs .ch { margin: 0 18px; height: 80px; border-color: rgba(255,255,255,.08); }
+/* ── full screen ─────────────────────────────────────────────────────── */
+.onbs { position: relative; width: 375px; height: 812px; overflow: hidden; color: #fff; font-family: Aeonik, var(--sf);
+  background: radial-gradient(90% 40% at 50% 0%, rgba(26,72,160,.55) 0%, rgba(10,24,52,.25) 55%, rgba(4,8,15,0) 100%), #04080F; }
+.onbs .sbw { position: absolute; left: 0; top: 0; width: 440px; height: 62px; transform: scale(.852273); transform-origin: 0 0; z-index: 30; }
+.onbs .hd { position: absolute; left: 16px; right: 16px; top: 58px; height: 26px; display: flex; align-items: center; justify-content: space-between; z-index: 30; }
+.onbs .brand { display: flex; align-items: center; gap: 8px; direction: ltr; font: 700 19px/1 Aeonik; letter-spacing: -.01em; color: #fff; }
+.onbs .brand .mark { display: block; width: 24px; height: 17px; }
+.onbs .steps { display: flex; gap: 5px; }
+.onbs .steps i { width: 16px; height: 7px; border-radius: 4px; background: #3A3D45; }
+.onbs .steps i.on { background: var(--primary); box-shadow: 0 0 8px rgba(26,105,241,.55); }
+.onbs .mockw { position: absolute; left: 0; top: 53px; width: 343px; height: 516px; transform: scale(1.093294); transform-origin: 0 0; z-index: 5; }
+.onbs .tx { position: absolute; left: 20px; right: 20px; top: 606px; text-align: center; z-index: 10; }
+.onbs .tx h1 { font: 700 25px/1.2 Aeonik; letter-spacing: -.02em; color: #fff; white-space: nowrap; }
+.onbs .tx h1 em { font-style: normal; color: #3D84FF; text-shadow: 0 0 22px rgba(26,105,241,.5); }
+.onbs .tx p { margin: 9px auto 0; max-width: 310px; font: 400 15px/1.42 Aeonik; color: #A7B3C9; text-wrap: balance; }
+.onbs .next { position: absolute; left: 28px; right: 28px; top: 723px; height: 50px; border-radius: 25px; background: var(--primary); z-index: 10;
+  display: flex; align-items: center; justify-content: center; font: 600 17px/1 var(--sf); color: #fff;
+  box-shadow: 0 10px 26px -8px rgba(26,105,241,.65), inset 0 1px 0 rgba(255,255,255,.16); }
+.onbs .ind { position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: rgba(255,255,255,.9); }
 
-/* 03: shield orb + MT login card */
-.onb .s3 .orb { left: 172px; top: 8px; }
-.onb .s3 .zin { left: 22px; right: 22px; top: 140px; padding: 16px; }
-.onb .plat { display: flex; align-items: center; gap: 9px; margin-bottom: 14px; }
-.onb .plat > span { font: 400 15px/1 Aeonik; color: var(--sub); margin-inline-end: 4px; }
-.onb .plat .pc { width: 81px; height: 36px; border-radius: 18px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-  font: 700 15px/1 Aeonik; color: #fff; }
-.onb .plat .pc.on { border: 2px solid var(--primary); background: rgba(26,105,241,.14); }
-.onb .conn { left: 50%; top: 402px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 16px;
-  border-radius: 19px; background: rgba(38,191,97,.14); border: 1px solid rgba(38,191,97,.4); white-space: nowrap;
-  font: 600 14.5px/1 var(--sf); color: var(--green); box-shadow: 0 0 30px rgba(38,191,97,.18); }
-.onb .conn i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
-
-/* 04: order with TP hits + rules card */
-.onb .s4 .prot { left: 14px; right: 14px; top: 10px; padding: 6px 0 10px; transform: rotate(-2deg); }
-.onb .s4 .prot .order { margin: 4px 8px 0; background: rgba(255,255,255,.04); }
-.onb .rules { left: 22px; right: 22px; top: 196px; padding: 4px 18px; }
-.onb .rule { height: 64px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,.08); }
-.onb .rule:last-child { border-bottom: 0; }
-.onb .rule .ib { width: 38px; height: 38px; border-radius: 12px; background: rgba(26,105,241,.16); display: flex; align-items: center; justify-content: center; color: #8DB6FF; flex: none; }
-.onb .rule .ib svg { width: 20px; height: 20px; }
-.onb .rule .t { flex: 1; font: 400 16px/1.2 Aeonik; color: var(--text); }
-.onb .rule .v { height: 34px; min-width: 70px; padding: 0 14px; border-radius: 17px; border: 1px solid var(--dark-border); background: var(--card);
-  display: flex; align-items: center; justify-content: center; font: 700 15px/1 Aeonik; color: #fff; }
-
-/* copy, page dots and buttons */
-.onb .copy2 { position: absolute; left: 28px; right: 28px; top: 604px; text-align: center; z-index: 10; }
-.onb .copy2 h1 { font: 700 36px/1.1 Aeonik; letter-spacing: -.02em; color: #fff; text-wrap: balance; }
-.onb .copy2 h1 em { font-style: normal; color: #3D84FF; text-shadow: 0 0 28px rgba(26,105,241,.45); }
-.onb .copy2 p { margin: 14px auto 0; max-width: 350px; font: 400 16.5px/1.45 Aeonik; color: #A7B3C9; text-wrap: balance; }
-.onb .dots { position: absolute; left: 0; right: 0; top: 800px; display: flex; justify-content: center; gap: 8px; z-index: 10; }
-.onb .dots i { width: 8px; height: 8px; border-radius: 4px; background: #3A3D45; }
-.onb .dots i.on { width: 26px; background: var(--primary); box-shadow: 0 0 12px rgba(26,105,241,.6); }
-.onb .cta { position: absolute; left: 24px; right: 24px; bottom: 50px; z-index: 10;
-  box-shadow: 0 12px 30px -8px rgba(26,105,241,.6), inset 0 1px 0 rgba(255,255,255,.18); }
-.onb .cta svg { width: 18px; height: 18px; margin-inline-start: 8px; }
-
-/* Arabic: everything set in the system font (ar.css); Arabic letters join, so no letter-spacing */
-.app.onb[dir="rtl"] .copy2 h1 { font-weight: 800; letter-spacing: 0; line-height: 1.22; }
-.app.onb[dir="rtl"] .copy2 p { letter-spacing: 0; line-height: 1.55; }
-.app.onb[dir="rtl"] .cta svg { transform: scaleX(-1); }
-.app.onb[dir="rtl"] .msg { transform: rotate(3deg); }
-.app.onb[dir="rtl"] .exec { transform: rotate(-2.5deg); }
-.app.onb[dir="rtl"] .s4 .prot { transform: rotate(2deg); }
+/* Arabic: system font everywhere (ar.css); joined letters, so no letter-spacing */
+html[lang="ar"] .onbs .tx h1 { font-weight: 800; letter-spacing: 0; }
+html[lang="ar"] .onbs .tx p { letter-spacing: 0; line-height: 1.55; }
+/* keep the English trade line ("Buy 0.12 lot at 4,412.50") in reading order on pop-out cards too */
+.mock [dir="rtl"] .order .det { direction: ltr; }
