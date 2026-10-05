@@ -1,10 +1,18 @@
-# name width height (CSS px; rendered at 2x), written by tools/web_mockups.py
-hero-image-elite 736 520
-benefits-item-image-1 380 769
-benefits-item-image-2 380 769
-benefits-item-image-3 380 769
-why-choose-us-image-v2 1383 579
-why-choose-us-image-elite 604 679
-smart-management-image-elite 323 295
-cta-box-img-elite 548 514
-testimonial-cta-image-elite 480 262
+# name width height format (CSS px; rendered at 2x; png = transparent, jpg = opaque), written by tools/web_mockups.py
+hero-image-elite 736 520 png
+benefits-item-image-1 380 769 png
+benefits-item-image-2 380 769 png
+benefits-item-image-3 380 769 png
+why-choose-us-image-v2 1383 579 png
+why-choose-us-image-elite 604 679 png
+smart-management-image-elite 323 295 png
+cta-box-img-elite 548 514 png
+digital-companion-image-elite 791 977 png
+about-us-image-1-elite 340 270 jpg
+about-us-image-2-elite 540 700 jpg
+benefit-image-3-elite 376 182 jpg
+about-us-image 705 660 jpg
+how-it-work-image-1 530 980 png
+how-it-work-image-2 530 1050 png
+contact-us-image 578 750 jpg
+testimonial-cta-image-elite 480 262 png

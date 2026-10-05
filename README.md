@@ -158,15 +158,22 @@ The alt and alt-ar sets have an Android version for Google Play. `./render.sh al
 
 The phone mockups on the website, rebuilt with this repo's design system: the alt set's titanium phone, the app screens, the Order executed and Breakeven notifications, and a profit card, all with the new icon. Each page in `src/web-<name>.html` is one image on the site, at that image's size. The images render on a transparent background for the site's dark sections, and `why-choose-us-image-elite` sits in an arch of the alt backdrop.
 
-| Image (tragram-web `public/images/`) | Size (CSS px, rendered at 2×) | Phones |
+| Image (tragram-web `public/images/`) | Where | Phones |
 |---|---|---|
-| `hero-image-elite.png` | 736 × 520 | Channels · Home · channel performance, with the notification and profit card |
-| `benefits-item-image-1/2/3.png` | 380 × 769 each | Home · Connect MT4/MT5 · channel performance |
-| `why-choose-us-image-v2.png` | 1383 × 579 | News · Home · channel performance, fanned out |
-| `why-choose-us-image-elite.png` | 604 × 679 | Home in an arch, with the notification |
-| `smart-management-image-elite.png` | 323 × 295 | Channels · Home |
-| `cta-box-img-elite.png` | 548 × 514 | Home · Channel Settings, with the Breakeven notification |
-| `testimonial-cta-image-elite.png` | 480 × 262 | Channels · Home · News |
+| `hero-image-elite.png` | Home hero | Channels · Home · channel performance, with the notification and profit card |
+| `about-us-image-1-elite.jpg`, `about-us-image-2-elite.jpg` | Home, About | a lattice of phones; Home with the notification (was a hand photo) |
+| `why-choose-us-image-elite.png` | Home, Why Tragram | Home in an arch of the alt backdrop, with the notification |
+| `digital-companion-image-elite.png` | Home, One workflow | close-up of Home with the notification |
+| `benefit-image-3-elite.jpg`, `smart-management-image-elite.png` | Home, Benefits | one phone lying at an angle; Channels · Home |
+| `cta-box-img-elite.png` | Home, closing call to action | Home · Channel Settings, with the Breakeven notification |
+| `testimonial-cta-image-elite.png` | Testimonials call to action | Channels · Home · News |
+| `why-choose-us-image-v2.png` | Features, About | News · Home · channel performance, fanned out |
+| `benefits-item-image-1/2/3.png` | Features, About | Home · Connect MT4/MT5 · channel performance |
+| `about-us-image.jpg` | About | tilted Home with the notification and profit card (was a hand photo) |
+| `how-it-work-image-1.png`, `how-it-work-image-2.png` | About, How it works | Channel Settings; channel performance in a backdrop panel with a profit chart |
+| `contact-us-image.jpg` | Contact | Home with the Breakeven notification (was a hand photo) |
+
+The PNGs are transparent and the JPGs are opaque, as on the site. Each image has the same proportions as the one it replaces, at 2× resolution.
 
 - `python3 tools/web_mockups.py` writes the pages and `src/web-sizes.txt`. The layout of each image (screens, positions, tilt and scale) lives in that script.
 - `./render.sh web` writes `out/web/<name>.png`. Add `WEB_REPO=../tragram-web` to also copy them into the website's `public/images/`. The site declares each image's display size, so the 2× files drop in with no code changes.

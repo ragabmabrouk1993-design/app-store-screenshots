@@ -45,6 +45,39 @@ def arch():
                     f' stroke-width="{1 if k % 2 else 1.4}"{dash if k % 2 else ""}/>' for k in range(8))
     return f'  <div class="arch"><div class="dots"></div><svg class="rings" viewBox="0 0 604 679">{rings}</svg></div>\n'
 
+def backdrop(w, h, cx, cy, radius=0, n=8, r0=90, step=56):
+    """The alt background, dots and signal rings, filling a w x h box (rings centred on cx, cy)."""
+    dash = ' stroke-dasharray="3 7"'
+    rings = "".join(f'<circle cx="{cx}" cy="{cy}" r="{r0 + step * k}" fill="none" stroke="#5B95FF" stroke-opacity="{.42 - .045 * k:.3f}"'
+                    f' stroke-width="{1 if k % 2 else 1.4}"{dash if k % 2 else ""}/>' for k in range(n))
+    style = f' style="border-radius:{radius}px"' if radius else ""
+    return f'  <div class="wbd"{style}><div class="dots"></div><svg class="rings" viewBox="0 0 {w} {h}">{rings}</svg></div>\n'
+
+def panel(x, y, w, h, radius, cx, cy):
+    """A backdrop panel of its own size, placed at x, y."""
+    return (f'  <div style="position:absolute;left:{x}px;top:{y}px;width:{w}px;height:{h}px;border-radius:{radius}px;overflow:hidden;'
+            f'box-shadow:inset 0 0 0 1px rgba(140,175,255,.14)">\n' + backdrop(w, h, cx, cy) + '  </div>\n')
+
+def phone_grid(x, y, rot, scale, cols, rows, dx, dy, screens):
+    """A rotated lattice of phones (the about image): rows of phones, alternate rows offset by half a step."""
+    out = f'  <div style="position:absolute;left:{x}px;top:{y}px;transform:rotate({rot}deg);transform-origin:0 0">\n'
+    k = 0
+    for r in range(rows):
+        for c in range(cols):
+            out += (f'  <div class="device ti" data-k="device" style="left:{c * dx + (dx / 2 if r % 2 else 0):.1f}px;top:{r * dy:.1f}px;'
+                    f'transform:scale({scale});transform-origin:0 0">\n    {SCREENS[screens[k % len(screens)]]}\n  </div>\n')
+            k += 1
+    return out + '  </div>\n'
+
+def chart(x, y, w, k, v, c):
+    pts = [(0, 88), (40, 80), (80, 84), (120, 66), (160, 70), (200, 52), (240, 58), (280, 38), (320, 44), (360, 22), (400, 14)]
+    line = " ".join(f"{px},{py}" for px, py in pts)
+    return (f'  <div class="wchart" style="left:{x}px;top:{y}px;width:{w}px"><div class="k">{k}</div><div class="v">{v}</div><div class="c">{c}</div>'
+            f'<svg viewBox="0 0 400 100" preserveAspectRatio="none" height="110"><defs><linearGradient id="cf" x1="0" y1="0" x2="0" y2="1">'
+            f'<stop stop-color="#1A69F1" stop-opacity=".45"/><stop offset="1" stop-color="#1A69F1" stop-opacity="0"/></linearGradient></defs>'
+            f'<polygon points="0,100 {line} 400,100" fill="url(#cf)"/><polyline points="{line}" fill="none" stroke="#3D86FF" stroke-width="2.5"/>'
+            f'<circle cx="400" cy="14" r="5" fill="#fff"/></svg><div class="x"><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span></div></div>\n')
+
 PAGES = {
     # home hero: three phones, Channels / Home / channel performance, with the Order executed notification
     "hero-image-elite": (736, 520, [
@@ -67,6 +100,30 @@ PAGES = {
     # home call to action: Home and Channel Settings, with the Breakeven notification
     "cta-box-img-elite": (548, 514, [
         phone("home", 186, 330, -7, .63, 3), phone("settings", 366, 296, 7, .63, 2), notif(80, 30, .62, *BREAKEVEN)]),
+    # home "one workflow" section: a close-up of the Home screen with the notification popping out
+    "digital-companion-image-elite": (791, 977, [
+        phone("home", 410, 812, 0, 2.3, 3), notif(14, 600, 1.5, *ORDER)]),
+    # home about section: a lattice of phones on the backdrop
+    "about-us-image-1-elite.jpg": (340, 270, [
+        backdrop(340, 270, 170, 300), phone_grid(-40, 120, -32, .2, 5, 3, 82, 150, ["home", "channels", "profile", "news", "connectMT", "settings"])]),
+    # home about section (the photo of a hand holding a phone): the phone on the backdrop
+    "about-us-image-2-elite.jpg": (540, 700, [
+        backdrop(540, 700, 270, 640), phone("home", 300, 430, 8, .78, 3), notif(24, 44, .76, *ORDER)]),
+    # home benefits card: one phone lying at an angle
+    "benefit-image-3-elite.jpg": (376, 182, [
+        backdrop(376, 182, 188, 200, n=6, r0=50, step=40), phone("home", 188, 92, -58, .23, 3)]),
+    # about page (hand holding a phone): tilted phone, notification and profit card
+    "about-us-image.jpg": (705, 660, [
+        backdrop(705, 660, 352, 620), phone("home", 330, 400, -14, .82, 3), notif(30, 46, .82, *ORDER), stat(452, 470, 1.0, *PROFIT)]),
+    # about page, how it works 1: Channel Settings, straight
+    "how-it-work-image-1": (530, 980, [phone("settings", 265, 490, 0, 1.4)]),
+    # about page, how it works 2: phone in a backdrop panel with a profit chart card below
+    "how-it-work-image-2": (530, 1050, [
+        panel(0, 0, 530, 760, 40, 265, 700), phone("profile", 265, 470, 0, .92, 3),
+        chart(24, 690, 433, "Total profit", "+$3,482.60", "Aurum Gold Signals · last 90 days")]),
+    # contact page (hand holding a phone): the phone with the Breakeven notification
+    "contact-us-image.jpg": (578, 750, [
+        backdrop(578, 750, 289, 700), phone("home", 300, 470, 6, .84, 3), notif(30, 50, .8, *BREAKEVEN)]),
     # testimonials call to action: three small phones
     "testimonial-cta-image-elite": (480, 262, [
         phone("channels", 146, 196, -9, .33, 2), phone("news", 334, 196, 9, .33, 2), phone("home", 240, 170, 0, .36, 3)]),
@@ -85,10 +142,11 @@ TAIL = """</div>
 """
 
 sizes = []
-for name, (w, h, parts) in PAGES.items():
+for key, (w, h, parts) in PAGES.items():
+    name, ext = (key.rsplit(".", 1) + ["png"])[:2]
     with open(os.path.join(ROOT, "src", f"web-{name}.html"), "w") as f:
         f.write(HEAD.format(w=w, h=h, name=name) + "".join(parts) + TAIL)
-    sizes.append(f"{name} {w} {h}")
+    sizes.append(f"{name} {w} {h} {ext}")
 with open(os.path.join(ROOT, "src", "web-sizes.txt"), "w") as f:
-    f.write("# name width height (CSS px; rendered at 2x), written by tools/web_mockups.py\n" + "\n".join(sizes) + "\n")
+    f.write("# name width height format (CSS px; rendered at 2x; png = transparent, jpg = opaque), written by tools/web_mockups.py\n" + "\n".join(sizes) + "\n")
 print("\n".join(sizes))

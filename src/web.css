@@ -30,3 +30,24 @@ html.web, html.web body { width: var(--w); height: var(--h); background: transpa
 .arch .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(140,180,255,.2) 1px, transparent 1.3px);
   background-size: 18px 18px; -webkit-mask-image: radial-gradient(80% 50% at 50% 18%, #000 0%, transparent 100%); }
 .arch svg.rings { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* solid backdrop for the opaque images (JPGs and panels): the alt background, dots and signal rings */
+.wbd { position: absolute; inset: 0; overflow: hidden;
+  background:
+    radial-gradient(70% 45% at 50% 0%, rgba(38,104,255,.40) 0%, rgba(38,104,255,0) 100%),
+    radial-gradient(50% 40% at 0% 72%, rgba(26,105,241,.28) 0%, rgba(26,105,241,0) 100%),
+    radial-gradient(48% 34% at 100% 88%, rgba(45,200,255,.16) 0%, rgba(45,200,255,0) 100%),
+    linear-gradient(180deg, #070B18 0%, #03050B 60%, #060A15 100%); }
+.wbd .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(140,180,255,.2) 1px, transparent 1.3px);
+  background-size: 18px 18px; -webkit-mask-image: radial-gradient(80% 55% at 50% 15%, #000 0%, transparent 100%); }
+.wbd svg.rings { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* chart card (how-it-works): profit line under the stat */
+.wchart { position: absolute; z-index: 12; padding: 20px 22px 18px; border-radius: 26px;
+  background: linear-gradient(180deg, #161C27 0%, #10151E 100%); border: 1px solid rgba(110,160,255,.22);
+  box-shadow: 0 30px 60px -12px rgba(0,0,0,.75), 0 0 60px rgba(26,105,241,.2); }
+.wchart .k { font: 700 11px/1 Aeonik; letter-spacing: .14em; text-transform: uppercase; color: #8DB6FF; }
+.wchart .v { margin-top: 10px; font: 700 34px/1 Aeonik; color: var(--green); }
+.wchart .c { margin-top: 8px; font: 400 14px/1 Aeonik; color: var(--secondary); }
+.wchart svg { display: block; margin-top: 14px; width: 100%; }
+.wchart .x { display: flex; justify-content: space-between; margin-top: 8px; font: 400 12px/1 Aeonik; color: var(--sub); }

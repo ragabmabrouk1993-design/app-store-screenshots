@@ -39,11 +39,17 @@ for set in $sets; do
   if [ "$set" = web ]; then
     [ -n "$RAW" ] && continue
     mkdir -p out/web
-    while read -r n w h; do
+    while read -r n w h fmt; do
       case "$n" in ''|'#'*) continue;; esac
       [ -n "$1" ] && [[ "$n" != $1* ]] && continue
-      shot 2 "$w,$h" "out/web/$n.png" "src/web-$n.html"; echo "out/web/$n.png"
-      [ -n "$WEB_REPO" ] && cp "out/web/$n.png" "$WEB_REPO/public/images/$n.png" && echo "  -> $WEB_REPO/public/images/$n.png"
+      shot 2 "$w,$h" "out/web/$n.png" "src/web-$n.html"
+      if [ "$fmt" = jpg ]; then   # opaque photo slots on the site stay JPEG
+        if command -v sips >/dev/null; then sips -s format jpeg -s formatOptions 88 "out/web/$n.png" --out "out/web/$n.jpg" >/dev/null
+        else ffmpeg -loglevel error -y -i "out/web/$n.png" -q:v 3 "out/web/$n.jpg"; fi
+        rm "out/web/$n.png"
+      fi
+      echo "out/web/$n.$fmt"
+      [ -n "$WEB_REPO" ] && cp "out/web/$n.$fmt" "$WEB_REPO/public/images/$n.$fmt" && echo "  -> $WEB_REPO/public/images/$n.$fmt"
     done < src/web-sizes.txt
     continue
   fi
