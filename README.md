@@ -90,6 +90,12 @@ These are designs for the app's five onboarding steps, in English and Arabic. Th
 | `tragram-symbol-1024.png` | The same, as a 1024 × 782 PNG with transparency. |
 | `tragram-app-icon.svg`, `tragram-app-icon-1024.png` | The symbol on the app's navy background with a soft glow, 1024 × 1024, no transparency. Use it as the store icon; iOS and Android round the corners themselves. |
 
+`brand/options/` holds three more directions for the same shape. `preview.png` shows them side by side.
+
+- **B, flat two-tone:** solid brand blue, a lighter blue stem and a navy fold. It has no gradients, so it stays crisp at small sizes and in print.
+- **C, neon:** cyan to violet-blue with a glow. It is meant for dark backgrounds only.
+- **D, one colour:** a white symbol with the fold cut in as a thin gap, for use on brand-coloured or dark surfaces. Invert it for a black version.
+
 ## Re-render
 
 ```bash
