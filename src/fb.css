@@ -1,0 +1,50 @@
+/* Facebook page: src/fb-*.html. ./render.sh facebook renders them at 2x into out/facebook/.
+     fb-cover-en / -ar   cover photo, 820 x 462 -> 1640 x 924. Mobile shows all of it (16:9); desktop shows
+                         the middle 820 x 312 band (y 75-387), so text and phone tops stay inside that band,
+                         and the bottom-left corner stays clear for the profile picture.
+     fb-post-en / -ar    first post, 540 x 675 -> 1080 x 1350 (4:5, the tallest feed image)
+     fb-profile          profile picture, 540 x 540 -> 1080 x 1080: the app icon's look, logo sized for the circle crop
+   The alt set's background, type, phone and notification. Load after alt.css. */
+
+html.fb, html.fb body { width: var(--w); height: var(--h); overflow: hidden; background: #03050B; }
+.canvas.fb { width: var(--w); height: var(--h); }
+.canvas.fb.dark.alt { background:
+    radial-gradient(46% 70% at 76% 24%, rgba(38,104,255,.34) 0%, rgba(38,104,255,0) 100%),
+    radial-gradient(40% 60% at 0% 100%, rgba(26,105,241,.22) 0%, rgba(26,105,241,0) 100%),
+    radial-gradient(34% 50% at 100% 100%, rgba(45,200,255,.12) 0%, rgba(45,200,255,0) 100%),
+    linear-gradient(180deg, #070B18 0%, #03050B 70%, #050913 100%); }
+.fb .bgdots { -webkit-mask-image: radial-gradient(55% 75% at 70% 25%, #000 0%, rgba(0,0,0,.3) 60%, transparent 100%); }
+.fb svg.rings { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.fb .device { z-index: 5; }
+.fb .notif { z-index: 12; transform-origin: 0 0; }
+
+/* copy block */
+.fb .copy4 { position: absolute; z-index: 8; }
+.fb .brand { display: flex; align-items: center; gap: 12px; font: 700 22px/1 Aeonik; letter-spacing: -.02em; color: #fff; }
+.fb .brand .ai { width: 42px; height: 42px; border-radius: 10px; background: url(app-icon.png) center/cover;
+  box-shadow: 0 0 0 1px rgba(140,175,255,.25), 0 10px 26px -8px rgba(0,0,0,.7), 0 0 30px rgba(26,105,241,.3); }
+.fb .eyebrow { margin-top: 0; }
+.fb .hl { font: 700 46px/1.02 Aeonik; letter-spacing: -.03em; color: #fff; text-align: inherit; }
+.fb .hl em { font-style: normal; background: linear-gradient(92deg, #7FB0FF 0%, #2F7BFF 55%, #1A69F1 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+.fb .sl { margin-top: 14px; font: 400 16px/1.4 Aeonik; color: var(--secondary); text-wrap: pretty; }
+.fb .chips { display: flex; gap: 8px; margin-top: 18px; }
+.fb .chips span { height: 28px; padding: 0 13px; border-radius: 14px; display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(26,105,241,.12); border: 1px solid rgba(90,151,255,.32); font: 700 12.5px/1 Aeonik; color: #8DB6FF; letter-spacing: .02em; }
+.fb .chips svg { width: 14px; height: 14px; }
+
+/* post */
+.fb .post-copy { left: 36px; right: 36px; top: 44px; text-align: center; }
+.fb .post-copy .brand { justify-content: center; }
+.fb .post-copy .hl { margin-top: 22px; font-size: 44px; }
+.fb .post-copy .sl { margin: 14px auto 0; max-width: 430px; font-size: 16.5px; }
+.fb .post-copy .chips { justify-content: center; }
+
+/* profile picture: the app icon's navy and glow, with the logo at 50% so it clears Facebook's circle crop */
+.fb .profile { position: absolute; inset: 0; background: radial-gradient(62% 62% at 50% 47%, #0B1D42 0%, #04080F 100%); }
+.fb .profile img { position: absolute; left: 50%; top: 50%; width: 86.2%; height: 86.2%; transform: translate(-50%, -50%); }
+
+/* Arabic: mirrored, system font (ar.css) */
+html[lang="ar"] .fb .brand { direction: ltr; }
+html[lang="ar"] .fb .hl { line-height: 1.2; letter-spacing: 0; }
+html[lang="ar"] .fb .sl { line-height: 1.6; }

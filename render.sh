@@ -16,9 +16,11 @@
 #   src/alt-ar-NN-*.html?android -> out/alt-ar-android/NN-*.png (Arabic)
 #   Pixel-style phone, Android status bar, notifications and Gboard number pad (src/android.css);
 #   the canvas is 476 x 952 pt, as Google Play takes at most 2:1.
+# Facebook page: src/fb-*.html -> out/facebook/ at 2x: cover-en.png, cover-ar.png (1640x924), post-en.png, post-ar.png
+#   (1080x1350, the first post), profile.png (1080x1080)
 # Google Play feature graphic: src/feature-en.html, src/feature-ar.html -> out/feature/feature-en.png, feature-ar.png (1024x500)
 #   ./render.sh            render everything
-#   ./render.sh dark       render only the dark set (or: light, alt, alt-ar, alt-android, alt-ar-android, onb, onb-ar, onb-mock, onb-mock-ar, feature)
+#   ./render.sh dark       render only the dark set (or: light, alt, alt-ar, alt-android, alt-ar-android, onb, onb-ar, onb-mock, onb-mock-ar, feature, facebook)
 #   ./render.sh dark 04    render only dark 04-*
 #   RAW=1 ./render.sh 01   render the bare in-app screen at 440x956pt (debug/compare)
 cd "$(dirname "$0")" || exit 1
@@ -30,9 +32,18 @@ shot() { "$CHROME" --headless=new --disable-gpu --hide-scrollbars --default-back
 # opaque background: Google Play wants 24-bit PNGs without alpha
 ashot() { "$CHROME" --headless=new --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --force-device-scale-factor=$ADSF \
   --window-size=476,952 --virtual-time-budget=5000 --allow-file-access-from-files --screenshot="$PWD/$1" "file://$PWD/$2?android" >/dev/null 2>&1; }
-sets="light dark alt alt-ar alt-android alt-ar-android onb onb-ar onb-mock onb-mock-ar feature"
-case "$1" in light|dark|alt|alt-ar|alt-android|alt-ar-android|onb|onb-ar|onb-mock|onb-mock-ar|feature) sets=$1; shift;; esac
+sets="light dark alt alt-ar alt-android alt-ar-android onb onb-ar onb-mock onb-mock-ar feature facebook"
+case "$1" in light|dark|alt|alt-ar|alt-android|alt-ar-android|onb|onb-ar|onb-mock|onb-mock-ar|feature|facebook) sets=$1; shift;; esac
 for set in $sets; do
+  if [ "$set" = facebook ]; then
+    [ -n "$RAW" ] && continue
+    mkdir -p out/facebook
+    for spec in cover-en:820,462 cover-ar:820,462 post-en:540,675 post-ar:540,675 profile:540,540; do
+      n=${spec%%:*}; [ -n "$1" ] && [[ "$n" != $1* ]] && continue
+      shot 2 "${spec#*:}" "out/facebook/$n.png" "src/fb-$n.html"; echo "out/facebook/$n.png"
+    done
+    continue
+  fi
   if [[ $set == *-android ]]; then
     [ -n "$RAW" ] && continue
     pre="${set%-android}-"; mkdir -p "out/$set"
