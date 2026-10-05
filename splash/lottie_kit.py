@@ -183,6 +183,20 @@ WHITE_BAND = [(0, "#E8FBFF"), (1, "#E8FBFF")]
 # ---------- root composition ----------
 SCALE = 100 * (min(0.38 * W, 190) / 845)  # logo 38% of the short side, as in splash.html
 
+def modern_keyframes(node):
+    """Rewrites legacy keyframes (each carrying its own end value "e") in the current format, where a keyframe
+    eases towards the next keyframe's "s". lottie-web doesn't interpolate the legacy form: the old file's glow
+    stuck at its first value."""
+    if isinstance(node, list):
+        for v in node: modern_keyframes(v)
+    elif isinstance(node, dict):
+        k = node.get("k")
+        if node.get("a") == 1 and isinstance(k, list) and any("e" in kf for kf in k):
+            for kf, nxt in zip(k, k[1:] + [None]):
+                e = kf.pop("e", None)
+                if e is not None and nxt is not None and nxt.get("s") is None: nxt["s"] = e
+        for v in node.values(): modern_keyframes(v)
+
 def write(name, title, layers, markers):
     """Wraps the logo-unit layers in a 1700 x 1700 precomp, centres it and writes the JSON.
     The animation ends on the full logo and wordmark, held still; it doesn't fade out.
@@ -197,7 +211,7 @@ def write(name, title, layers, markers):
         bg_layers = [l for l in json.load(open(src))["layers"] if l.get("ty") != 0]
     elif os.path.exists(os.path.join(HERE, name)):
         bg_layers = [l for l in json.load(open(os.path.join(HERE, name)))["layers"] if l.get("ty") != 0]
-    for l in bg_layers: l["op"] = OP
+    for l in bg_layers: l["op"] = OP; modern_keyframes(l)
     anim = {"v": "5.12.2", "fr": FPS, "ip": 0, "op": OP, "w": W, "h": H, "ddd": 0, "nm": title,
             "assets": [{"id": "logo_comp", "nm": "Logo + wordmark (logo units)", "fr": FPS, "layers": layers}],
             "layers": [comp_layer, *bg_layers],
