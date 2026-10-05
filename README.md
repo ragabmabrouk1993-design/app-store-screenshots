@@ -107,6 +107,26 @@ RAW=1 ./render.sh 01   # bare in-app screen, for comparing with a device capture
 
 Requires Google Chrome in `/Applications`.
 
+## Fonts
+
+The font files live in `fonts/` on your own machine and are not in git: Apple's license doesn't allow sharing SF Pro and SF Arabic, and Aeonik is a paid font.
+
+```bash
+fonts/install.sh       # macOS: downloads SF Pro and SF Arabic from Apple into fonts/ and ~/Library/Fonts
+```
+
+- The script keeps SF Pro Text, SF Pro Display and SF Arabic (upright weights, no italics or Rounded), installs them in `~/Library/Fonts` for Figma, and writes `fonts/fonts.css`. `ar.css` imports that file, so the Arabic pages draw Arabic letters with this SF Arabic; Latin letters and digits stay SF Pro (system font). Without the file, the Arabic pages use the system font, as before.
+- Aeonik: copy `Aeonik-Regular` and `Aeonik-Bold` (`.otf` or `.ttf`) into `fonts/`. Without them, `base.css` falls back to the app repo's `src/assets/fonts/`.
+
+Weights in use:
+
+| Font | Weights | Used for |
+|---|---|---|
+| SF Arabic | 400 Regular, 600 Semibold, 700 Bold, 800 Heavy | Arabic letters in the Arabic set; the headline is Heavy |
+| SF Pro Text (under 20pt) | 400 Regular, 500 Medium, 600 Semibold, 700 Bold | in-app text, notifications; Latin and digits in the Arabic set |
+| SF Pro Display (20pt and up) | 400 Regular, 700 Bold, 800 Heavy | large Latin text: badge "MT4 & MT5", balances, headline |
+| Aeonik | 400 Regular, 700 Bold | headlines, subtitles and most text in the English sets |
+
 ## Figma
 
 `figma/` turns the alt and alt-ar sets into a Figma file with editable text: one 1284 × 2778 frame per screenshot, the background as one image, and a frame each for the title, the phone, the card and the notification. Inside those frames the artwork (phone body, icons, card fills, laurels) is an image, and every text on top of it is a live Figma text layer in the design's font, weight, size, color and spacing: headline, subtitle, badge, and all the text on the phone screens, cards and notifications. Rotated phones are rotated frames, so their text is rotated with them.
