@@ -21,8 +21,8 @@ OUT = os.path.join(HERE, "..", "brand")
 INK = "#F4F7FB"   # the wordmark colour used in the splash
 GAP = 0.12        # space after the symbol's top bar, as a share of the height
 VARIANTS = [      # (file suffix, text, font size in px at 22 px tall, tracking in em)
-    ("", "Tragram", 16, -0.01),
-    ("-caps", "TRAGRAM", 14.5, 0.06),
+    ("", "Tragram", 18, -0.01),
+    ("-caps", "TRAGRAM", 16.5, 0.06),
 ]
 
 font = TTFont(sys.argv[1])
@@ -68,8 +68,9 @@ for suffix, text, px22, track in VARIANTS:
     d, (ix0, iy0, ix1, iy1) = outline(text, size, track)
     cap = CAP * size
     tx = sx1 + GAP * H - ix0                    # first letter's ink starts one gap after the top bar
-    ty = sy0 + (H - cap) / 2 + cap              # baseline that centres the capitals on the symbol
-    assert ty + iy1 <= sy1 + 0.5, f"{text}: descender would drop below the symbol"
+    ty = sy0 + (H - cap) / 2 + cap              # baseline that centres the capitals on the symbol,
+    ty = min(ty, sy1 - iy1)                     # raised just enough to keep any descender inside the height
+    assert sy0 + (H - cap) / 2 + cap - ty < 0.02 * H, f"{text}: too large to fit beside the symbol"
     W = tx + ix1 - sx0
     body = (f'  <defs>\n    {defs}\n  </defs>\n'
             f'  <path d="{shape("shFold")}" fill="url(#gFold)"/>\n'
