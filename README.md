@@ -139,6 +139,21 @@ Fonts: Aeonik (the app font) for English, SF Pro for in-app and Latin text, SF A
 
 A few texts stay part of the artwork: the keyboard keys, emoji, text hidden behind the keyboard or tab bar, and settings rows fading out under the header. The export helper is `src/export.js`, which `kit.js` loads for `#fx=` URLs.
 
+## Android option (Google Play)
+
+The alt and alt-ar sets have an Android version for Google Play. `./render.sh alt-android` and `./render.sh alt-ar-android` write `out/alt-android/` and `out/alt-ar-android/`.
+
+- **Size:** each PNG is 1080 × 2160, 24-bit with no alpha. Google Play takes phone screenshots up to 2:1, but the App Store size (1284 × 2778) is 2.16:1, so the canvas grows from 440 to 476 pt wide. The backdrop fills the extra width and everything else moves 18 pt right, so the layouts match the iOS set.
+- **What changes:** the same pages are used with `?android`, which loads `src/android.css`. It replaces the iOS details with Android ones:
+  - a Pixel-style phone with the buttons on the right;
+  - a punch-hole camera;
+  - an Android status bar, mirrored in Arabic;
+  - a gesture handle;
+  - Material-style heads-up notifications on 01 and 06, with a round app icon, "Tragram • now" and an expand button;
+  - a Gboard number pad on the Connect screens, 02 and 04.
+- **What stays:** the app screens inside the phone stay as they are.
+- `render.sh` reads `CHROME` from the environment, so it can render with another Chrome or Chromium.
+
 ## Splash animation
 
 `splash/` holds the app's launch animation: the ribbon logo draws itself, then the "Tragram" wordmark fades in beneath it. It runs about 3.1 seconds.
