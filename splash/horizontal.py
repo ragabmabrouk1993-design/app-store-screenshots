@@ -21,8 +21,8 @@ OUT = os.path.join(HERE, "..", "brand")
 INK = "#F4F7FB"   # the wordmark colour used in the splash
 GAP = 0.12        # space after the symbol's top bar, as a share of the height
 VARIANTS = [      # (file suffix, text, font size in px at 22 px tall, tracking in em)
-    ("", "Tragram", 20, -0.01),
-    ("-caps", "TRAGRAM", 18.5, 0.06),
+    ("", "Tragram", 18, -0.01),
+    ("-caps", "TRAGRAM", 16.5, 0.06),
 ]
 
 font = TTFont(sys.argv[1])
