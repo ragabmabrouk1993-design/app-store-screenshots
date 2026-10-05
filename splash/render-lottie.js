@@ -1,10 +1,10 @@
 // Renders SplashAnimation.json with lottie-web (SVG renderer), frame by frame, into an MP4 for review.
 //   npm i lottie-web playwright   (or have them on NODE_PATH); needs ffmpeg
-//   node render-lottie.js [scale]   default 3 -> 1125 x 2436 (H.264 needs even sizes, so odd ones get 1px of background)
+//   node render-lottie.js [file.json] [scale]   default SplashAnimation.json at 3x -> 1125 x 2436 (H.264 needs even sizes, so odd ones get 1px of background)
 const fs = require('fs'), { spawn } = require('child_process');
 const { chromium } = require('playwright');
-const SCALE = +(process.argv[2] || 3);
-const anim = JSON.parse(fs.readFileSync(__dirname + '/SplashAnimation.json'));
+const FILE = process.argv[2] || 'SplashAnimation.json', SCALE = +(process.argv[3] || 3);
+const anim = JSON.parse(fs.readFileSync(require('path').resolve(__dirname, FILE)));
 const lottieJs = fs.readFileSync(require.resolve('lottie-web/build/player/lottie.min.js'), 'utf8');
 (async () => {
   const browser = await chromium.launch();
@@ -13,7 +13,7 @@ const lottieJs = fs.readFileSync(require.resolve('lottie-web/build/player/lottie
     <script>${lottieJs}</script><script>window.anim = lottie.loadAnimation({ container: a, renderer: 'svg', loop: false, autoplay: false,
     animationData: ${JSON.stringify(anim)} });</script>`);
   await page.waitForFunction(() => window.anim && window.anim.isLoaded);
-  const out = `SplashAnimation-lottie-${anim.w * SCALE}x${anim.h * SCALE}.mp4`;
+  const out = `${require('path').basename(FILE, '.json')}-lottie-${anim.w * SCALE}x${anim.h * SCALE}.mp4`;
   const ff = spawn('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'image2pipe', '-framerate', anim.fr, '-i', '-', '-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2:color=0x04080F', '-c:v', 'libx264',
     '-preset', 'slow', '-crf', '14', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', __dirname + '/' + out], { stdio: ['pipe', 'inherit', 'inherit'] });
   for (let f = anim.ip; f < anim.op; f++) {
