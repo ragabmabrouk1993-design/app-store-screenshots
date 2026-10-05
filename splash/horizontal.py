@@ -7,7 +7,7 @@ brand/tragram-horizontal-{22,200}.svg       "Tragram"
 brand/tragram-horizontal-caps-{22,200}.svg  "TRAGRAM", slightly tracked out
 
 The symbol sets the height. Type sizes are given as they are at 22 px tall and scale with the height; the
-capitals are centred on the symbol. The wordmark is Manrope Bold (the app's Aeonik isn't in this repo),
+capitals are centred on the symbol, raised where needed to keep the g inside the height. The wordmark is Manrope Bold (the app's Aeonik isn't in this repo),
 outlined, so the SVGs need no font. Symbol paths and gradients come from splash.html.
 """
 import os, re, sys
@@ -21,8 +21,8 @@ OUT = os.path.join(HERE, "..", "brand")
 INK = "#F4F7FB"   # the wordmark colour used in the splash
 GAP = 0.12        # space after the symbol's top bar, as a share of the height
 VARIANTS = [      # (file suffix, text, font size in px at 22 px tall, tracking in em)
-    ("", "Tragram", 18, -0.01),
-    ("-caps", "TRAGRAM", 16.5, 0.06),
+    ("", "Tragram", 22, -0.01),
+    ("-caps", "TRAGRAM", 20.5, 0.06),
 ]
 
 font = TTFont(sys.argv[1])
@@ -70,7 +70,7 @@ for suffix, text, px22, track in VARIANTS:
     tx = sx1 + GAP * H - ix0                    # first letter's ink starts one gap after the top bar
     ty = sy0 + (H - cap) / 2 + cap              # baseline that centres the capitals on the symbol,
     ty = min(ty, sy1 - iy1)                     # raised just enough to keep any descender inside the height
-    assert sy0 + (H - cap) / 2 + cap - ty < 0.02 * H, f"{text}: too large to fit beside the symbol"
+    assert ty - cap >= sy0 - 0.5, f"{text}: too large to fit beside the symbol"
     W = tx + ix1 - sx0
     body = (f'  <defs>\n    {defs}\n  </defs>\n'
             f'  <path d="{shape("shFold")}" fill="url(#gFold)"/>\n'
