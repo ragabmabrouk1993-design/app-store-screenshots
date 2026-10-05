@@ -26,6 +26,8 @@
   --orange: #FF7B12;
   --yellow: #FFC700;
   --sf: "SF Pro Text", BlinkMacSystemFont, system-ui, sans-serif;
+  /* the app's screen background: a navy glow behind the status bar and header, measured from device captures */
+  --app-glow: radial-gradient(52% 21% at 50% 0%, #081C3F 0%, #071530 30%, rgba(6,15,30,.5) 62%, rgba(4,8,15,0) 100%);
 
   /* Device geometry (points) */
   --dev-w: 330px;
@@ -115,7 +117,7 @@ svg.ic { display: block; flex: none; }
    ===================================================================== */
 .app { position: absolute; left: 0; top: 0; width: 440px; height: 956px; overflow: hidden;
   font-family: Aeonik, var(--sf); color: var(--text);
-  background: url(../../../src/assets/img/background1.png) center top / 440px auto no-repeat, var(--bg); }
+  background: var(--app-glow), var(--bg); }
 .app.plain { background: var(--bg); }
 
 /* typography (app variants, scaled) */

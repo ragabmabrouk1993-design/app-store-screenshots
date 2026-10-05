@@ -1,0 +1,30 @@
+/* Google Play feature graphic: 1024 x 500 px, opaque. The alt set's background, type and phone.
+   Keep text and the phone inside the middle ~900 x 420 so nothing important sits on the edges. */
+html.featurepage, html.featurepage body { width: 1024px; height: 500px; overflow: hidden; background: #03050B; }
+.canvas.feature { width: 1024px; height: 500px; }
+.canvas.feature.dark.alt { background:
+    radial-gradient(40% 60% at 74% 30%, rgba(38,104,255,.34) 0%, rgba(38,104,255,0) 100%),
+    radial-gradient(34% 50% at 8% 100%, rgba(26,105,241,.22) 0%, rgba(26,105,241,0) 100%),
+    radial-gradient(30% 40% at 100% 100%, rgba(45,200,255,.12) 0%, rgba(45,200,255,0) 100%),
+    linear-gradient(180deg, #070B18 0%, #03050B 70%, #050913 100%); }
+.feature .bgdots { -webkit-mask-image: radial-gradient(50% 70% at 74% 30%, #000 0%, rgba(0,0,0,.3) 60%, transparent 100%); }
+.feature [data-deco="chart"] { z-index: 1; opacity: .55; }
+.feature .shade { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+
+.feature .copy3 { position: absolute; top: 74px; width: 440px; z-index: 8; }
+.feature .brand { display: flex; align-items: center; gap: 14px; font: 700 27px/1 Aeonik; letter-spacing: -.02em; color: #fff; }
+.feature .brand .ai { width: 54px; height: 54px; border-radius: 13px; background: url(app-icon.png) center/cover;
+  box-shadow: 0 0 0 1px rgba(140,175,255,.25), 0 10px 26px -8px rgba(0,0,0,.7), 0 0 30px rgba(26,105,241,.3); }
+.feature .hl { margin-top: 26px; font-size: 56px; line-height: 1.02; text-align: inherit; }
+.feature .sl { margin: 16px 0 0; max-width: 380px; font-size: 18px; line-height: 1.4; text-align: inherit; text-wrap: pretty; }
+.feature .chips { display: flex; gap: 8px; margin-top: 22px; }
+.feature .chips span { height: 30px; padding: 0 14px; border-radius: 15px; display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(26,105,241,.12); border: 1px solid rgba(90,151,255,.32); font: 700 13px/1 Aeonik; color: #8DB6FF; letter-spacing: .02em; }
+.feature .chips svg { width: 15px; height: 15px; }
+.feature .device { z-index: 5; }
+.feature .notif { z-index: 12; }
+
+/* Arabic: mirrored layout, system font (ar.css) */
+html[lang="ar"] .feature .brand { direction: ltr; justify-content: flex-end; }
+html[lang="ar"] .feature .hl { line-height: 1.2; }
+html[lang="ar"] .feature .sl { font-size: 19px; line-height: 1.55; }

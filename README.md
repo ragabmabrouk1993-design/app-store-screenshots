@@ -41,16 +41,66 @@ Each screenshot is an HTML page in `src/`. Light pages are `NN-*.html`, dark pag
   - Add `data-keyboard` to show the iOS number pad: the decimal pad on Telegram and the number pad on MT.
 - `settings.js`: the Channel Settings screen. `data-scroll-to` picks the section shown.
 - `base.css` and `kit.js`: the app's UI tokens (colors, Aeonik font, `scale()` sizes), device frame, icons, status bar and tab bar.
+  - The app screen background (`--app-glow` in `base.css`) is the navy glow behind the status bar and header, measured from device captures.
+  - `src/symbols/` holds the round symbol icons (USD, EUR, GBP, gold, silver), drawn after the app's own. A pair icon shows the quote currency top-left with the base symbol over it, bottom-right.
 
 Layouts alternate: odd screenshots have the headline on top and the phone below; even ones have the phone on top and the headline below. The channels and account are fictional demo data.
 
 `v1-dark/` keeps the first dark draft for reference.
 
+## Onboarding
+
+These are designs for the app's five onboarding steps, in English and Arabic. They keep the app's fixed onboarding layout: the logo and progress pills on top, then the mockup image, the title, the subtitle and the Next button. Only the mockup image and the text styling change.
+
+| # | Step | English title | Arabic title |
+|---|------|---------------|--------------|
+| 1 | `01-signals` | Never Miss a **Signal** | لا تفوّت أي **إشارة** |
+| 2 | `02-link-telegram` | Link Your **Telegram** | اربط حساب **تيليجرام** |
+| 3 | `03-channels` | Pick Your **Channels** | اختر **قنواتك** |
+| 4 | `04-connect` | Connect **MT4 & MT5** | اربط **MT4 & MT5** |
+| 5 | `05-rules` | Trade by **Your Rules** | تداول وفق **قواعدك** |
+
+- **Mockup images** (`out/onb-mock/`, `out/onb-mock-ar/`) are the assets for the app. Each one is a 686 × 1032 PNG, the same size as the current mockup, plus a 1372 × 2064 `@2x` copy. It is transparent above and beside the phone and fades into `#04080F` at the bottom. A graphite phone shows the app screen, with one app card or notification popping out over it.
+- **Full screens** (`out/onb/`, `out/onb-ar/`, 1125 × 2436) show each mockup in the layout, with the suggested text styling:
+  - title: 25 pt bold, white, with the last word in blue `#3D84FF` and a soft glow
+  - subtitle: 15 pt, `#A7B3C9`
+- `onboarding.js` builds both kinds of page from `data-onb` and holds all the text. `onboarding.css` holds the styles. The page files are `src/onb-mock-*.html` and `src/onb-*.html`.
+
+## Google Play feature graphic
+
+`out/feature/feature-en.png` and `feature-ar.png` are the 1024 × 500 feature graphic for the Google Play listing. They are opaque PNGs with no alpha, as Play requires.
+
+- The left side has the app icon, the name, the "Never Miss a Signal" headline, the subtitle, and MT4 / MT5 / Telegram chips. The right side has a tilted phone on the home screen with the "Order executed" notification popping out.
+- The Arabic version mirrors the layout.
+- The background is the alt set's: dark navy, signal rings and a faint candlestick chart.
+- Text and the phone stay clear of the edges, because Play can crop or overlay them.
+- `./render.sh feature` renders both. The pages are `src/feature-en.html` and `src/feature-ar.html`, and the styles are in `src/feature.css`.
+
+## Brand
+
+`brand/` holds the enhanced Tragram symbol. The shape is unchanged from the original; only the colour and shading are refined.
+
+- **Bar:** a cleaner cyan-to-blue gradient, a thin lit top edge and a slightly darker underside.
+- **Stem:** runs from deep blue under the bar to bright cyan at the tip.
+- **Join:** the bar casts a soft shadow onto the stem, and the fold where the ribbon turns now fades out instead of ending in a hard block.
+
+| File | What it is |
+|------|------------|
+| `tragram-symbol.svg` | The symbol, transparent background. One shared path, so the file is smaller. |
+| `tragram-symbol-1024.png` | The same, as a 1024 × 782 PNG with transparency. |
+| `tragram-app-icon.svg`, `tragram-app-icon-1024.png` | The symbol on the app's navy background with a soft glow, 1024 × 1024, no transparency. Use it as the store icon; iOS and Android round the corners themselves. |
+
+`brand/options/` holds three more directions for the same shape. `preview.png` shows them side by side.
+
+- **B, flat two-tone:** solid brand blue, a lighter blue stem and a navy fold. It has no gradients, so it stays crisp at small sizes and in print.
+- **C, neon:** cyan to violet-blue with a glow. It is meant for dark backgrounds only.
+- **D, one colour:** a white symbol with the fold cut in as a thin gap, for use on brand-coloured or dark surfaces. Invert it for a black version.
+
 ## Re-render
 
 ```bash
 ./render.sh            # all three sets + their preview boards
-./render.sh dark       # only the dark set (or: light, alt, alt-ar)
+./render.sh dark       # only the dark set (or: light, alt, alt-ar, onb, onb-ar, onb-mock, onb-mock-ar)
 ./render.sh dark 04    # only dark 04-*
 RAW=1 ./render.sh 01   # bare in-app screen, for comparing with a device capture
 ```
