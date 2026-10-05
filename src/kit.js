@@ -1,6 +1,12 @@
 /* Tragram screenshot kit: icon sprite + small templating helpers.
    Markup uses data-k="<helper>" placeholders that are expanded on load. */
 (function () {
+  // Android option (?android): Pixel-style phone, Android status bar, notifications and keyboard; see android.css.
+  const ANDROID = new URLSearchParams(location.search).has('android');
+  if (ANDROID) {
+    document.documentElement.classList.add('android');
+    document.head.append(Object.assign(document.createElement('link'), { rel: 'stylesheet', href: 'android.css' }));
+  }
   const FLAGS = 'symbols/';   // round symbol icons drawn after the app's symbol-flags
   const LOGO_PATHS = {
     mark: '<path d="M37.2305 48.5783L56.979 28H79.162L36.1739 73L35.3681 71.8192C30.4695 64.64 31.2577 54.8018 37.2305 48.5783Z" fill="#142B55"/><path d="M39.3715 0.00141907H139.162V24L6.16205 23.2529L7.57904 17.8656C10.3223 7.43605 23.7679 -0.118992 39.3715 0.00141907Z" fill="#1A69F1"/><path d="M39.9265 59.5534L70.1795 28H104.162L38.3078 97L37.0734 95.1894C29.5692 84.1814 30.7767 69.0962 39.9265 59.5534Z" fill="#1A69F1"/>',
@@ -74,6 +80,13 @@
     // iOS mirrors the status bar in right-to-left languages: time on the right, battery on the left
     sb: el => {
       const rtl = !!el.closest('[dir="rtl"]'), x = (l, w) => rtl ? 440 - l - w : l;
+      if (ANDROID) {  // Android mirrors its status bar in right-to-left languages too
+        const ic = (l, w, vb, body) => `<svg class="ic" viewBox="${vb}" style="position:absolute;left:${x(l, w)}px;top:24px;width:${w}px;height:${w}px">${body}</svg>`;
+        return `<div class="sb"><span class="time" style="left:${rtl ? 368 : 34}px">9:41</span><div class="punch"></div>
+        ${ic(334, 18, '0 0 24 24', '<path fill="currentColor" d="M12 21 .6 7.4C3.7 4.8 7.7 3.4 12 3.4s8.3 1.4 11.4 4z"/>')}
+        ${ic(357, 18, '0 0 24 24', '<path fill="currentColor" d="M2.5 21.5h19v-19z"/>')}
+        ${ic(380, 18, '0 0 24 24', '<rect x="6.5" y="3.5" width="11" height="18.5" rx="2.4" fill="currentColor"/><rect x="9.5" y="1.5" width="5" height="2.6" rx="1" fill="currentColor"/>')}</div>`;
+      }
       return `<div class="sb"><span class="time" style="left:${rtl ? 356 : 84}px">9:41</span><div class="island"></div>
       ${svg('cell', 'ic', `position:absolute;left:${x(312, 18)}px;top:26.6px;width:18px;height:12px`)}
       ${svg('wifi', 'ic', `position:absolute;left:${x(341.5, 17.5)}px;top:25.8px;width:17.5px;height:13px`)}
@@ -129,7 +142,8 @@
 
   function device(el) {
     const app = el.innerHTML;
-    el.innerHTML = `<i class="hw l action"></i><i class="hw l volu"></i><i class="hw l vold"></i><i class="hw r power"></i><i class="hw r cam"></i>
+    el.innerHTML = (ANDROID ? '<i class="hw r power"></i><i class="hw r vol"></i>'
+      : '<i class="hw l action"></i><i class="hw l volu"></i><i class="hw l vold"></i><i class="hw r power"></i><i class="hw r cam"></i>') + `
       <div class="bezel"><div class="screen">${app}</div></div><div class="glass"></div>`;
   }
 
@@ -145,6 +159,13 @@
     });
     document.querySelectorAll('[data-ic]').forEach(el => {
       el.outerHTML = svg(el.dataset.ic, 'ic ' + (el.className || ''), el.getAttribute('style') || '');
+    });
+    // Android heads-up notification: round app icon, "Tragram • now", title, text and the expand button
+    if (ANDROID) document.querySelectorAll('.notif').forEach(n => {
+      const title = n.querySelector('.h b').innerHTML, when = n.querySelector('.h span').innerHTML, body = n.querySelector('.bd').innerHTML;
+      n.innerHTML = `<div class="ai"></div><div class="nt"><div class="ah"><b>Tragram</b><span>•</span><span>${when}</span></div>
+        <div class="t">${title}</div><div class="bd">${body}</div></div>
+        <span class="exp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>`;
     });
     document.querySelectorAll('.app').forEach(app => {
       if (!app.querySelector('.home-ind') && !app.classList.contains('no-ind')) app.insertAdjacentHTML('beforeend', '<div class="home-ind"></div>');

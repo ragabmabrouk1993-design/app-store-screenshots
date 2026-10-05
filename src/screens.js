@@ -32,6 +32,20 @@
     return `<div class="kb"><div class="keys">${k}${decimal ? '<span><b>.</b></span>' : '<span class="blank"></span>'}<span><b>0</b></span>${del}</div>${globe}</div>`;
   };
 
+  // Gboard number pad for the Android option (?android): 1-9, then , 0 . with minus, space, delete and done keys
+  const gboard = () => {
+    const ic = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+    const fn = {
+      minus: ic('<path d="M7 12h10"/>'),
+      space: ic('<path d="M4 10v4h16v-4"/>'),
+      del: ic('<path d="M9 5h11v14H9l-6-7z"/><path d="m12 9 5 6m0-6-5 6"/>'),
+      go: `<svg viewBox="0 0 24 24" fill="none" stroke="#0B1D3F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>`,
+    };
+    const d = n => `<span><b>${n}</b></span>`, f = (k, cls = 'fn') => `<span class="${cls}">${fn[k]}</span>`;
+    return `<div class="kb"><div class="keys">${d(1)}${d(2)}${d(3)}${f('minus')}${d(4)}${d(5)}${d(6)}${f('space')}${d(7)}${d(8)}${d(9)}${f('del')}`
+      + `<span class="fn"><b>,</b></span>${d(0)}<span class="fn"><b>.</b></span>${f('go', 'go')}</div></div>`;
+  };
+
   const T = {
     home: () => `<div data-k="sb"></div>
       <div class="home-hdr">
@@ -180,7 +194,7 @@
       app.insertAdjacentHTML('afterbegin', T[k]());
       if (app.dataset.keyboard !== undefined) {
         app.classList.add('kbd');
-        app.insertAdjacentHTML('beforeend', keyboard(k === 'connectTelegram'));
+        app.insertAdjacentHTML('beforeend', document.documentElement.classList.contains('android') ? gboard() : keyboard(k === 'connectTelegram'));
       }
       if (k === 'profile') drawChart(app);
     });

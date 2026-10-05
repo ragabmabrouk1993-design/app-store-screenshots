@@ -1,0 +1,53 @@
+/* Android option for the alt and alt-ar sets: open any alt page with ?android (render.sh sets alt-android and
+   alt-ar-android). kit.js then adds class "android" to <html> and builds a Pixel-style phone, an Android status
+   bar and gesture handle, Android heads-up notifications and the Gboard number pad.
+
+   Google Play takes screenshots up to 2:1, so the canvas grows from 440 to 476 pt wide (476 x 952 = 1:2,
+   rendered at 1080 x 2160). The backdrop fills the new width and everything else moves 18 pt right, so the
+   layouts stay exactly as in the iOS set. */
+
+html.android, html.android body { width: 476px; }
+.android .canvas { width: 476px; }
+.android .canvas > :not(.bgdots):not([data-deco="rings"]):not([data-deco="wave"]):not(.glow):not(.grid) { translate: 18px 0; }
+.android .canvas [data-deco="rings"] svg { overflow: visible; }   /* drawn 440 wide and centred: let the rings run to the edges */
+
+/* ------------------------------------------------------------- Pixel-style phone */
+.android .device { border-radius: 42px;
+  background: linear-gradient(140deg, #75787E 0%, #34363B 16%, #1C1D21 48%, #2A2C30 78%, #6C6F75 100%); }
+.android .device .bezel { border-radius: 39.5px; }
+.android .device .screen, .android .device .glass { border-radius: 33.5px; }
+.android .hw.power { top: 150px; height: 40px; }
+.android .hw.vol { top: 206px; height: 82px; }
+
+/* status bar: time on the left, punch-hole camera in the middle, Wi-Fi, signal and battery on the right */
+.android .sb .time { top: 23px; transform: none; font: 500 17px/1 "Google Sans Text", Roboto, var(--sf); letter-spacing: .1px; }
+.android .sb .punch { position: absolute; left: 207px; top: 19px; width: 26px; height: 26px; border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #1B2232 0 22%, #05070B 36%, #000 70%); box-shadow: 0 0 0 1px rgba(255,255,255,.05); }
+.android .sb .ic { color: #fff; }
+
+/* gesture handle */
+.android .home-ind { width: 108px; margin-left: -54px; height: 4px; bottom: 9px; border-radius: 2px; }
+
+/* -------------------------------------------------- Android heads-up notification */
+.android .notif { gap: 14px; padding: 16px 18px 17px 16px; border-radius: 28px; align-items: flex-start;
+  background: linear-gradient(180deg, rgba(48,51,59,.97), rgba(36,38,45,.97)); border: none;
+  font-family: "Google Sans Text", Roboto, var(--sf); }
+.android .notif .ai { width: 40px; height: 40px; border-radius: 50%; box-shadow: none; }
+.android .notif .ah { display: flex; align-items: center; gap: 6px; font: 400 13px/1 "Google Sans Text", Roboto, var(--sf);
+  color: rgba(227,227,232,.72); }
+.android .notif .ah b { font-weight: 500; color: rgba(227,227,232,.86); }
+.android .notif .t { margin-top: 7px; font: 500 15.5px/1.25 "Google Sans Text", Roboto, var(--sf); color: #F2F2F5; letter-spacing: 0; }
+.android .notif .bd { margin-top: 3px; font: 400 14.5px/1.35 "Google Sans Text", Roboto, var(--sf); color: rgba(227,227,232,.8); letter-spacing: 0; }
+.android .notif .exp { width: 26px; height: 26px; flex: none; border-radius: 50%; background: rgba(255,255,255,.1);
+  display: flex; align-items: center; justify-content: center; margin-top: -2px; }
+.android .notif .exp svg { width: 14px; height: 14px; color: #E3E3E8; }
+
+/* ------------------------------------------------------- Gboard number pad (dark) */
+.android .kb { top: 640px; border-radius: 0; background: #1C1D21; direction: ltr; }
+.android .kb .keys { left: 6px; right: 6px; top: 12px; grid-template-columns: repeat(3, 1fr) 76px; column-gap: 6px; row-gap: 7px; }
+.android .kb .keys span { height: 52px; border-radius: 13px; background: #3A3B40; padding: 0; justify-content: center; }
+.android .kb .keys span.fn { background: #4A4C53; }
+.android .kb .keys span.go { background: #A8C7FA; }
+.android .kb .keys b { font: 400 25px/1 "Google Sans Text", Roboto, var(--sf); }
+.android .kb .keys svg { width: 24px; height: 24px; }
+.android .kb .globe { display: none; }
