@@ -154,6 +154,18 @@ The alt and alt-ar sets have an Android version for Google Play. `./render.sh al
 - **What stays:** the app screens inside the phone stay as they are.
 - `render.sh` reads `CHROME` from the environment, so it can render with another Chrome or Chromium.
 
+## Facebook page
+
+`./render.sh facebook` writes `out/facebook/`, using the alt set's background, type, phone and notification.
+
+| File | Size | Use |
+|---|---|---|
+| `cover-en.png`, `cover-ar.png` | 1640 × 924 | Cover photo. Mobile shows all of it (16:9). Desktop shows the middle band (2.63:1), so the text and the tops of the phones sit inside that band, and the bottom-left corner is kept clear for the profile picture. |
+| `post-en.png`, `post-ar.png` | 1080 × 1350 | First post, in 4:5, the tallest feed format. Suggested captions are in `first-post-caption.md`. |
+| `profile.png` | 1080 × 1080 | Profile picture: the app icon's navy and glow, with the logo at 50% so it clears the circle crop. |
+
+The pages are `src/fb-*.html`, styled by `src/fb.css`. The committed PNGs were rendered in a cloud session with stand-in fonts (Manrope for Aeonik, Inter for SF Pro). Re-render on the Mac for the exact fonts.
+
 ## Splash animation
 
 `splash/` holds the app's launch animation: the ribbon logo draws itself, then the "Tragram" wordmark fades in beneath it. It runs about 3.1 seconds.
