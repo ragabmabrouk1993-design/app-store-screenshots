@@ -68,3 +68,20 @@ Requires Google Chrome in `/Applications`.
 Fonts: Aeonik (the app font) for English, SF Pro for in-app and Latin text, SF Arabic for Arabic. SF Pro and SF Arabic are free from developer.apple.com/fonts; install them before running the plugin. If a font is missing the plugin uses a stand-in (Inter, Noto Sans Arabic), the text stays editable, and the closing message names the missing fonts.
 
 A few texts stay part of the artwork: the keyboard keys, emoji, text hidden behind the keyboard or tab bar, and settings rows fading out under the header. The export helper is `src/export.js`, which `kit.js` loads for `#fx=` URLs.
+
+## Splash animation
+
+`splash/` holds the app's launch animation: the ribbon logo draws itself, then the "Tragram" wordmark fades in beneath it. It runs about 3.1 seconds.
+
+- `splash/splash.html` is the master. Open it in a browser to play it. Use Replay or the scrubber to review it. Add `?loop` to repeat it, `?t=1.2` to freeze it at a time, and `?bare` to hide the controls. The logo keeps the original geometry and gradients from the source SVG. Masks reveal it: a wide, feathered stroke follows the upper ribbon left to right, then turns down through the fold and follows the lower ribbon to its tip.
+- `splash/splash-1080x1920.mp4` is the 60 fps render. Re-render it with `node splash/render.js [width height]`, which needs Playwright and ffmpeg.
+- The wordmark is Manrope SemiBold converted to outlines, because the app's Aeonik font isn't in this repo. To swap the font, run `python3 splash/wordmark.py <font.ttf>`.
+
+| Time | Step |
+|------|------|
+| 0.05–0.85s | upper ribbon draws left to right |
+| 0.42–1.68s | the fold, then the lower ribbon top to bottom, in one continuous sweep |
+| 1.20–2.30s | the logo glides up into its final centre and settles from 101.2% to 100% |
+| 1.32–2.26s | T → r → a → g → r → a → m fade in and rise, 65 ms apart |
+| 2.20–2.72s | final light sweep across the logo |
+| 2.82–3.10s | the composition fades into the app background (#04080F) |
