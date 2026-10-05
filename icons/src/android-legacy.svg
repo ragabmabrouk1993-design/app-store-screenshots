@@ -1,0 +1,7 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="bg" cx="512" cy="481.28" r="634.88" gradientUnits="userSpaceOnUse"><stop stop-color="#0B1D42"/><stop offset="1" stop-color="#04080F"/></radialGradient><linearGradient id="shFold" x1="517.19" y1="415.612" x2="517.19" y2="494.947" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0342C5"/><stop offset="1" stop-color="#002E9E"/></linearGradient><linearGradient id="shStem" x1="522.38" y1="415.612" x2="522.38" y2="746.983" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0054E9"/><stop offset="0.48" stop-color="#009DF8"/><stop offset="1" stop-color="#00E7EB"/></linearGradient><linearGradient id="shTop" x1="199.111" y1="343.692" x2="824.889" y2="343.692" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#00B8EE"/><stop offset="0.48" stop-color="#008DF8"/><stop offset="1" stop-color="#0755F3"/></linearGradient></defs>
+<rect width="1024" height="1024" fill="url(#bg)"/>
+<path d="M 470.479 415.612 H 563.901 V 494.947 L 470.479 415.612Z" fill="url(#shFold)"/>
+<path d="M 415.612 415.612 H 470.479 L 592.076 516.449 C 617.285 537.209 629.148 556.487 629.148 584.661 V 729.243 C 629.148 746.296 616.543 752.227 602.456 741.847 L 471.221 644.718 C 436.373 618.768 415.612 589.11 415.612 546.106 V 415.612Z" fill="url(#shStem)"/>
+<path d="M 199.111 415.612 C 209.491 334.054 276.963 271.773 360.746 271.773 H 824.889 C 814.509 353.331 747.037 415.612 663.254 415.612 H 199.111Z" fill="url(#shTop)"/>
+</svg>

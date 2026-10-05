@@ -88,3 +88,14 @@ A few texts stay part of the artwork: the keyboard keys, emoji, text hidden behi
 | 1.32–2.26s | T → r → a → g → r → a → m fade in and rise, 65 ms apart |
 | 2.20–2.72s | final light sweep across the logo |
 | 2.72–3.10s | the full logo and wordmark hold still to the last frame (no fade-out) |
+
+## App icons
+
+`icons/` holds the Tragram app icons: the ribbon logo, with its original gradients, centred on the app's navy (`#04080F`) with a soft lift behind it. `python3 icons/build.py` regenerates everything. It reads the logo from `splash/splash.html` and needs Node with Playwright, and ffmpeg.
+
+- **iOS:** copy `icons/ios/AppIcon.appiconset` into `Images.xcassets`, replacing the existing set. It's a single-size 1024 × 1024 set (Xcode 14+). `AppIcon-1024.png` is opaque with no alpha channel, as the App Store requires. The set also has iOS 18 dark and tinted variants with transparent backgrounds.
+- **Android:** copy `icons/android/res/*` into `android/app/src/main/res/`.
+  - The adaptive icon (API 26+) uses vector layers in `drawable/`: foreground, background, and a monochrome layer for themed icons (API 33). The logo is 44 dp wide, so its corners stay inside the 66 dp safe circle.
+  - Older launchers get the legacy `mipmap-*/ic_launcher.png` (rounded square) and `ic_launcher_round.png` (circle) at 48–192 px.
+  - `icons/android/play-store-512.png` is the Google Play listing icon.
+- `icons/previews/icons.png` shows every variant under its real mask, for review.
