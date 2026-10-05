@@ -8,8 +8,6 @@
   :root { --bg: #04080F; --ink: #F4F7FB; --ui: rgba(244,247,251,.55); }
   html, body { margin: 0; height: 100%; background: var(--bg); overflow: hidden; }
   body { -webkit-font-smoothing: antialiased; font-family: -apple-system, system-ui, sans-serif; }
-  /* The stage is the splash itself; the app layer sits under it and is revealed by the exit. */
-  #app { position: fixed; inset: 0; background: var(--bg); }
   #stage { position: fixed; inset: 0; background: var(--bg); display: grid; place-items: center; }
   /* Logo width on screen: 38% of the short side, capped. The SVG viewBox is 1700 units wide, the logo 845. */
   #mark { width: calc(min(38vmin, 190px) * 1700 / 845); height: auto; overflow: visible; display: block; }
@@ -24,7 +22,6 @@
 </style>
 </head>
 <body>
-<div id="app"></div>
 <div id="stage">
 <svg id="mark" viewBox="-427.5 -392.5 1700 1700" xmlns="http://www.w3.org/2000/svg" aria-label="Tragram" role="img">
   <defs>
@@ -134,9 +131,8 @@
     settle:[1.20, 2.30],   // logo glides up to make room for the wordmark and settles
     word:  { start: 1.32, stagger: 0.065, dur: 0.55 },  // T r a g r a m
     sweep: [2.20, 2.72],   // finishing light sweep
-    exit:  [2.82, 3.10],   // hand-off to the app
   };
-  const END = T.exit[1];
+  const END = 3.10;  // the full logo and wordmark hold still from the end of the sweep; no fade-out
 
   /* ---------- Easing ---------- */
   // cubic-bezier(x1,y1,x2,y2), solved for x with Newton steps then bisection.
@@ -159,7 +155,6 @@
     glide:  bezier(0.45, 0.0, 0.20, 1.0),
     letter: bezier(0.22, 1.0, 0.36, 1.0),  // ease-out quint-like
     sweep:  bezier(0.45, 0.0, 0.55, 1.0),
-    exit:   bezier(0.40, 0.0, 0.20, 1.0),
   };
   const clamp = v => Math.min(1, Math.max(0, v));
   const prog = (t, [a, b]) => clamp((t - a) / (b - a));
@@ -168,7 +163,7 @@
 
   /* ---------- Elements ---------- */
   const $ = id => document.getElementById(id);
-  const content = $('content'), logo = $('logo'), stage = $('stage');
+  const content = $('content'), logo = $('logo');
   const mTop = $('mTopStroke'), mLow = $('mLowStroke'), hlTop = $('hlTop'), hlLow = $('hlLow'), sweep = $('sweep');
   const letters = [...document.querySelectorAll('#wordmark > path')];
 
@@ -233,11 +228,6 @@
     const s = prog(t, T.sweep);
     sweep.setAttribute('x', lerp(-260, 1100, ease.sweep(s)).toFixed(2));
     sweep.setAttribute('opacity', (0.16 * bell(s)).toFixed(3));
-
-    // Hand-off: the composition fades and lifts very slightly; the background is already the app's.
-    const e = ease.exit(prog(t, T.exit));
-    stage.style.opacity = (1 - e).toFixed(3);
-    stage.style.transform = e > 0 ? `scale(${lerp(1, 1.015, e).toFixed(4)})` : '';
   }
 
   /* ---------- Playback ---------- */

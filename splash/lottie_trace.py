@@ -7,7 +7,7 @@ runs both ways round, closing at the far end: the upper ribbon from its bottom-l
 top-right corner, the fold from its top corner to its point, and the lower ribbon from its top-left
 corner down to its tip. The gradient then floods in and the line dissolves into the edge, leaving the
 logo exactly as drawn while it eases from 96.5% to 100%. The letters rise into place one by one, each
-uncovered from the baseline up by a soft-edged matte. A light sweep and the fade into the app follow.
+uncovered from the baseline up by a soft-edged matte. A light sweep follows, then the full lockup holds still to the last frame.
 """
 import math
 import lottie_kit as kit
@@ -19,8 +19,8 @@ FLOOD = {"Top": (0.55, 1.15), "Fold": (0.78, 1.22), "Stem": (1.00, 1.60)}
 DISSOLVE = {"Top": (1.00, 1.50), "Fold": (1.10, 1.50), "Stem": (1.40, 1.85)}
 T_PUSH = (0.00, 1.90)
 WORD_START, WORD_STAGGER, WORD_DUR = 1.30, 0.07, 0.50
-T_SWEEP, T_EXIT = (2.20, 2.72), (2.82, 3.10)
-END = T_EXIT[1]
+T_SWEEP = (2.20, 2.72)
+END = 3.10  # the full logo and wordmark hold still from the end of the sweep to the last frame
 OP = kit.setup(END)
 
 E_TRACE = bezier(.50, 0, .25, 1)
@@ -124,4 +124,4 @@ layers = [sweep_layer, *letter_layers, trace_layer, fill_layer, logo, content]
 
 write("SplashAnimation-trace.json", "Tragram Splash — B trace & fill", layers,
       [("symbol-start", TRACE["Top"][0]), ("fill-start", FLOOD["Top"][0]), ("wordmark-start", WORD_START),
-       ("sweep-start", T_SWEEP[0]), ("stable", T_SWEEP[1]), ("exit-start", T_EXIT[0])], T_EXIT)
+       ("sweep-start", T_SWEEP[0]), ("stable", T_SWEEP[1]), ("end", END)])

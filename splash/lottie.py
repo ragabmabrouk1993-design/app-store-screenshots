@@ -13,8 +13,8 @@ from lottie_kit import *
 # ---------- timeline: the same numbers as splash.html ----------
 T_TOP, T_LOW, T_SETTLE = (0.05, 0.85), (0.42, 1.68), (1.20, 2.30)
 WORD_START, WORD_STAGGER, WORD_DUR = 1.32, 0.065, 0.55
-T_SWEEP, T_EXIT = (2.20, 2.72), (2.82, 3.10)
-END = T_EXIT[1]
+T_SWEEP = (2.20, 2.72)
+END = 3.10  # the full logo and wordmark hold still from the end of the sweep to the last frame
 OP = kit.setup(END)
 
 E_DRAW, E_FLOW = bezier(.55, 0, .30, 1), bezier(.40, 0, .18, 1)
@@ -149,4 +149,4 @@ layers = [sweep_layer, *letters, top_matte, top_layer, low_matte, low_layer, log
 
 write("SplashAnimation.json", "Tragram Splash — A ribbon draw", layers,
       [("symbol-start", T_TOP[0]), ("fold-start", T_LOW[0]), ("settle-start", T_SETTLE[0]), ("wordmark-start", WORD_START),
-       ("sweep-start", T_SWEEP[0]), ("stable", T_SWEEP[1]), ("exit-start", T_EXIT[0])], T_EXIT)
+       ("sweep-start", T_SWEEP[0]), ("stable", T_SWEEP[1]), ("end", END)])

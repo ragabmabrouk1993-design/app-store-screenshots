@@ -34,7 +34,7 @@ def bezier(x1, y1, x2, y2):
         return 3 * (1 - s) ** 2 * s * y1 + 3 * (1 - s) * s * s * y2 + s ** 3
     return f
 
-E_LETTER, E_EXIT = bezier(.22, 1, .36, 1), bezier(.40, 0, .20, 1)
+E_LETTER = bezier(.22, 1, .36, 1)
 clamp = lambda v: min(1.0, max(0.0, v))
 prog = lambda t, r: clamp((t - r[0]) / (r[1] - r[0]))
 lerp = lambda a, b, k: a + (b - a) * k
@@ -183,15 +183,13 @@ WHITE_BAND = [(0, "#E8FBFF"), (1, "#E8FBFF")]
 # ---------- root composition ----------
 SCALE = 100 * (min(0.38 * W, 190) / 845)  # logo 38% of the short side, as in splash.html
 
-def write(name, title, layers, markers, t_exit):
-    """Wraps the logo-unit layers in a 1700 x 1700 precomp, centres it, fades it out over t_exit, writes the JSON.
+def write(name, title, layers, markers):
+    """Wraps the logo-unit layers in a 1700 x 1700 precomp, centres it and writes the JSON.
+    The animation ends on the full logo and wordmark, held still; it doesn't fade out.
     The background layers come from the JSON passed on the command line, else from SplashAnimation.json."""
-    ex = lambda t: E_EXIT(prog(t, t_exit))
     comp_layer = {"ddd": 0, "ind": 1, "ty": 0, "nm": "Tragram Logo Animation", "refId": "logo_comp", "sr": 1,
                   "ip": 0, "op": OP, "st": 0, "bm": 0, "w": 1700, "h": 1700,
-                  "ks": transform(p=(W / 2, H / 2), a=(850, 850),
-                                  s=baked(lambda t: [SCALE * lerp(1, 1.015, ex(t))] * 2),
-                                  o=baked(lambda t: 100 * (1 - ex(t))))}
+                  "ks": transform(p=(W / 2, H / 2), a=(850, 850), s=(SCALE, SCALE))}
     bg_layers = [{"ddd": 0, "ind": 3, "ty": 1, "nm": "Background", "sr": 1, "ip": 0, "op": OP, "st": 0, "bm": 0,
                   "sw": W, "sh": H, "sc": BG, "ks": transform(p=(W / 2, H / 2), a=(W / 2, H / 2))}]
     src = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "SplashAnimation.json")
