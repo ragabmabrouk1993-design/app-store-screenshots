@@ -7,7 +7,8 @@ Design: the ribbon logo with its original gradients, centred on the app's dark n
 radial lift behind it, like the previous icon and the splash. All geometry is flattened into the final
 coordinate space, so no format below relies on group transforms.
 
-iOS      ios/AppIcon.appiconset/          single-size 1024 set (Xcode 14+), with iOS 18 dark and tinted variants
+iOS      ios/AppIcon.appiconset/          iPhone set: 20, 29, 40, 60 pt at 2x and 3x, plus the 1024 App Store icon
+         ios/ios18/                       optional iOS 18 dark and tinted 1024 variants
 Android  android/res/mipmap-anydpi-v26/   adaptive icon (API 26+): vector foreground, background, monochrome (API 33 themed icons)
          android/res/drawable/            the three vector layers
          android/res/mipmap-*/            legacy PNGs (ic_launcher rounded square, ic_launcher_round circle)
@@ -140,13 +141,13 @@ write("android/res/drawable/ic_launcher_monochrome.xml", monochrome())
 write("android/res/mipmap-anydpi-v26/ic_launcher.xml", ADAPTIVE)
 write("android/res/mipmap-anydpi-v26/ic_launcher_round.xml", ADAPTIVE)
 
-write("ios/AppIcon.appiconset/Contents.json", json.dumps({
-    "images": [
-        {"filename": "AppIcon-1024.png", "idiom": "universal", "platform": "ios", "size": "1024x1024"},
-        {"appearances": [{"appearance": "luminosity", "value": "dark"}],
-         "filename": "AppIcon-1024-dark.png", "idiom": "universal", "platform": "ios", "size": "1024x1024"},
-        {"appearances": [{"appearance": "luminosity", "value": "tinted"}],
-         "filename": "AppIcon-1024-tinted.png", "idiom": "universal", "platform": "ios", "size": "1024x1024"}],
-    "info": {"author": "xcode", "version": 1}}, indent=2) + "\n")
+# iOS: the per-size iPhone set Xcode shows as Notification, Settings, Spotlight, App and App Store.
+IOS_SIZES = [(20, 2), (20, 3), (29, 2), (29, 3), (40, 2), (40, 3), (60, 2), (60, 3)]
+ios_images = [{"filename": f"Icon-{pt}@{sc}x.png", "idiom": "iphone", "scale": f"{sc}x", "size": f"{pt}x{pt}"}
+              for pt, sc in IOS_SIZES]
+ios_images.append({"filename": "Icon-1024.png", "idiom": "ios-marketing", "scale": "1x", "size": "1024x1024"})
+write("ios/AppIcon.appiconset/Contents.json", json.dumps({"images": ios_images, "info": {"author": "xcode", "version": 1}}, indent=2) + "\n")
+write("ios/sizes.json", json.dumps([[f"Icon-{pt}@{sc}x.png", pt * sc] for pt, sc in IOS_SIZES] + [["Icon-1024.png", 1024]]))
 
 subprocess.run(["node", os.path.join(HERE, "rasterize.js")], check=True)
+os.remove(os.path.join(HERE, "ios/sizes.json"))  # only a hand-off to rasterize.js

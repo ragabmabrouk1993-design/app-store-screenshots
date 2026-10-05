@@ -29,9 +29,13 @@ const flatten = rel => {  // App Store and Play icons: opaque RGB, no alpha chan
   const page = await browser.newPage({ deviceScaleFactor: 1 });
 
   // iOS: square, full bleed; the system applies the corner mask.
-  await render(page, 'icon-1024.svg', 1024, 'ios/AppIcon.appiconset/AppIcon-1024.png'); flatten('ios/AppIcon.appiconset/AppIcon-1024.png');
-  await render(page, 'icon-1024-dark.svg', 1024, 'ios/AppIcon.appiconset/AppIcon-1024-dark.png');
-  await render(page, 'icon-1024-tinted.svg', 1024, 'ios/AppIcon.appiconset/AppIcon-1024-tinted.png');
+  // Every size is rendered from the vector master, not scaled down from 1024. All opaque, as Apple requires.
+  for (const [name, px] of JSON.parse(fs.readFileSync(path.join(dir, 'ios/sizes.json')))) {
+    const rel = `ios/AppIcon.appiconset/${name}`;
+    await render(page, 'icon-1024.svg', px, rel); flatten(rel);
+  }
+  await render(page, 'icon-1024-dark.svg', 1024, 'ios/ios18/AppIcon-1024-dark.png');
+  await render(page, 'icon-1024-tinted.svg', 1024, 'ios/ios18/AppIcon-1024-tinted.png');
 
   // Android Play listing icon: full square, Play applies its own mask.
   await render(page, 'icon-1024.svg', 512, 'android/play-store-512.png'); flatten('android/play-store-512.png');

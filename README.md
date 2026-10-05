@@ -93,7 +93,14 @@ A few texts stay part of the artwork: the keyboard keys, emoji, text hidden behi
 
 `icons/` holds the Tragram app icons: the ribbon logo, with its original gradients, centred on the app's navy (`#04080F`) with a soft lift behind it. `python3 icons/build.py` regenerates everything. It reads the logo from `splash/splash.html` and needs Node with Playwright, and ffmpeg.
 
-- **iOS:** copy `icons/ios/AppIcon.appiconset` into `Images.xcassets`, replacing the existing set. It's a single-size 1024 × 1024 set (Xcode 14+). `AppIcon-1024.png` is opaque with no alpha channel, as the App Store requires. The set also has iOS 18 dark and tinted variants with transparent backgrounds.
+- **iOS:** copy `icons/ios/AppIcon.appiconset` into `Images.xcassets`, replacing the existing set. It fills every slot of the iPhone icon set:
+  - Notification: 20 pt at 2x and 3x (40, 60 px)
+  - Settings: 29 pt at 2x and 3x (58, 87 px)
+  - Spotlight: 40 pt at 2x and 3x (80, 120 px)
+  - App: 60 pt at 2x and 3x (120, 180 px)
+  - App Store: 1024 px
+
+  Each size is rendered from the vector master, and all are opaque RGB with no alpha channel, as Apple requires. `icons/ios/ios18/` holds optional iOS 18 dark and tinted 1024 variants with transparent backgrounds. They're only needed if you move to Xcode's single-size set.
 - **Android:** copy `icons/android/res/*` into `android/app/src/main/res/`.
   - The adaptive icon (API 26+) uses vector layers in `drawable/`: foreground, background, and a monochrome layer for themed icons (API 33). The logo is 44 dp wide, so its corners stay inside the 66 dp safe circle.
   - Older launchers get the legacy `mipmap-*/ic_launcher.png` (rounded square) and `ic_launcher_round.png` (circle) at 48–192 px.
