@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tragram Splash</title>
+<style>
+  :root { --bg: #04080F; --ink: #F4F7FB; --ui: rgba(244,247,251,.55); }
+  html, body { margin: 0; height: 100%; background: var(--bg); overflow: hidden; }
+  body { -webkit-font-smoothing: antialiased; font-family: -apple-system, system-ui, sans-serif; }
+  #stage { position: fixed; inset: 0; background: var(--bg); display: grid; place-items: center; }
+  /* Logo width on screen: 38% of the short side, capped. The SVG viewBox is 1700 units wide, the logo 845. */
+  #mark { width: calc(min(38vmin, 190px) * 1700 / 845); height: auto; overflow: visible; display: block; }
+  #ui { position: fixed; left: 0; right: 0; bottom: max(16px, env(safe-area-inset-bottom)); display: flex;
+        gap: 12px; align-items: center; justify-content: center; padding: 0 16px; z-index: 2; }
+  #ui button { font: 500 13px/1 inherit; color: var(--ui); background: none; border: 1px solid rgba(244,247,251,.16);
+               border-radius: 999px; padding: 9px 16px; cursor: pointer; }
+  #ui button:hover { color: var(--ink); border-color: rgba(244,247,251,.32); }
+  #ui input { width: min(260px, 50vw); accent-color: #1E8BF7; }
+  #ui output { font: 500 12px/1 ui-monospace, monospace; color: var(--ui); min-width: 44px; }
+  .bare #ui { display: none; }
+</style>
+</head>
+<body>
+<div id="stage">
+<svg id="mark" viewBox="-427.5 -392.5 1700 1700" xmlns="http://www.w3.org/2000/svg" aria-label="Tragram" role="img">
+  <defs>
+    <!-- Original logo gradients, unchanged. -->
+    <linearGradient id="gFold" x1="429" y1="194" x2="429" y2="301" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0342C5"/><stop offset="1" stop-color="#002E9E"/>
+    </linearGradient>
+    <linearGradient id="gStem" x1="436" y1="194" x2="436" y2="640.926" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0054E9"/><stop offset="0.48" stop-color="#009DF8"/><stop offset="1" stop-color="#00E7EB"/>
+    </linearGradient>
+    <linearGradient id="gTop" x1="0" y1="97" x2="844" y2="97" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00B8EE"/><stop offset="0.48" stop-color="#008DF8"/><stop offset="1" stop-color="#0755F3"/>
+    </linearGradient>
+
+    <!-- Original logo geometry, unchanged. -->
+    <path id="shFold" d="M366 194H492V301L366 194Z"/>
+    <path id="shStem" d="M292 194H366L530 330C564 358 580 384 580 422V617C580 640 563 648 544 634L367 503C320 468 292 428 292 370V194Z"/>
+    <path id="shTop" d="M0 194C14 84 105 0 218 0H844C830 110 739 194 626 194H0Z"/>
+
+    <clipPath id="cTop"><use href="#shTop"/></clipPath>
+    <clipPath id="cLow"><use href="#shFold"/><use href="#shStem"/></clipPath>
+    <clipPath id="cAll"><use href="#shTop"/><use href="#shFold"/><use href="#shStem"/></clipPath>
+
+    <!-- Feathers the leading edge of each reveal, so the shape is drawn by soft light, not cut by a hard wipe. -->
+    <filter id="feather" filterUnits="userSpaceOnUse" x="-600" y="-600" width="2100" height="1900">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    <filter id="soft" filterUnits="userSpaceOnUse" x="-600" y="-600" width="2100" height="1900">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+
+    <!-- Reveal paths. A wide stroke dashed from 0 to the current length uncovers the shape along the path. -->
+    <!-- Upper ribbon: runs left to right; the skew tilts the leading edge to match the ribbon's slanted ends. -->
+    <path id="pTop" d="M -260 97 H 1100"/>
+    <!-- Fold and lower ribbon: one path that turns down at the fold and follows the ribbon to its tip. -->
+    <path id="pLow" d="M 300 160 C 360 212 420 290 450 400 C 475 495 520 585 585 700"/>
+
+    <mask id="mTop" maskUnits="userSpaceOnUse" x="-600" y="-600" width="2100" height="1900">
+      <g transform="translate(0 97) skewX(-45) translate(0 -97)" filter="url(#feather)">
+        <use id="mTopStroke" href="#pTop" fill="none" stroke="#fff" stroke-width="300" stroke-dasharray="0 99999"/>
+      </g>
+    </mask>
+    <mask id="mLow" maskUnits="userSpaceOnUse" x="-600" y="-600" width="2100" height="1900">
+      <g filter="url(#feather)">
+        <use id="mLowStroke" href="#pLow" fill="none" stroke="#fff" stroke-width="460" stroke-dasharray="0 99999"/>
+      </g>
+    </mask>
+
+    <!-- Final light sweep: a narrow, soft diagonal band. -->
+    <linearGradient id="gSweep" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <g id="content">
+    <g id="logo">
+      <g mask="url(#mLow)">
+        <use href="#shFold" fill="url(#gFold)"/>
+        <use href="#shStem" fill="url(#gStem)"/>
+        <g clip-path="url(#cLow)">
+          <use id="hlLow" href="#pLow" fill="none" stroke="#E8FBFF" stroke-width="460" filter="url(#soft)"
+               stroke-dasharray="0 99999" opacity="0" style="mix-blend-mode: screen"/>
+        </g>
+      </g>
+      <g mask="url(#mTop)">
+        <use href="#shTop" fill="url(#gTop)"/>
+        <g clip-path="url(#cTop)">
+          <g transform="translate(0 97) skewX(-45) translate(0 -97)">
+            <use id="hlTop" href="#pTop" fill="none" stroke="#E8FBFF" stroke-width="300" filter="url(#soft)"
+                 stroke-dasharray="0 99999" opacity="0" style="mix-blend-mode: screen"/>
+          </g>
+        </g>
+      </g>
+      <g clip-path="url(#cAll)">
+        <rect id="sweep" x="-160" y="-300" width="160" height="1300" fill="url(#gSweep)" opacity="0"
+              transform="rotate(18 422 322)" style="mix-blend-mode: screen"/>
+      </g>
+    </g>
+    <g id="wordmark" fill="#F4F7FB" transform="translate(94 915) scale(0.8)">
+      <!-- wordmark:start -->
+      <path data-ch="T" d="M51.9 0V-129.2H2.1V-149.6H123.3V-129.2H73.6V0Z"/>
+      <path data-ch="r" d="M137.9 0V-112.2H157.2V-85L154.5 -88.5Q156.6 -93.9 159.9 -98.5Q163.3 -103 167.6 -105.9Q171.9 -109 177.1 -110.7Q182.4 -112.4 187.9 -112.8Q193.4 -113.2 198.5 -112.2V-91.9Q193 -93.3 186.3 -92.7Q179.6 -92.1 174 -88.4Q168.7 -85 165.6 -80.1Q162.5 -75.2 161.2 -69.3Q159.8 -63.3 159.8 -56.6V0Z"/>
+      <path data-ch="a" d="M247.8 3.1Q235.4 3.1 227 -1.5Q218.5 -6.1 214.2 -13.8Q209.9 -21.4 209.9 -30.6Q209.9 -39.1 212.9 -45.5Q215.9 -52 221.9 -56.5Q227.8 -61 236.4 -63.8Q243.9 -66 253.3 -67.6Q262.8 -69.3 273.2 -70.8Q283.7 -72.2 294 -73.7L286.1 -69.3Q286.3 -82.5 280.5 -88.9Q274.8 -95.3 260.7 -95.3Q251.9 -95.3 244.5 -91.2Q237.1 -87.1 234.2 -77.6L214 -83.9Q218.1 -98.3 229.8 -106.8Q241.5 -115.3 260.9 -115.3Q276 -115.3 287.2 -110.2Q298.3 -105.1 303.5 -93.9Q306.2 -88.4 306.9 -82.3Q307.5 -76.2 307.5 -69.1V0H288.3V-25.7L292 -22.3Q285 -9.5 274.3 -3.2Q263.5 3.1 247.8 3.1ZM251.7 -14.7Q260.9 -14.7 267.6 -17.9Q274.2 -21.2 278.3 -26.3Q282.3 -31.4 283.6 -36.9Q285.4 -41.9 285.6 -48.1Q285.9 -54.3 285.9 -58.1L292.9 -55.5Q282.7 -53.9 274.2 -52.7Q265.8 -51.4 259 -50.2Q252.2 -49 246.9 -47.4Q242.4 -45.8 239 -43.6Q235.5 -41.5 233.4 -38.3Q231.4 -35.2 231.4 -30.8Q231.4 -26.4 233.6 -22.7Q235.8 -19 240.3 -16.8Q244.7 -14.7 251.7 -14.7Z"/>
+      <path data-ch="g" d="M378.7 53Q369.6 53 361.2 50.2Q352.7 47.4 345.7 41.9Q338.8 36.5 334.2 28.5L354.2 18.3Q357.9 25.5 364.6 28.8Q371.4 32.1 378.9 32.1Q388.1 32.1 394.7 28.8Q401.2 25.6 404.6 19Q408 12.5 407.9 2.8V-28.6H410.5V-112.2H429.7V3Q429.7 7.5 429.4 11.5Q429.1 15.6 428.2 19.6Q425.8 31 419.1 38.3Q412.4 45.7 402.1 49.4Q391.8 53 378.7 53ZM377 3.1Q361.3 3.1 349.9 -4.7Q338.6 -12.5 332.4 -25.9Q326.2 -39.4 326.2 -56.2Q326.2 -73.2 332.4 -86.5Q338.7 -99.9 350.1 -107.6Q361.6 -115.3 377.4 -115.3Q393.3 -115.3 404.2 -107.6Q415 -99.9 420.6 -86.5Q426.2 -73.1 426.2 -56.2Q426.2 -39.4 420.5 -26Q414.9 -12.6 404 -4.7Q393.1 3.1 377 3.1ZM380 -16.5Q390.7 -16.5 397.5 -21.6Q404.2 -26.7 407.4 -35.6Q410.5 -44.6 410.5 -56.2Q410.5 -67.9 407.3 -76.8Q404.1 -85.7 397.5 -90.7Q390.9 -95.7 380.7 -95.7Q369.9 -95.7 363 -90.4Q356 -85.1 352.6 -76.2Q349.3 -67.2 349.3 -56.2Q349.3 -45.1 352.6 -36.1Q356 -27.1 362.8 -21.8Q369.6 -16.5 380 -16.5Z"/>
+      <path data-ch="r" d="M456.7 0V-112.2H476V-85L473.3 -88.5Q475.4 -93.9 478.7 -98.5Q482.1 -103 486.4 -105.9Q490.7 -109 495.9 -110.7Q501.2 -112.4 506.7 -112.8Q512.2 -113.2 517.3 -112.2V-91.9Q511.8 -93.3 505.1 -92.7Q498.4 -92.1 492.8 -88.4Q487.5 -85 484.4 -80.1Q481.3 -75.2 480 -69.3Q478.6 -63.3 478.6 -56.6V0Z"/>
+      <path data-ch="a" d="M566.7 3.1Q554.2 3.1 545.8 -1.5Q537.3 -6.1 533 -13.8Q528.7 -21.4 528.7 -30.6Q528.7 -39.1 531.7 -45.5Q534.8 -52 540.7 -56.5Q546.6 -61 555.2 -63.8Q562.7 -66 572.2 -67.6Q581.6 -69.3 592.1 -70.8Q602.5 -72.2 612.8 -73.7L604.9 -69.3Q605.1 -82.5 599.3 -88.9Q593.6 -95.3 579.5 -95.3Q570.7 -95.3 563.3 -91.2Q555.9 -87.1 553 -77.6L532.8 -83.9Q536.9 -98.3 548.6 -106.8Q560.3 -115.3 579.7 -115.3Q594.8 -115.3 606 -110.2Q617.2 -105.1 622.4 -93.9Q625.1 -88.4 625.7 -82.3Q626.3 -76.2 626.3 -69.1V0H607.1V-25.7L610.8 -22.3Q603.9 -9.5 593.1 -3.2Q582.3 3.1 566.7 3.1ZM570.5 -14.7Q579.7 -14.7 586.4 -17.9Q593 -21.2 597.1 -26.3Q601.2 -31.4 602.4 -36.9Q604.2 -41.9 604.4 -48.1Q604.7 -54.3 604.7 -58.1L611.8 -55.5Q601.5 -53.9 593 -52.7Q584.6 -51.4 577.8 -50.2Q571 -49 565.7 -47.4Q561.2 -45.8 557.8 -43.6Q554.3 -41.5 552.3 -38.3Q550.2 -35.2 550.2 -30.8Q550.2 -26.4 552.4 -22.7Q554.6 -19 559.1 -16.8Q563.5 -14.7 570.5 -14.7Z"/>
+      <path data-ch="m" d="M785.7 0 785.8 -69.9Q785.8 -82.1 779.6 -88.9Q773.3 -95.7 763.2 -95.7Q756.9 -95.7 751.8 -92.8Q746.6 -90 743.5 -84.3Q740.3 -78.7 740.3 -70.1L729.8 -75.4Q729.6 -87.3 734.8 -96.2Q740.1 -105.2 749.1 -110.1Q758.2 -115 769.4 -115Q787.6 -115 797.6 -104.1Q807.5 -93.2 807.5 -75.1L807.4 0ZM651.1 0V-112.2H670.5V-79.8H673V0ZM718.5 0 718.6 -69.5Q718.6 -81.8 712.4 -88.7Q706.2 -95.7 695.8 -95.7Q685.5 -95.7 679.2 -88.6Q673 -81.6 673 -70.1L662.6 -76.8Q662.6 -87.8 667.9 -96.4Q673.2 -105.1 682.2 -110Q691.2 -115 702.7 -115Q714.6 -115 723 -110Q731.5 -105 735.9 -95.9Q740.3 -86.9 740.3 -74.9L740.2 0Z"/>      <!-- wordmark:end -->
+    </g>
+  </g>
+</svg>
+</div>
+
+<div id="ui">
+  <button id="replay" type="button">Replay</button>
+  <input id="scrub" type="range" min="0" max="3.1" step="0.001" value="0" aria-label="Timeline">
+  <output id="clock">0.00s</output>
+</div>
+
+<script>
+(() => {
+  /* ---------- Timeline (seconds) ---------- */
+  const T = {
+    top:   [0.05, 0.85],   // upper ribbon, left to right
+    low:   [0.42, 1.68],   // fold, then the lower ribbon down to its tip
+    settle:[1.20, 2.30],   // logo glides up to make room for the wordmark and settles
+    word:  { start: 1.32, stagger: 0.065, dur: 0.55 },  // T r a g r a m
+    sweep: [2.20, 2.72],   // finishing light sweep
+  };
+  const END = 3.10;  // the full logo and wordmark hold still from the end of the sweep; no fade-out
+
+  /* ---------- Easing ---------- */
+  // cubic-bezier(x1,y1,x2,y2), solved for x with Newton steps then bisection.
+  function bezier(x1, y1, x2, y2) {
+    const ax = 3*x1 - 3*x2 + 1, bx = 3*x2 - 6*x1, cx = 3*x1;
+    const ay = 3*y1 - 3*y2 + 1, by = 3*y2 - 6*y1, cy = 3*y1;
+    const X = s => ((ax*s + bx)*s + cx)*s, Y = s => ((ay*s + by)*s + cy)*s, dX = s => (3*ax*s + 2*bx)*s + cx;
+    return x => {
+      if (x <= 0) return 0; if (x >= 1) return 1;
+      let s = x;
+      for (let i = 0; i < 6; i++) { const e = X(s) - x, d = dX(s); if (Math.abs(e) < 1e-6) return Y(s); if (Math.abs(d) < 1e-6) break; s -= e / d; }
+      let lo = 0, hi = 1; s = x;
+      for (let i = 0; i < 30; i++) { const v = X(s); if (Math.abs(v - x) < 1e-6) break; if (v < x) lo = s; else hi = s; s = (lo + hi) / 2; }
+      return Y(s);
+    };
+  }
+  const ease = {
+    draw:   bezier(0.55, 0.0, 0.30, 1.0),  // upper ribbon: gathers speed, then glides
+    flow:   bezier(0.40, 0.0, 0.18, 1.0),  // lower ribbon: picks up the motion, lands softly
+    glide:  bezier(0.45, 0.0, 0.20, 1.0),
+    letter: bezier(0.22, 1.0, 0.36, 1.0),  // ease-out quint-like
+    sweep:  bezier(0.45, 0.0, 0.55, 1.0),
+  };
+  const clamp = v => Math.min(1, Math.max(0, v));
+  const prog = (t, [a, b]) => clamp((t - a) / (b - a));
+  const lerp = (a, b, k) => a + (b - a) * k;
+  const bell = k => Math.sin(Math.PI * clamp(k));  // 0 → 1 → 0
+
+  /* ---------- Elements ---------- */
+  const $ = id => document.getElementById(id);
+  const content = $('content'), logo = $('logo');
+  const mTop = $('mTopStroke'), mLow = $('mLowStroke'), hlTop = $('hlTop'), hlLow = $('hlLow'), sweep = $('sweep');
+  const letters = [...document.querySelectorAll('#wordmark > path')];
+
+  /* ---------- Reveal ranges ----------
+     For each shape, the reveal runs from the first to the last point of its outline that the
+     dashed stroke reaches, plus the feather, so the motion never idles off-shape. */
+  const FEATHER = 9 * 2.5;
+  // Upper ribbon (the path is straight): in the skewed space a point (x, y) sits at x + (y - 97) along it.
+  const topRange = (() => {
+    const sh = $('shTop'), L = sh.getTotalLength(); let lo = Infinity, hi = -Infinity;
+    for (let i = 0; i <= 400; i++) { const p = sh.getPointAtLength(L * i / 400); const s = p.x + (p.y - 97) + 260; lo = Math.min(lo, s); hi = Math.max(hi, s); }
+    return [lo - FEATHER, hi + FEATHER];
+  })();
+  // Fold and lower ribbon: the nearest point on the curved path.
+  const lowRange = (() => {
+    const path = $('pLow'), PL = path.getTotalLength(), samples = [];
+    for (let i = 0; i <= 600; i++) { const p = path.getPointAtLength(PL * i / 600); samples.push([p.x, p.y, PL * i / 600]); }
+    let lo = Infinity, hi = -Infinity;
+    for (const id of ['shFold', 'shStem']) {
+      const sh = $(id), L = sh.getTotalLength();
+      for (let i = 0; i <= 400; i++) {
+        const q = sh.getPointAtLength(L * i / 400); let best = Infinity, s = 0;
+        for (const [x, y, l] of samples) { const d = (x - q.x) ** 2 + (y - q.y) ** 2; if (d < best) { best = d; s = l; } }
+        lo = Math.min(lo, s); hi = Math.max(hi, s);
+      }
+    }
+    return [lo - FEATHER, hi + FEATHER];
+  })();
+
+  const HL = 120;  // length of the travelling highlight, in logo units
+  function reveal(stroke, hl, range, k, intensity) {
+    const p = Math.max(0, lerp(range[0], range[1], k));  // a negative dash is invalid and would draw the whole stroke
+    stroke.setAttribute('stroke-dasharray', `${p.toFixed(2)} 99999`);
+    hl.setAttribute('stroke-dasharray', `${HL} 99999`);
+    hl.setAttribute('stroke-dashoffset', (-(p - HL - FEATHER)).toFixed(2));
+    hl.setAttribute('opacity', p > 0 ? (intensity * bell(k)).toFixed(3) : '0');
+  }
+
+  /* ---------- Frame ---------- */
+  const GLIDE = 135;  // half the wordmark block: the logo starts centred alone, ends centred with the wordmark
+  function frame(t) {
+    // 1–2–3. Construction: upper ribbon, then the fold turning into the lower ribbon.
+    reveal(mTop, hlTop, topRange, ease.draw(prog(t, T.top)), 0.30);
+    reveal(mLow, hlLow, lowRange, ease.flow(prog(t, T.low)), 0.26);
+
+    // 6. Settle: the composition glides up into its final centre while the logo eases from 101.2% to 100%.
+    const g = ease.glide(prog(t, T.settle));
+    const sc = lerp(1.012, 1, g);
+    content.setAttribute('transform', `translate(0 ${(GLIDE * (1 - g)).toFixed(3)})`);
+    logo.setAttribute('transform', `translate(422 322) scale(${sc.toFixed(5)}) translate(-422 -322)`);
+
+    // Wordmark: T → r → a → g → r → a → m, each fading in and rising a few points.
+    letters.forEach((el, i) => {
+      const k = ease.letter(prog(t, [T.word.start + i * T.word.stagger, T.word.start + i * T.word.stagger + T.word.dur]));
+      el.setAttribute('opacity', k.toFixed(3));
+      el.setAttribute('transform', `translate(0 ${(46 * (1 - k)).toFixed(2)})`);
+      // A touch of defocus at the start of each letter; dropped once settled so the final type is crisp.
+      el.style.filter = k < 0.999 ? `blur(${(1.6 * (1 - k)).toFixed(2)}px)` : 'none';
+    });
+
+    // Finishing light sweep across the gradient.
+    const s = prog(t, T.sweep);
+    sweep.setAttribute('x', lerp(-260, 1100, ease.sweep(s)).toFixed(2));
+    sweep.setAttribute('opacity', (0.16 * bell(s)).toFixed(3));
+  }
+
+  /* ---------- Playback ---------- */
+  const qs = new URLSearchParams(location.search);
+  if (qs.has('bare')) document.documentElement.classList.add('bare');
+  const scrub = $('scrub'), clock = $('clock');
+  let t0 = null, raf = 0, now = 0;
+  function show(t) { now = t; frame(t); scrub.value = t; clock.textContent = t.toFixed(2) + 's'; }
+  function tick(ts) {
+    if (t0 === null) t0 = ts;
+    const t = (ts - t0) / 1000;
+    show(Math.min(t, END));
+    if (t < END) raf = requestAnimationFrame(tick);
+    else { document.dispatchEvent(new CustomEvent('splashend')); if (qs.has('loop')) setTimeout(play, 900); }
+  }
+  function play() { cancelAnimationFrame(raf); t0 = null; show(0); raf = requestAnimationFrame(tick); }
+  // For frame-exact capture: window.seek(t) renders time t without playing.
+  window.seek = t => { cancelAnimationFrame(raf); show(t); };
+  window.SPLASH_DURATION = END;
+
+  $('replay').onclick = play;
+  scrub.oninput = () => window.seek(+scrub.value);
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (qs.has('t')) window.seek(+qs.get('t'));
+  else if (reduce) window.seek(T.sweep[0]);  // show the finished lockup without the motion
+  else { show(0); requestAnimationFrame(() => requestAnimationFrame(play)); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+/* Onboarding, in the app's fixed onboarding layout: logo and progress pills on top, a mockup image,
+   then title, subtitle and Next. Two kinds of page, both built by onboarding.js:
+   - mockup image (html.mockpage): 343 x 516 pt, transparent above and beside the phone, fading into
+     the screen background (#04080F) at the bottom. Exported at 2x = 686 x 1032 px, the size the app uses.
+   - full screen (html.onbpage): 375 x 812 pt with the mockup in place, exported at 3x = 1125 x 2436 px.
+   Load after alt.css (and ar.css on Arabic pages). */
+
+html.mockpage, html.mockpage body { width: 343px; height: 516px; background: transparent; overflow: hidden; }
+html.onbpage, html.onbpage body { width: 375px; height: 812px; background: #04080F; overflow: hidden; }
+
+/* ── mockup ──────────────────────────────────────────────────────────── */
+.mock { position: relative; width: 343px; height: 516px; overflow: hidden; }
+/* the artwork is laid out on the screenshot canvas's 440pt grid, so the pop-out cards, notification and
+   in-app screens keep their screenshot sizes; 343 / 440 scales it down to the mockup box */
+.mock .ml.canvas { position: absolute; left: 0; top: 0; width: 440px; height: 662px; overflow: visible;
+  transform: scale(.779545); transform-origin: 0 0; }
+.mock .ml.canvas.dark.alt { background: none; }
+
+/* phone: graphite frame like the current mockup, cropped by the bottom fade */
+.mock .phone { position: absolute; left: 26px; top: 58px; width: 388px; height: 760px; z-index: 3; padding: 5px; border-radius: 62px;
+  background: linear-gradient(140deg, #8E9097 0%, #4F5258 18%, #2C2E33 45%, #44474D 75%, #7C7F86 100%);
+  box-shadow: none; }
+.mock .phone .bz { width: 100%; height: 100%; padding: 8px; border-radius: 57px; background: #010101; box-shadow: inset 0 0 0 1px rgba(255,255,255,.07); }
+.mock .phone .scr { position: relative; width: 362px; height: 742px; border-radius: 49px; overflow: hidden; background: var(--bg); isolation: isolate; }
+.mock .phone .scr > .app { transform: scale(.822727); transform-origin: 0 0; }
+.mock .phone .hw { position: absolute; width: 3px; border-radius: 2px; background: linear-gradient(90deg, #26282C, #8C8F96 55%, #2E3035); }
+.mock .phone .hw.l { left: -2.4px; } .mock .phone .hw.r { right: -2.4px; }
+.mock .phone .hw.a { top: 128px; height: 26px; } .mock .phone .hw.v1 { top: 178px; height: 50px; } .mock .phone .hw.v2 { top: 240px; height: 50px; }
+.mock .phone .hw.p { top: 200px; height: 80px; }
+
+/* pop-out cards over the phone */
+.mock .pop, .mock .notif { z-index: 12; }
+.mock .zoom { padding: 4px 0; border-radius: 22px; }
+.mock .zoom .ch { margin: 0 18px; border: 0; }
+.mock .zoom .order { margin: 6px 10px; background: rgba(255,255,255,.04); }
+.mock .zoom .zh { display: flex; align-items: center; gap: 8px; padding: 12px 18px 2px; font: 700 15px/1.2 Aeonik; color: var(--text); }
+.mock .zoom .zh svg { width: 18px; height: 18px; color: var(--green); }
+.mock .zoom .zh span { margin-inline-start: auto; font: 400 13px/1 Aeonik; color: var(--sub); }
+
+/* fade into the screen background, over everything */
+.mock .fade { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; z-index: 50; pointer-events: none;
+  background: linear-gradient(180deg, rgba(4,8,15,0) 0%, rgba(4,8,15,.75) 45%, #04080F 80%); }
+
+/* ── full screen ─────────────────────────────────────────────────────── */
+.onbs { position: relative; width: 375px; height: 812px; overflow: hidden; color: #fff; font-family: Aeonik, var(--sf);
+  background: var(--app-glow), var(--bg); }
+.onbs .sbw { position: absolute; left: 0; top: 0; width: 440px; height: 62px; transform: scale(.852273); transform-origin: 0 0; z-index: 30; }
+.onbs .hd { position: absolute; left: 16px; right: 16px; top: 58px; height: 26px; display: flex; align-items: center; justify-content: space-between; z-index: 30; }
+.onbs .brand { display: flex; align-items: center; gap: 8px; direction: ltr; font: 700 19px/1 Aeonik; letter-spacing: -.01em; color: #fff; }
+.onbs .brand .mark { display: block; width: 24px; height: 17px; }
+.onbs .steps { display: flex; gap: 5px; }
+.onbs .steps i { width: 16px; height: 7px; border-radius: 4px; background: #3A3D45; }
+.onbs .steps i.on { background: var(--primary); box-shadow: 0 0 8px rgba(26,105,241,.55); }
+.onbs .mockw { position: absolute; left: 0; top: 53px; width: 343px; height: 516px; transform: scale(1.093294); transform-origin: 0 0; z-index: 5; }
+.onbs .tx { position: absolute; left: 20px; right: 20px; top: 606px; text-align: center; z-index: 10; }
+.onbs .tx h1 { font: 700 25px/1.2 Aeonik; letter-spacing: -.02em; color: #fff; white-space: nowrap; }
+.onbs .tx h1 em { font-style: normal; color: #3D84FF; text-shadow: 0 0 22px rgba(26,105,241,.5); }
+.onbs .tx p { margin: 9px auto 0; max-width: 310px; font: 400 15px/1.42 Aeonik; color: #A7B3C9; text-wrap: balance; }
+.onbs .next { position: absolute; left: 28px; right: 28px; top: 723px; height: 50px; border-radius: 25px; background: var(--primary); z-index: 10;
+  display: flex; align-items: center; justify-content: center; font: 600 17px/1 var(--sf); color: #fff;
+  box-shadow: 0 10px 26px -8px rgba(26,105,241,.65), inset 0 1px 0 rgba(255,255,255,.16); }
+.onbs .ind { position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: rgba(255,255,255,.9); }
+
+/* Arabic: system font everywhere (ar.css); joined letters, so no letter-spacing */
+html[lang="ar"] .onbs .tx h1 { font-weight: 800; letter-spacing: 0; }
+html[lang="ar"] .onbs .tx p { letter-spacing: 0; line-height: 1.55; }
+/* keep the English trade line ("Buy 0.12 lot at 4,412.50") in reading order on pop-out cards too */
+.mock [dir="rtl"] .order .det { direction: ltr; }

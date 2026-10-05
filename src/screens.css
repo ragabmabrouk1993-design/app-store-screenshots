@@ -36,7 +36,7 @@
 .app.modal { background: #06090F; }
 .app.modal .parent { position: absolute; left: 14px; right: 14px; top: 50px; height: 40px; border-radius: 34px 34px 0 0; background: #0D131D; }
 .app.modal .sheet { position: absolute; left: 0; right: 0; top: 62px; bottom: 0; border-radius: 38px 38px 0 0; overflow: hidden;
-  background: url(../../../src/assets/img/background1.png) center top / 440px auto no-repeat, var(--bg); }
+  background: var(--app-glow), var(--bg); }
 .app.modal .back { position: absolute; left: 19px; top: 30px; width: 38px; height: 38px; color: #fff; }
 .app.modal .body { position: absolute; left: 19px; right: 19px; top: 82px; }
 .app.modal .ttl { display: flex; align-items: center; gap: 9px; font: 700 28px/1.2 Aeonik; color: var(--text); }
@@ -47,6 +47,12 @@
 .app.modal .fld .end { margin-left: auto; }
 .app.modal .fld .dots { letter-spacing: 3px; font-size: 18px; }
 .app.modal .cbtn { position: absolute; left: 19px; right: 19px; bottom: 34px; }
+/* full-screen variant (data-full): the same screen pushed as a page, no parent card or sheet corners */
+.app.modal.full { background: var(--app-glow), var(--bg); }
+.app.modal.full .parent { display: none; }
+.app.modal.full .sheet { top: 0; border-radius: 0; background: none; }
+.app.modal.full .back { top: 74px; }
+.app.modal.full .body { top: 130px; }
 .scr-connectMT .plat { margin-top: 22px; display: flex; align-items: center; gap: 9px; }
 .scr-connectMT .plat .pc { width: 81px; height: 34px; border-radius: 17px; border: 1px solid var(--dark-border); display: flex; align-items: center; justify-content: center; font: 400 16px/1 Aeonik; color: #fff; }
 .scr-connectMT .plat .pc.on { border: 2px solid var(--primary); }

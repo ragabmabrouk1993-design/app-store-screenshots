@@ -1,3 +1,4 @@
+@import url(../fonts/fonts.css);   /* SF Arabic from fonts/, written by fonts/install.sh; optional */
 /* Arabic pages: <html lang="ar"> with dir="rtl" on the canvas (on <html> it would shift the page
    right, because Chrome's minimum window is wider than 440pt), loaded last. */
 
