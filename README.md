@@ -154,6 +154,24 @@ The alt and alt-ar sets have an Android version for Google Play. `./render.sh al
 - **What stays:** the app screens inside the phone stay as they are.
 - `render.sh` reads `CHROME` from the environment, so it can render with another Chrome or Chromium.
 
+## Website mockups (tragram.app)
+
+The phone mockups on the website, rebuilt with this repo's design system: the alt set's titanium phone, the app screens, the Order executed and Breakeven notifications, and a profit card, all with the new icon. Each page in `src/web-<name>.html` is one image on the site, at that image's size. The images render on a transparent background for the site's dark sections, and `why-choose-us-image-elite` sits in an arch of the alt backdrop.
+
+| Image (tragram-web `public/images/`) | Size (CSS px, rendered at 2×) | Phones |
+|---|---|---|
+| `hero-image-elite.png` | 736 × 520 | Channels · Home · channel performance, with the notification and profit card |
+| `benefits-item-image-1/2/3.png` | 380 × 769 each | Home · Connect MT4/MT5 · channel performance |
+| `why-choose-us-image-v2.png` | 1383 × 579 | News · Home · channel performance, fanned out |
+| `why-choose-us-image-elite.png` | 604 × 679 | Home in an arch, with the notification |
+| `smart-management-image-elite.png` | 323 × 295 | Channels · Home |
+| `cta-box-img-elite.png` | 548 × 514 | Home · Channel Settings, with the Breakeven notification |
+| `testimonial-cta-image-elite.png` | 480 × 262 | Channels · Home · News |
+
+- `python3 tools/web_mockups.py` writes the pages and `src/web-sizes.txt`. The layout of each image (screens, positions, tilt and scale) lives in that script.
+- `./render.sh web` writes `out/web/<name>.png`. Add `WEB_REPO=../tragram-web` to also copy them into the website's `public/images/`. The site declares each image's display size, so the 2× files drop in with no code changes.
+- The PNGs in `out/web/` were rendered in a cloud session without Aeonik or SF Pro: Manrope stood in for Aeonik, and Inter for SF Pro. Re-render on the Mac for the exact fonts.
+
 ## Splash animation
 
 `splash/` holds the app's launch animation: the ribbon logo draws itself, then the "Tragram" wordmark fades in beneath it. It runs about 3.1 seconds.

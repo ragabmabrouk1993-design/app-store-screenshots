@@ -1,0 +1,32 @@
+/* Website mockups (tragram.app): src/web-*.html. Each page is one image on the site, at its CSS size
+   (--w x --h), on a transparent background. ./render.sh web renders them at 2x into out/web/, under the
+   website's file names. Phones, app screens, cards and notifications are the alt set's. Load after alt.css. */
+
+html.web, html.web body { width: var(--w); height: var(--h); background: transparent; overflow: hidden; }
+.canvas.dark.alt.web { width: var(--w); height: var(--h); background: transparent; overflow: hidden; }
+.canvas.web .device { left: 0; top: 0; }
+/* a softer glow than on the store screenshots: the site places these on its own backgrounds */
+.canvas.web .device { box-shadow: 0 0 0 .5px rgba(255,255,255,.18), 0 40px 70px -14px rgba(0,0,0,.6), 0 14px 30px rgba(0,0,0,.35),
+  0 0 60px rgba(26,105,241,.08); }
+.canvas.web .notif, .canvas.web .wstat { transform-origin: 0 0; }
+
+/* stat card: label, figure, caption */
+.wstat { position: absolute; z-index: 12; padding: 14px 18px 15px; border-radius: 22px;
+  background: linear-gradient(180deg, rgba(40,46,60,.97), rgba(28,33,45,.97)); border: .5px solid rgba(140,175,255,.22);
+  box-shadow: 0 30px 60px -10px rgba(0,0,0,.7), 0 10px 22px rgba(0,0,0,.4), 0 0 60px rgba(26,105,241,.22); white-space: nowrap; }
+.wstat .k { font: 700 10.5px/1 Aeonik; letter-spacing: .14em; text-transform: uppercase; color: #8DB6FF; }
+.wstat .v { margin-top: 9px; font: 700 26px/1 Aeonik; color: #fff; letter-spacing: -.01em; }
+.wstat .v.up { color: var(--green); }
+.wstat .c { margin-top: 7px; font: 400 12.5px/1 Aeonik; color: var(--secondary); }
+
+/* arch panel (the why-choose-us image): the alt backdrop inside an arch */
+.arch { position: absolute; inset: 0; overflow: hidden; border-radius: 302px 302px 32px 32px;
+  background:
+    radial-gradient(70% 40% at 50% 0%, rgba(38,104,255,.42) 0%, rgba(38,104,255,0) 100%),
+    radial-gradient(50% 36% at 0% 70%, rgba(26,105,241,.30) 0%, rgba(26,105,241,0) 100%),
+    radial-gradient(48% 30% at 100% 86%, rgba(45,200,255,.18) 0%, rgba(45,200,255,0) 100%),
+    linear-gradient(180deg, #070B18 0%, #03050B 60%, #060A15 100%);
+  box-shadow: inset 0 0 0 1px rgba(140,175,255,.14); }
+.arch .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(140,180,255,.2) 1px, transparent 1.3px);
+  background-size: 18px 18px; -webkit-mask-image: radial-gradient(80% 50% at 50% 18%, #000 0%, transparent 100%); }
+.arch svg.rings { position: absolute; inset: 0; width: 100%; height: 100%; }

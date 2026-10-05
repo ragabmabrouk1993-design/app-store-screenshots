@@ -1,0 +1,10 @@
+# name width height (CSS px; rendered at 2x), written by tools/web_mockups.py
+hero-image-elite 736 520
+benefits-item-image-1 380 769
+benefits-item-image-2 380 769
+benefits-item-image-3 380 769
+why-choose-us-image-v2 1383 579
+why-choose-us-image-elite 604 679
+smart-management-image-elite 323 295
+cta-box-img-elite 548 514
+testimonial-cta-image-elite 480 262

@@ -16,9 +16,12 @@
 #   src/alt-ar-NN-*.html?android -> out/alt-ar-android/NN-*.png (Arabic)
 #   Pixel-style phone, Android status bar, notifications and Gboard number pad (src/android.css);
 #   the canvas is 476 x 952 pt, as Google Play takes at most 2:1.
+# Website mockups (tragram.app): src/web-<name>.html -> out/web/<name>.png at 2x, transparent, named as on the site
+#   (sizes in src/web-sizes.txt, pages written by tools/web_mockups.py).
+#   WEB_REPO=../tragram-web ./render.sh web   also copies them into <WEB_REPO>/public/images/
 # Google Play feature graphic: src/feature-en.html, src/feature-ar.html -> out/feature/feature-en.png, feature-ar.png (1024x500)
 #   ./render.sh            render everything
-#   ./render.sh dark       render only the dark set (or: light, alt, alt-ar, alt-android, alt-ar-android, onb, onb-ar, onb-mock, onb-mock-ar, feature)
+#   ./render.sh dark       render only the dark set (or: light, alt, alt-ar, alt-android, alt-ar-android, onb, onb-ar, onb-mock, onb-mock-ar, feature, web)
 #   ./render.sh dark 04    render only dark 04-*
 #   RAW=1 ./render.sh 01   render the bare in-app screen at 440x956pt (debug/compare)
 cd "$(dirname "$0")" || exit 1
@@ -30,9 +33,20 @@ shot() { "$CHROME" --headless=new --disable-gpu --hide-scrollbars --default-back
 # opaque background: Google Play wants 24-bit PNGs without alpha
 ashot() { "$CHROME" --headless=new --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --force-device-scale-factor=$ADSF \
   --window-size=476,952 --virtual-time-budget=5000 --allow-file-access-from-files --screenshot="$PWD/$1" "file://$PWD/$2?android" >/dev/null 2>&1; }
-sets="light dark alt alt-ar alt-android alt-ar-android onb onb-ar onb-mock onb-mock-ar feature"
-case "$1" in light|dark|alt|alt-ar|alt-android|alt-ar-android|onb|onb-ar|onb-mock|onb-mock-ar|feature) sets=$1; shift;; esac
+sets="light dark alt alt-ar alt-android alt-ar-android onb onb-ar onb-mock onb-mock-ar feature web"
+case "$1" in light|dark|alt|alt-ar|alt-android|alt-ar-android|onb|onb-ar|onb-mock|onb-mock-ar|feature|web) sets=$1; shift;; esac
 for set in $sets; do
+  if [ "$set" = web ]; then
+    [ -n "$RAW" ] && continue
+    mkdir -p out/web
+    while read -r n w h; do
+      case "$n" in ''|'#'*) continue;; esac
+      [ -n "$1" ] && [[ "$n" != $1* ]] && continue
+      shot 2 "$w,$h" "out/web/$n.png" "src/web-$n.html"; echo "out/web/$n.png"
+      [ -n "$WEB_REPO" ] && cp "out/web/$n.png" "$WEB_REPO/public/images/$n.png" && echo "  -> $WEB_REPO/public/images/$n.png"
+    done < src/web-sizes.txt
+    continue
+  fi
   if [[ $set == *-android ]]; then
     [ -n "$RAW" ] && continue
     pre="${set%-android}-"; mkdir -p "out/$set"
